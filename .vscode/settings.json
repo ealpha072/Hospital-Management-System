@@ -1,4 +1,5 @@
 {
     "editor.fontSize": 12,
-    "workbench.tree.indent": 4
+    "workbench.tree.indent": 4,
+    "files.autoSave": "afterDelay"
 }
