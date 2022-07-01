@@ -13,66 +13,68 @@
                 <li class="">
                     <a href="../dashboard/dashboard.php"><i class="fas fa-server"></i> Dashboard</a>
                 </li>
-                <!--students -->
+                <!-- patients -->
                 <li>
-                    <a href="#student" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user-circle"></i>  Students</a>
+                    <a href="#student" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user-circle"></i> Patient</a>
                     <ul class="collapse list-unstyled" id="student">
                         <li>
-                            <a href="../students/addst.php"><i class="fa fa-user-plus fa-sm"></i>  Add Student</a>
+                            <a href="#"><i class="fa fa-user-plus fa-sm"></i> New Patient</a>
                         </li>
                         <li>
-                            <a href="../students/bulkstudents.php"><i class="fa fa-users fa-sm"></i>  Add bulk Students</a>
-                        </li>
-                        <li>
-                            <a href="../students/managest.php"><i class="fa fa-wrench fa-sm"></i>  Manage Students</a>
+                            <a href="#"><i class="fa fa-users fa-sm"></i> Manage Patient</a>
                         </li>
                     </ul>
                 </li>                
-                <!--syllabus-->
+                <!--Staff-->
                 <li>
-                    <a href="#syllabus" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-book"></i> Subjects</a>
+                    <a href="#syllabus" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-book"></i> Medical Staff</a>
                     <ul class="collapse list-unstyled" id="syllabus">
                         <li>
-                            <a href="../subjects/addsub.php"><i class="fa fa-plus fa-sm"></i> Add Subjects</a>
+                            <a href="#"><i class="fa fa-plus fa-sm"></i> Add New</a>
                         </li>
                         <li>
-                            <a href="../subjects/managesub.php"><i class="fa fa-wrench fa-sm"></i> Manage Subjects</a>
+                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Manage</a>
                             
                         </li>
                     </ul>
                 </li>
                 <!--Finance-->
                 <li>
-                    <a href="#dpts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user-circle"></i> Teachers</a>
+                    <a href="#dpts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user-circle"></i> Billing</a>
                     <ul class="collapse list-unstyled" id="dpts">
                         <li>
-                            <a href="../teachers/addteach.php"><i class="fa fa-user-plus fa-sm"></i>  Add Teacher</a>
+                            <a href="#"><i class="fa fa-user-plus fa-sm"></i> General Billing</a>
                         </li>
                         <li>
-                            <a href="../teachers/manageteach.php"><i class="fa fa-wrench fa-sm"></i> Manage Teachers</a>
-                    
+                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Morgue Billing</a>
                         </li>
                     </ul>
                 </li>
-                <!---->
+                <!--Reports-->
                 <li>
-                    <a href="#schools" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> Parents</a>
+                    <a href="#schools" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> Reports</a>
                     <ul class="collapse list-unstyled" id="schools">
                         <li>
-                            <a href="../parents/managepar.php"><i class="fa fa-wrench fa-sm"></i>  Manage Parents</a>
+                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Patient List Report</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Patient Report</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Employee List</a>
                         </li>
                     </ul>
                 </li>
-                <!--REGISTER-->
+                <!--store-->
 
                 <li>
-                    <a href="#staff" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> Support Staff</a>
+                    <a href="#staff" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> Inventory</a>
                     <ul class="collapse list-unstyled" id="staff">
                         <li>
-                            <a href="../staff/addstaff.php"><i class="fa fa-user-plus fa-sm"></i>  Add Staff</a>
+                            <a href=" "><i class="fa fa-user-plus fa-sm"></i>  Drugs</a>
                         </li>
                         <li>
-                            <a href="../staff/managestaff.php"><i class="fa fa-wrench fa-sm"></i>  Manage Staff</a>
+                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Manage Staff</a>
                         </li>
                     </ul>
                 </li>
