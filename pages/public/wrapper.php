@@ -18,7 +18,7 @@
                     <a href="#student" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user-circle"></i> Patient</a>
                     <ul class="collapse list-unstyled" id="student">
                         <li>
-                            <a href="#"><i class="fa fa-user-plus fa-sm"></i> New Patient</a>
+                            <a href="../add_patient.php"><i class="fa fa-user-plus fa-sm"></i> New Patient</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-users fa-sm"></i> Manage Patient</a>
