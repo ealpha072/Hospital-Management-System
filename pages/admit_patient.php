@@ -41,6 +41,13 @@
                         </select>
                     </div>
                 </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-2 col-form-label">Date of Admission</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control form-control-sm" value="" readonly>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-sm btn-primary">Admit</button>
 
             </form>

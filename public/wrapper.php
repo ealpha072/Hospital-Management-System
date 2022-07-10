@@ -72,7 +72,7 @@
                     <a href="#dpts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user-circle"></i> Billing</a>
                     <ul class="collapse list-unstyled" id="dpts">
                         <li>
-                            <a href="#"><i class="fa fa-user-plus fa-sm"></i> General Billing</a>
+                            <a href="bill_patient.php"><i class="fa fa-user-plus fa-sm"></i> General Billing</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-sm"></i> Morgue Billing</a>
