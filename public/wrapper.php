@@ -27,10 +27,10 @@
                 </li>                
                 <!--Staff-->
                 <li>
-                    <a href="#syllabus" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-book"></i> Medical Staff</a>
+                    <a href="#syllabus" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-book"></i> Hospital Staff</a>
                     <ul class="collapse list-unstyled" id="syllabus">
                         <li>
-                            <a href="#"><i class="fa fa-plus fa-sm"></i> Add New</a>
+                            <a href="add_staff.php"><i class="fa fa-plus fa-sm"></i> Add New</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-sm"></i> Manage</a>
