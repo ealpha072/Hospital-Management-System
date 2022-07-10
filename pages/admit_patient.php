@@ -16,6 +16,13 @@
                 </div>
 
                 <div class="form-group row">
+                    <label for="" class="col-2 col-form-label">IP Number</label>
+                    <div class="col-8">
+                        <input type="text" value="GET FROM DB" placeholder="" name="" class="form-control form-control-sm" readonly >
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label for="" class="col-2 col-form-label">Ward Name</label>
                     <div class="col-8">
                         <select name="" class="form-control form-control-sm">
