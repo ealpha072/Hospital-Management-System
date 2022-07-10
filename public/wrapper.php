@@ -11,7 +11,7 @@
             <ul class="list-unstyled components">
                 <!-- dashboard-->
                 <li class="">
-                    <a href="../dashboard/dashboard.php"><i class="fas fa-server"></i> Dashboard</a>
+                    <a href="dashboard.php"><i class="fas fa-server"></i> Dashboard</a>
                 </li>
                 <!-- patients -->
                 <li>
@@ -21,20 +21,35 @@
                             <a href="add_patient.php"><i class="fa fa-user-plus fa-sm"></i> New Patient</a>
                         </li>
                         <li>
+                            <a href="admit_patient.php"><i class="fa fa-user-plus fa-sm"></i> Admit Patient</a>
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-users fa-sm"></i> Manage Patient</a>
                         </li>
                     </ul>
                 </li>                
                 <!--Staff-->
                 <li>
-                    <a href="#syllabus" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-book"></i> Hospital Staff</a>
-                    <ul class="collapse list-unstyled" id="syllabus">
+                    <a href="#host-staffs" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-book"></i> Hospital Staff</a>
+                    <ul class="collapse list-unstyled" id="host-staffs">
                         <li>
-                            <a href="add_staff.php"><i class="fa fa-plus fa-sm"></i> Add New</a>
+                            <a href="add_ward.php"><i class="fa fa-plus fa-sm"></i> Add New</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-sm"></i> Manage</a>
-                            
+                        </li>
+                    </ul>
+                </li>
+                <!-- wards -->
+
+                <li>
+                    <a href="#wards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-book"></i> Ward Rooms</a>
+                    <ul class="collapse list-unstyled" id="wards">
+                        <li>
+                            <a href="add_ward.php"><i class="fa fa-plus fa-sm"></i> Add New</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Manage</a>
                         </li>
                     </ul>
                 </li>
