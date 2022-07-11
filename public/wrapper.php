@@ -11,57 +11,58 @@
             <ul class="list-unstyled components">
                 <!-- dashboard-->
                 <li class="">
-                    <a href="dashboard.php"><i class="fas fa-server"></i> Dashboard</a>
+                    <a href="dashboard.php"><i class="fas fa-server mr-2"></i> Dashboard</a>
                 </li>
                 <!-- patients -->
                 <li>
-                    <a href="#student" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user-circle"></i> Patient</a>
+                    <a href="#student" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user-circle mr-2"></i> Patient</a>
                     <ul class="collapse list-unstyled" id="student">
                         <li>
-                            <a href="add_patient.php"><i class="fa fa-user-plus fa-sm"></i> Register</a>
+                            <a href="add_patient.php"><i class="fa fa-user-plus fa-sm mr-2"></i> Register</a>
                         </li>
                         <li>
-                            <a href="admit_patient.php"><i class="fa fa-user-plus fa-sm"></i> Admit Patient</a>
+                            <a href="admit_patient.php"><i class="fa fa-user-plus fa-sm mr-2"></i> Admit Patient</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-users fa-sm"></i> Patient List</a>
+                            <a href="#"><i class="fa fa-users fa-sm mr-2"></i> Patient List</a>
                         </li>
                     </ul>
                 </li>                
                 <!--Staff-->
                 <li>
-                    <a href="#host-staffs" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-book"></i> Hospital Staff</a>
+                    <a href="#host-staffs" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users mr-2"></i> Hospital Staff</a>
                     <ul class="collapse list-unstyled" id="host-staffs">
                         <li>
-                            <a href="add_staff.php"><i class="fa fa-plus fa-sm"></i> New Employee</a>
+                            <a href="add_staff.php"><i class="fa fa-plus fa-sm mr-2"></i> New Employee</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Manage</a>
+                            <a href="#"><i class="fa fa-wrench fa-sm mr-2"></i> Manage</a>
                         </li>
                     </ul>
                 </li>
 
+                 <!--DOCTOR-->
                 <li>
-                    <a href="#doctor" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-book"></i> Doctor</a>
+                    <a href="#doctor" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user-md mr-2"></i> Doctor</a>
                     <ul class="collapse list-unstyled" id="doctor">
                         <li>
-                            <a href="add_doctor.php"><i class="fa fa-plus fa-sm"></i> Add Doctor</a>
+                            <a href="add_doctor.php"><i class="fa fa-plus fa-sm mr-2"></i> Add Doctor</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Doctor List</a>
+                            <a href="#"><i class="fa fa-wrench fa-sm mr-2"></i> Doctor List</a>
                         </li>
                     </ul>
                 </li>
 
                 <!-- DEPARTMENTS -->
                 <li>
-                    <a href="#depts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-book"></i> Departments</a>
+                    <a href="#depts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-book mr-2"></i> Departments</a>
                     <ul class="collapse list-unstyled" id="depts">
                         <li>
-                            <a href="add_depts.php"><i class="fa fa-plus fa-sm"></i> Create New</a>
+                            <a href="add_depts.php"><i class="fa fa-plus fa-sm mr-2"></i> Create New</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Manage</a>
+                            <a href="#"><i class="fa fa-wrench fa-sm mr-2"></i> Manage</a>
                         </li>
                     </ul>
                 </li> 
@@ -69,25 +70,25 @@
                 <!-- wards -->
 
                 <li>
-                    <a href="#wards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-book"></i> Ward Rooms</a>
+                    <a href="#wards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-hospital mr-2"></i> Ward Rooms</a>
                     <ul class="collapse list-unstyled" id="wards">
                         <li>
-                            <a href="add_ward.php"><i class="fa fa-plus fa-sm"></i> Add New</a>
+                            <a href="add_ward.php"><i class="fa fa-plus fa-sm mr-2"></i> Add New</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Manage</a>
+                            <a href="#"><i class="fa fa-wrench fa-sm mr-2"></i> Manage</a>
                         </li>
                     </ul>
                 </li>
                 <!--Finance-->
                 <li>
-                    <a href="#dpts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user-circle"></i> Billing</a>
+                    <a href="#dpts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-credit-card mr-2"></i> Billing</a>
                     <ul class="collapse list-unstyled" id="dpts">
                         <li>
-                            <a href="bill_patient.php"><i class="fa fa-user-plus fa-sm"></i> General Billing</a>
+                            <a href="add_service.php"><i class="fa fa-user-plus fa-sm mr-2"></i> Add service</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Morgue Billing</a>
+                            <a href="#"><i class="fa fa-list fa-sm mr-2"></i> Service List</a>
                         </li>
                     </ul>
                 </li>
