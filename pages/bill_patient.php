@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <div class="mt-4 border border-primary">
+            <div class="mt-4">
                 <div class="row">
                     <div class="col">
                         <div class="row">
@@ -80,7 +80,7 @@
             </div>
 
             <div class="mt-2">
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="bill-table">
                     <thead class="">
                         <tr>
                             <th><i class="fa fa-cogs"></i></th>
@@ -90,12 +90,12 @@
                             <th>Sub-Total</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="bill-table-body">
                         <tr>
                             <td>
                                 <div class="btn-group">
-                                    <button class="btn btn-primary btn-sm">+</button>
-                                    <button class="btn btn-success btn-sm">-</button>
+                                    <button class="btn btn-primary btn-sm" id="add-bill-row">+</button>
+                                    <button class="btn btn-success btn-sm" id="remove-bill-row">-</button>
                                 </div>
                             </td>
                             <td>
