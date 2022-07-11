@@ -31,7 +31,7 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <label for="" class="col-2 col-form-label">Bed Number</label>
                     <div class="col-8">
@@ -48,9 +48,11 @@
                         <input type="text" class="form-control form-control-sm" value="" readonly>
                     </div>
                 </div>
+                
                 <button type="submit" class="btn btn-sm btn-primary">Admit</button>
 
             </form>
         </div>
     </div>
+
 <?php require "../public/footer.php" ?>

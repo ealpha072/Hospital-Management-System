@@ -41,6 +41,18 @@
                     </ul>
                 </li>
 
+                <li>
+                    <a href="#doctor" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-book"></i> Doctor</a>
+                    <ul class="collapse list-unstyled" id="doctor">
+                        <li>
+                            <a href="add_doctor.php"><i class="fa fa-plus fa-sm"></i> Add Doctor</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Doctor List</a>
+                        </li>
+                    </ul>
+                </li>
+
                 <!-- DEPARTMENTS -->
                 <li>
                     <a href="#depts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-book"></i> Departments</a>
