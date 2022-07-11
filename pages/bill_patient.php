@@ -1,6 +1,6 @@
 <?php require "../public/wrapper.php" ?>
 
-<div class="card">
+<div class="card mr-4 mb-2 ml-4">
     <div class="card-header">
         <form action="" method="post" class="form-inline">
             <div class="form-group">
@@ -9,28 +9,120 @@
             </div>
         </form>
     </div>
+
     <div class="card-body">
-        <div class="search-results">
-            <div class="form-group row">  
-                <label for="" class="col-sm-2">Patient Name</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-sm" value="" readonly>
+        <form action="" method="post">
+            <div class="row">
+                <div class="col-9">
+                    <div class="form-group row">  
+                        <label for="" class="col-sm-2">Patient Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control form-control-sm" value="" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">  
+                        <label for="" class="col-sm-2">IP Number</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control form-control-sm" value="" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">  
+                        <label for="" class="col-sm-2">Date of Adm</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control form-control-sm" value="" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <img src="" alt="" class="img-thumbnail" height="150" width="150">
                 </div>
             </div>
-            <div class="form-group row">  
-                <label for="" class="col-sm-2">IP Number</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-sm" value="" readonly>
+
+            <div class="mt-4 border border-primary">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <label for="" class="col-4"><strong>Discharge Date</strong> </label>
+                            <div class="col-8">
+                                <input type="text" readonly value="" name="" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label for="" class="col-4"><strong>Total Days</strong> </label>
+                            <div class="col-8">
+                                <input type="text" readonly value="" name="" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col">
+                        <div class="row">
+                            <label for="" class="col-4"><strong>Insurance Provider</strong> </label>
+                            <div class="col-8">
+                                <input type="text" readonly value="" name="" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="row">
+                            <label for="" class="col-4"><strong> Insurance Number</strong></label>
+                            <div class="col-8">
+                                <input type="text" readonly value="" name="" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="form-group row">  
-                <label for="" class="col-sm-2">D.O.B</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-sm" value="" readonly>
-                </div>
+
+            <div class="mt-2">
+                <table class="table table-bordered">
+                    <thead class="secondary">
+                        <tr>
+                            <th><i class="fa fa-cogs"></i></th>
+                            <th>Service Name</th>
+                            <th>Quantity</th>
+                            <th>Unit Charge</th>
+                            <th>Sub-Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-primary btn-sm">+</button>
+                                    <button class="btn btn-success btn-sm">-</button>
+                                </div>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control form-control-sm" placeholder="Service Name">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control form-control-sm" placeholder="1">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control form-control-sm" placeholder="0.00">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control form-control-sm" placeholder="0.00" readonly>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
-        <div class="card-header">Bill Patient</div>
+
+            <div class="row mt-4">
+                <div class="col">
+                    div.
+                </div>
+                <div class="col"></div>
+            </div>
+        </form>
+        
     </div>
 </div>
 <?php require "../public/footer.php" ?>

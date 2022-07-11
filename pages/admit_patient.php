@@ -1,5 +1,5 @@
 <?php require "../public/wrapper.php" ?>
-    <div class="card">
+    <div class="card mb-4 mr-4 ml-4">
         <div class="card-header">
             <form action="" class="form-inline">
                 <input type="text" placeholder="Search Name" class="form-control form-control-sm mr-2">
@@ -9,22 +9,22 @@
         <div class="card-body">
             <form action="">
                 <div class="form-group row">
-                    <label for="" class="col-2 col-form-label">Patient Name</label>
-                    <div class="col-8">
+                    <label for="" class="col-sm-2 col-form-label"><strong>Patient Name</strong> </label>
+                    <div class="col-sm-6">
                         <input type="text" value="" placeholder="" name="" class="form-control form-control-sm">
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="" class="col-2 col-form-label">IP Number</label>
-                    <div class="col-8">
+                    <label for="" class="col-sm-2 col-form-label"><strong>IP Number</strong> </label>
+                    <div class="col-sm-6">
                         <input type="text" value="GET FROM DB" placeholder="" name="" class="form-control form-control-sm" readonly >
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="" class="col-2 col-form-label">Ward Name</label>
-                    <div class="col-8">
+                    <label for="" class="col-sm-2 col-form-label"><strong>Ward Name</strong> </label>
+                    <div class="col-sm-6">
                         <select name="" class="form-control form-control-sm">
                             <option value="" disabled selected>--Select Ward--</option>
                             <!--POPULATE FROM DB-->
@@ -33,8 +33,8 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="" class="col-2 col-form-label">Bed Number</label>
-                    <div class="col-8">
+                    <label for="" class="col-sm-2 col-form-label"><strong>Bed Number</strong> </label>
+                    <div class="col-sm-6">
                         <select name="" class="form-control form-control-sm">
                             <option value="" disabled selected>--Select Ward--</option>
                             <!--POPULATE FROM DB-->
@@ -43,13 +43,27 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="" class="col-2 col-form-label">Date of Admission</label>
-                    <div class="col-8">
+                    <label for="" class="col-sm-2 col-form-label"><strong>Date of Admission</strong> </label>
+                    <div class="col-sm-6">
                         <input type="text" class="form-control form-control-sm" value="" readonly>
                     </div>
                 </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label"><strong>Next of Kin</strong></label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-sm" value="" placeholder="Next of Kin">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label"><strong>Relationship</strong> </label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-sm" value="" placeholder="Relationship with next of Kin">
+                    </div>
+                </div>
                 
-                <button type="submit" class="btn btn-sm btn-primary">Admit</button>
+                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle mr-2"></i> Admit</button>
 
             </form>
         </div>

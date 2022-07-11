@@ -21,7 +21,7 @@
                             <a href="add_patient.php"><i class="fa fa-user-plus fa-sm mr-2"></i> Register</a>
                         </li>
                         <li>
-                            <a href="admit_patient.php"><i class="fa fa-user-plus fa-sm mr-2"></i> Admit Patient</a>
+                            <a href="admit_patient.php"><i class="fa fa-user-circle fa-sm mr-2"></i> Admit Patient</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-users fa-sm mr-2"></i> Patient List</a>
@@ -89,6 +89,9 @@
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-list fa-sm mr-2"></i> Service List</a>
+                        </li>
+                        <li>
+                            <a href="bill_patient.php"><i class="fa fa-user-plus fa-sm mr-2"></i> Bill Patient</a>
                         </li>
                     </ul>
                 </li>
