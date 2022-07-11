@@ -3,7 +3,7 @@
 <div class="card mr-4 ml-4 mb-4">
     <div class="card-header">
         <a href="">
-            <button class="btn btn-md btn-primary"> <i class="fa fa-bars mr-2"></i> Doctor List</button>
+            <button class="btn btn-md btn-primary"> <i class="fa fa-list mr-2"></i> Doctor List</button>
         </a>
     </div>
     <div class="card-body">
