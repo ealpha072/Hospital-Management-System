@@ -81,7 +81,7 @@
 
             <div class="mt-2">
                 <table class="table table-bordered">
-                    <thead class="secondary">
+                    <thead class="">
                         <tr>
                             <th><i class="fa fa-cogs"></i></th>
                             <th>Service Name</th>
@@ -117,9 +117,79 @@
 
             <div class="row mt-4">
                 <div class="col">
-                    div.
+                    <div class="form-group row">
+                        <label for="" class="col-4">Payment Method</label>
+                        <div class="col-8">
+                            <select name="" id="" class="form-control form-control-sm">
+                                <option value="" selected disabled>--Payment Method--</option>
+                                <option value="">Cash</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-4">Card/ Cheque Number</label>
+                        <div class="col-8">
+                            <input type="text" placeholder="Card/ Cheque No" class="form-control form-control-sm">
+                        </div>
+                    </div>
                 </div>
-                <div class="col"></div>
+
+                <div class="col">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Totals</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Total</td>
+                                <td>
+                                    <input type="number" name="" id="" class="form-control form-control-sm" placeholder="0.00">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="input-group">
+                                        <span class="input-group-text">Discount %</span>
+                                        <input type="number" name="" id="" class="form-control form-control-sm" placeholder="0.00">
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="number" name="" id="" class="form-control form-control-sm"  placeholder="0.00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="input-group">
+                                        <span class="input-group-text">Tax %</span>
+                                        <input type="number" name="" id="" class="form-control" placeholder="0.00" >
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="number" name="" id="" class="form-control fom-conrol-sm" placeholder="0.00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Payable</td>
+                                <td>
+                                    <input type="number" name="" id="" class="form-control fom-conrol-sm" placeholder="0.00">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <textarea name="" id="" class="form-control " placeholder="Additional Notes"></textarea>
+            </div>
+
+            <div class="d-flex justify-content-center mt-4">
+                <button class="btn btn-md btn-success"><i class="fa fa-save mr-2"></i> Save and Print Invoice</button>
             </div>
         </form>
         
