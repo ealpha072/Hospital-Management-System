@@ -23,14 +23,18 @@ $(document).ready(function () {
             </td>
         </tr>
     `
-   const tableBody = document.querySelector('tbody#bill-table-body')
-   const buttons = tableBody.querySelectorAll("button")
+   const tableButtonsAdd =$('#bill-table-body .add-row-btn')
+   const tableButtonsRemove = $('#bill-table-body .remove-row-btn')
 
-   fn  = function (e) {e.preventDefault()}
+   tableButtonsAdd.on('click', e=>{
+        e.preventDefault()
+        $("#bill-table-body").append(tableRow)
+   })
 
-   for(let i = 0; i < buttons.length; i++){
-        buttons[i].addEventListener('click', fn, false )
-   }
+   tableButtonsRemove.on('click', function(e){
+        e.preventDefault()
+        $(this).parentsUntil("tr").remove()
+   })
 
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');

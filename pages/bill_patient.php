@@ -95,7 +95,7 @@
                             <td>
                                 <div class="btn-group">
                                     <button class="btn btn-primary btn-sm add-row-btn">+</button>
-                                    <button class="btn btn-success btn-sm" id="remove-bill-row">-</button>
+                                    <button class="btn btn-success btn-sm remove-row-btn">-</button>
                                 </div>
                             </td>
                             <td>
@@ -111,6 +111,8 @@
                                 <input type="number" class="form-control form-control-sm" placeholder="0.00" readonly>
                             </td>
                         </tr>
+
+                        
                     </tbody>
                 </table>
             </div>
