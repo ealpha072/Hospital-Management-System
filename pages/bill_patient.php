@@ -94,7 +94,7 @@
                         <tr>
                             <td>
                                 <div class="btn-group">
-                                    <button class="btn btn-primary btn-sm" id="add-bill-row">+</button>
+                                    <button class="btn btn-primary btn-sm add-row-btn">+</button>
                                     <button class="btn btn-success btn-sm" id="remove-bill-row">-</button>
                                 </div>
                             </td>

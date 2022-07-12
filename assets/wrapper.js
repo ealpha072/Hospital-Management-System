@@ -23,13 +23,18 @@ $(document).ready(function () {
             </td>
         </tr>
     `
+   const tableBody = document.querySelector('tbody#bill-table-body')
+   const buttons = tableBody.querySelectorAll("button")
+
+   fn  = function (e) {e.preventDefault()}
+
+   for(let i = 0; i < buttons.length; i++){
+        buttons[i].addEventListener('click', fn, false )
+   }
+
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
     });
-    $('#add-bill-row').on('click', function (e){
-        e.preventDefault()
-        console.log('Clicked')
-        $('#bill-table-body').append(tableRow)
-        
-    })
+
+    
 });
