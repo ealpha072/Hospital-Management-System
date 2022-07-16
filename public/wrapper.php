@@ -123,6 +123,19 @@
                         </li>
                     </ul>
                 </li>
+
+                <li>
+                    <a href="#notice" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> Noticeboard</a>
+                    <ul class="collapse list-unstyled" id="notice">
+                        <li>
+                            <a href="add_notice.php"><i class="fa fa-user-plus fa-sm"></i> Add Notice</a>
+                        </li>
+                        <li>
+                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Notice List</a>
+                        </li>
+                    </ul>
+                </li>
+
                 
                 <li>
                     <a href="../dashboard/settings.php"><i class="fa fa-cogs"></i> Settings</a>
