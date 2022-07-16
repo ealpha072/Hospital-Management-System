@@ -111,7 +111,26 @@
                                 <input type="number" class="form-control form-control-sm" placeholder="0.00" readonly>
                             </td>
                         </tr>
-
+                        <tr>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-primary btn-sm add-row-btn">+</button>
+                                    <button class="btn btn-success btn-sm remove-row-btn">-</button>
+                                </div>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control form-control-sm" placeholder="Service Name">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control form-control-sm" placeholder="1">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control form-control-sm" placeholder="0.00">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control form-control-sm" placeholder="0.00" readonly>
+                            </td>
+                        </tr>
                         
                     </tbody>
                 </table>

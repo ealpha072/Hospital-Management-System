@@ -65,7 +65,7 @@
                             <option value="">Female</option>
                         </select>
                     </div>
-                </div>
+                </div> 
 
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Status<sup>*</sup></label>
@@ -77,7 +77,6 @@
                         </select>
                     </div>
                 </div>
-
 
                 <div class="form-group row">
                     <label for="" class="col-sm-2">NHIF Number<sup>*</sup></label>

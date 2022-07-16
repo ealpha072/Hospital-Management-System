@@ -1,11 +1,10 @@
-console.log('This page works')
-
 $(document).ready(function () {
+
     let tableRow = `
         <tr>
             <td>
                 <div class="btn-group">
-                    <button class="btn btn-primary btn-sm" id="add-bill-row">+</button>
+                    <button class="btn btn-primary btn-sm add-row-btn" onclick = "event.preventDefault(); addRow()">+</button>
                     <button class="btn btn-success btn-sm" id="remove-bill-row">-</button>
                 </div>
             </td>
@@ -23,18 +22,11 @@ $(document).ready(function () {
             </td>
         </tr>
     `
-   const tableButtonsAdd =$('#bill-table-body .add-row-btn')
-   const tableButtonsRemove = $('#bill-table-body .remove-row-btn')
-
-   tableButtonsAdd.on('click', e=>{
-        e.preventDefault()
-        $("#bill-table-body").append(tableRow)
-   })
-
-   tableButtonsRemove.on('click', function(e){
-        e.preventDefault()
-        $(this).parentsUntil("tr").remove()
-   })
+    
+    function addRow(){
+        let tableBody = $('#bill-table-body')
+        tableBody.append(tableRow)
+    }
 
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
