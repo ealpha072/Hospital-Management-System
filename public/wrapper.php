@@ -145,16 +145,16 @@
 
                 <!--Expenses-->
                 <li>
-                    <a href="#expenses" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> Expenses</a>
+                    <a href="#expenses" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-credit-card"></i> Expenses</a>
                     <ul class="collapse list-unstyled" id="expenses">
                         <li>
-                            <a href="add_category.php"><i class="fa fa-user-plus fa-sm"></i>  Add Category</a>
+                            <a href="add_category.php"><i class="fa fa-user fa-sm"></i>  Add Category</a>
                         </li>
                         <li>
-                            <a href="add_drugs.php"><i class="fa fa-user-plus fa-sm"></i>  Add Expenses</a>
+                            <a href="add_expense.php"><i class="fa fa-plus-circle fa-sm"></i>  Add Expenses</a>
                         </li>
                         <li>
-                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Drugs List</a>
+                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Expense List</a>
                         </li>
                     </ul>
                 </li>
