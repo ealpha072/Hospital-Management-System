@@ -4,7 +4,7 @@
     <div class="card-header">
         <div class="btn-group" role="group">
             <button type="button" class="btn btn-sm btn-success"> 
-                <a href="new_message.php"><i class="fa fa-paper-plane mr-2"></i> New Message</a>
+                <a href="new_ message.php"><i class="fa fa-paper-plane mr-2"></i> New Message</a>
             </button>
             <button type="button" class="btn btn-sm btn-info">
                 <a href="inbox.php"><i class="fa fa-inbox mr-2"></i> Inbox</a> 

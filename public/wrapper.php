@@ -22,10 +22,10 @@
                             <a href="add_patient.php"><i class="fa fa-user-plus fa-sm mr-2"></i> Register</a>
                         </li>
                         <li>
-                            <a href="admit_patient.php"><i class="fa fa-user-circle fa-sm mr-2"></i> Admit Patient</a>
+                            <a href="admit_patient.php"><i class="fa fa-bed fa-sm mr-2"></i> Admit Patient</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-users fa-sm mr-2"></i> Patient List</a>
+                            <a href="#"><i class="fa fa-heartbeat fa-sm mr-2"></i> Patient List</a>
                         </li>
                     </ul>
                 </li>  
@@ -38,20 +38,20 @@
                             <a href="add_staff.php"><i class="fa fa-plus fa-sm mr-2"></i> Add Employee</a>
                         </li>
                         <li>
-                            <a href="add_doctor.php"><i class="fa fa-plus-circle fa-sm mr-2"></i> Add Doctor</a>
+                            <a href="add_doctor.php"><i class="fa fa-user-md fa-sm mr-2"></i> Add Doctor</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-sm mr-2"></i> Doctor List</a>
+                            <a href="#"><i class="fa fa-stethoscope fa-sm mr-2"></i> Doctor List</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-sm mr-2"></i> Employee List</a>
+                            <a href="#"><i class="fa fa-list fa-sm mr-2"></i> Employee List</a>
                         </li>
                     </ul>
                 </li>
 
                 <!-- DEPARTMENTS -->
                 <li>
-                    <a href="#depts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-book mr-2"></i> Departments</a>
+                    <a href="#depts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-database mr-2"></i> Departments</a>
                     <ul class="collapse list-unstyled" id="depts">
                         <li>
                             <a href="add_depts.php"><i class="fa fa-plus fa-sm mr-2"></i> Create New</a>
@@ -86,7 +86,7 @@
                             <a href="#"><i class="fa fa-list fa-sm mr-2"></i> Service List</a>
                         </li>
                         <li>
-                            <a href="bill_patient.php"><i class="fa fa-user-plus fa-sm mr-2"></i> Bill Patient</a>
+                            <a href="bill_patient.php"><i class="fa fa-credit-card fa-sm mr-2"></i> Bill Patient</a>
                         </li>
                     </ul>
                 </li>
@@ -96,25 +96,25 @@
                     <a href="#schools" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user mr-2"></i> Reports</a>
                     <ul class="collapse list-unstyled" id="schools">
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Patient List Report</a>
+                            <a href="#"><i class="fa fa-list fa-sm"></i> Patient List Report</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Patient Report</a>
+                            <a href="#"><i class="fa fa-bars fa-sm"></i> Patient Report</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Employee List</a>
+                            <a href="#"><i class="fa fa-th-list fa-sm"></i> Employee List</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Expense Report</a>
+                            <a href="#"><i class="fa fa-list-alt fa-sm"></i> Expense Report</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Inventory Report</a>
+                            <a href="#"><i class="fa fa-truck fa-sm"></i> Inventory Report</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Profit/Loss Report</a>
+                            <a href="#"><i class="fa fa-credit-card fa-sm"></i> Profit/Loss Report</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Balance Sheet</a>
+                            <a href="#"><i class="fa fa-balance-scale fa-sm"></i> Balance Sheet</a>
                         </li>
                     </ul>
                 </li>
@@ -161,7 +161,7 @@
 
                 <!--Inventory --> 
                 <li>
-                    <a href="#staff" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user mr-2"></i> Inventory</a>
+                    <a href="#staff" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-truck mr-2"></i> Inventory</a>
                     <ul class="collapse list-unstyled" id="staff">
                         <li>
                             <a href="add_drugs.php"><i class="fa fa-user-plus fa-sm"></i>  Add Drugs</a>
