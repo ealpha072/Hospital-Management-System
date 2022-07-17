@@ -28,6 +28,12 @@
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <label for="" class="col-sm-2">Category Name<sup>*</sup></label>
+                    <div class="col-sm-6">
+                        <textarea name="" id="" cols="30" rows="5" class="form-control form-control-sm"></textarea>
+                    </div>
+                </div>
                 <button class="btn btn-sm btn-primary"> <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i> Save</button>
             </div>
         </form>

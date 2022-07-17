@@ -128,7 +128,7 @@
 
                 <!--store-->
 
-                <!--Accounting-->
+                <!--Supplier-->
                 <li>
                     <a href="#suppliers" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-briefcase mr-2"></i> Suppliers</a>
                     <ul class="collapse list-unstyled" id="suppliers">
@@ -136,10 +136,16 @@
                             <a href="add_supplier.php"><i class="fa fa-user-plus fa-sm"></i>  Add Supplier</a>
                         </li>
                         <li>
-                            <a href="add_supplier.php"><i class="fa fa-user-plus fa-sm"></i> Invoice Supplier</a>
+                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Manage Suppliers</a>
                         </li>
                         <li>
-                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Manage Suppliers</a>
+                            <a href="create_purchase.php"><i class="fa fa-plus fa-sm"></i>  Create Purchase</a>
+                        </li>
+                        <li>
+                            <a href=" "><i class="fa fa-plus fa-sm"></i>  Purchase Order</a>
+                        </li>
+                        <li>
+                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Purchase Purchase List</a>
                         </li>
                     </ul>
                 </li>
@@ -149,7 +155,7 @@
                     <a href="#expenses" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-credit-card mr-2"></i> Expenses</a>
                     <ul class="collapse list-unstyled" id="expenses">
                         <li>
-                            <a href="add_category.php"><i class="fa fa-user fa-sm"></i>  Add Category</a>
+                            <a href="add_expense_category.php"><i class="fa fa-user fa-sm"></i>  Add Category</a>
                         </li>
                         <li>
                             <a href="add_expense.php"><i class="fa fa-plus-circle fa-sm"></i>  Add Expenses</a>
