@@ -92,8 +92,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    
+                                <tr>                                    
                                 </tr>
                             </tbody>
                         </table>
@@ -102,24 +101,20 @@
                             <thead class="bg-primary">
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Code</th>
                                     <th scope="col">Product Description</th>
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Unit Price</th>
                                     <th scope="col">Amount</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="po-table-body">
                                 <tr>
                                     <td>
                                         <div class="btn-group">
-                                            <button class="btn btn-success btn-sm"><i class="fa fa-plus"></i></button>
-                                            <button class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button>
+                                            <button class="btn btn-success btn-sm arppt"><i class="fa fa-plus"></i></button>
+                                            <button class="btn btn-info btn-sm"><i class="fa fa-minus"></i></button>
                                         </div>
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control form-control-sm">
-                                    </td>
+                                    </td>                                    
                                     <td>
                                         <input type="text" class="form-control form-control-sm">
                                     </td>
