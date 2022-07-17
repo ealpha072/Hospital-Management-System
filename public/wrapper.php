@@ -196,7 +196,7 @@
                             <a href="new_message.php"><i class="fa fa-user-plus fa-sm"></i> Send Message</a>
                         </li>
                         <li>
-                            <a href="new_message.php"><i class="fa fa-wrench fa-sm"></i>  Inbox</a>
+                            <a href="inbox.php"><i class="fa fa-wrench fa-sm"></i>  Inbox</a>
                         </li>
                         <li>
                             <a href=" "><i class="fa fa-wrench fa-sm"></i>  Sent</a>
