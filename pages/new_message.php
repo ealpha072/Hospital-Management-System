@@ -4,10 +4,10 @@
     <div class="card-header">
         <div class="btn-group" role="group">
             <button type="button" class="btn btn-sm btn-primary"> 
-                <a href=""><i class="fa fa-inbox mr-2"></i> Inbox</a>
+                <a href="inbox.php"><i class="fa fa-inbox mr-2"></i> Inbox</a>
             </button>
             <button type="button" class="btn btn-sm btn-info">
-                <a href=""><i class="fa fa-share-square mr-2"></i> Sent</a> 
+                <a href="sent_sms.php"><i class="fa fa-share-square mr-2"></i> Sent</a> 
             </button>
         </div>
         
