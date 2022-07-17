@@ -68,7 +68,6 @@
                 </li> 
 
                 <!-- wards -->
-
                 <li>
                     <a href="#wards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-hospital mr-2"></i> Ward Rooms</a>
                     <ul class="collapse list-unstyled" id="wards">
@@ -80,6 +79,7 @@
                         </li>
                     </ul>
                 </li>
+
                 <!--Finance-->
                 <li>
                     <a href="#dpts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-credit-card mr-2"></i> Billing</a>
@@ -95,6 +95,7 @@
                         </li>
                     </ul>
                 </li>
+
                 <!--Reports-->
                 <li>
                     <a href="#schools" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> Reports</a>
@@ -112,14 +113,28 @@
                 </li>
                 <!--store-->
 
+                <!--Accounting-->
+                <li>
+                    <a href="#suppliers" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> Suppliers</a>
+                    <ul class="collapse list-unstyled" id="suppliers">
+                        <li>
+                            <a href="add_drugs.php"><i class="fa fa-user-plus fa-sm"></i>  Add Supplier</a>
+                        </li>
+                        <li>
+                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Manage Suppliers</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!--Inventory --> 
                 <li>
                     <a href="#staff" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> Inventory</a>
                     <ul class="collapse list-unstyled" id="staff">
                         <li>
-                            <a href=" "><i class="fa fa-user-plus fa-sm"></i>  Drugs</a>
+                            <a href="add_drugs.php"><i class="fa fa-user-plus fa-sm"></i>  Add Drugs</a>
                         </li>
                         <li>
-                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Manage Staff</a>
+                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Manage Drugs</a>
                         </li>
                     </ul>
                 </li>
