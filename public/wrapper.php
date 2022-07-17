@@ -32,26 +32,19 @@
 
                 <!--Staff-->
                 <li>
-                    <a href="#host-staffs" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users mr-2"></i> Hospital Staff</a>
+                    <a href="#host-staffs" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users mr-2"></i> Human Resource</a>
                     <ul class="collapse list-unstyled" id="host-staffs">
                         <li>
-                            <a href="add_staff.php"><i class="fa fa-plus fa-sm mr-2"></i> New Employee</a>
+                            <a href="add_staff.php"><i class="fa fa-plus fa-sm mr-2"></i> Add Employee</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-sm mr-2"></i> Manage</a>
-                        </li>
-                    </ul>
-                </li>
-
-                 <!--DOCTOR-->
-                <li>
-                    <a href="#doctor" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user-md mr-2"></i> Doctor</a>
-                    <ul class="collapse list-unstyled" id="doctor">
-                        <li>
-                            <a href="add_doctor.php"><i class="fa fa-plus fa-sm mr-2"></i> Add Doctor</a>
+                            <a href="add_doctor.php"><i class="fa fa-plus-circle fa-sm mr-2"></i> Add Doctor</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-sm mr-2"></i> Doctor List</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-sm mr-2"></i> Employee List</a>
                         </li>
                     </ul>
                 </li>
@@ -195,6 +188,25 @@
                     </ul>
                 </li>
 
+                <!--SMS-->
+                <li>
+                    <a href="#sms" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-comment mr-2"></i> SMS</a>
+                    <ul class="collapse list-unstyled" id="sms">
+                        <li>
+                            <a href="new_message.php"><i class="fa fa-user-plus fa-sm"></i> Send Message</a>
+                        </li>
+                        <li>
+                            <a href="new_message.php"><i class="fa fa-wrench fa-sm"></i>  Inbox</a>
+                        </li>
+                        <li>
+                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Sent</a>
+                        </li>
+                        <li>
+                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Draft</a>
+                        </li>
+                    </ul>
+                </li>
+
                 
                 <li>
                     <a href="../dashboard/settings.php"><i class="fa fa-cogs mr-2"></i> Settings</a>
@@ -210,7 +222,7 @@
     <div id="content">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <button type="button" id="sidebarCollapse" class="btn btn-info btn-sm">
                     <i class="fas fa-align-left"></i>
                     <!--<span>Toggle Sidebar</span>-->
                 </button>

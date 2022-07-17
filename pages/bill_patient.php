@@ -80,7 +80,7 @@
             </div>
 
             <div class="mt-2">
-                <table class="table table-bordered" id="bill-table">
+                <table class="table table-bordered table-sm" id="bill-table">
                     <thead class="">
                         <tr>
                             <th><i class="fa fa-cogs"></i></th>
@@ -137,7 +137,7 @@
                 </div>
 
                 <div class="col">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-sm">
                         <thead>
                             <tr>
                                 <th>Item</th>
