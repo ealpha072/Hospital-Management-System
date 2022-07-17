@@ -25,8 +25,8 @@ let poTableRow = `
     <tr>
         <td>
             <div class="btn-group">
-                <button class="btn btn-success btn-sm" onclick="addPoRow(event);"><i class="fa fa-plus"></i></button>
-                <button class="btn btn-info btn-sm" onclick="removePoRow(event);"><i class="fa fa-minus"></i></button>
+                <button class="btn btn-success btn-sm" onclick="addPoRow(event);"><i class="fa fa-plus-circle"></i></button>
+                <button class="btn btn-info btn-sm" onclick="removePoRow(event);"><i class="fa fa-minus-circle"></i></button>
             </div>
         </td>                                    
         <td>
@@ -79,6 +79,7 @@ $(document).ready(function () {
         e.preventDefault()
         $('#po-table-body').append(poTableRow)
     })
+    
     addBtns.on('click', (e)=> {
         e.preventDefault()
         $('#bill-table-body').append(tableRow)

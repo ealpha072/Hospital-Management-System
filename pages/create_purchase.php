@@ -52,7 +52,7 @@
                                 <tr>
                                     <td>
                                         <div class="form-group row">
-                                            <label for="" class="col-sm-3 col-form-label">Company Name</label>
+                                            <label for="" class="col-sm-3 col-form-label">Name</label>
                                             <div class="col-sm-9">
                                                 <input type="text" placeholder="Company Name" class="form-control form-control-sm">
                                             </div>
@@ -73,7 +73,7 @@
                                     </td>
                                     <td>
                                         <div class="form-group row">
-                                            <label for="" class="col-sm-3 col-form-label">Company Name</label>
+                                            <label for="" class="col-sm-3 col-form-label">Name</label>
                                             <div class="col-sm-9">
                                                 <input type="text" placeholder="Company Name" class="form-control form-control-sm">
                                             </div>
@@ -111,8 +111,8 @@
                                 <tr>
                                     <td>
                                         <div class="btn-group">
-                                            <button class="btn btn-success btn-sm arppt"><i class="fa fa-plus"></i></button>
-                                            <button class="btn btn-info btn-sm"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-success btn-sm arppt"><i class="fa fa-plus-circle"></i></button>
+                                            <button class="btn btn-info btn-sm"><i class="fa fa-minus-circle"></i></button>
                                         </div>
                                     </td>                                    
                                     <td>
