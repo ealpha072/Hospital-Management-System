@@ -13,6 +13,7 @@
                 <li class="">
                     <a href="dashboard.php"><i class="fas fa-server mr-2"></i> Dashboard</a>
                 </li>
+
                 <!-- patients -->
                 <li>
                     <a href="#student" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user-circle mr-2"></i> Patient</a>
@@ -27,7 +28,8 @@
                             <a href="#"><i class="fa fa-users fa-sm mr-2"></i> Patient List</a>
                         </li>
                     </ul>
-                </li>                
+                </li>  
+
                 <!--Staff-->
                 <li>
                     <a href="#host-staffs" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users mr-2"></i> Hospital Staff</a>
@@ -109,19 +111,50 @@
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-sm"></i> Employee List</a>
                         </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Expense Report</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Inventory Report</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Profit/Loss Report</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-sm"></i> Balance Sheet</a>
+                        </li>
                     </ul>
                 </li>
                 <!--store-->
 
                 <!--Accounting-->
                 <li>
-                    <a href="#suppliers" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> Suppliers</a>
+                    <a href="#suppliers" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-briefcase"></i> Suppliers</a>
                     <ul class="collapse list-unstyled" id="suppliers">
                         <li>
-                            <a href="add_drugs.php"><i class="fa fa-user-plus fa-sm"></i>  Add Supplier</a>
+                            <a href="add_supplier.php"><i class="fa fa-user-plus fa-sm"></i>  Add Supplier</a>
+                        </li>
+                        <li>
+                            <a href="add_supplier.php"><i class="fa fa-user-plus fa-sm"></i> Invoice Supplier</a>
                         </li>
                         <li>
                             <a href=" "><i class="fa fa-wrench fa-sm"></i>  Manage Suppliers</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!--Expenses-->
+                <li>
+                    <a href="#expenses" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> Expenses</a>
+                    <ul class="collapse list-unstyled" id="expenses">
+                        <li>
+                            <a href="add_category.php"><i class="fa fa-user-plus fa-sm"></i>  Add Category</a>
+                        </li>
+                        <li>
+                            <a href="add_drugs.php"><i class="fa fa-user-plus fa-sm"></i>  Add Expenses</a>
+                        </li>
+                        <li>
+                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Drugs List</a>
                         </li>
                     </ul>
                 </li>
@@ -134,11 +167,15 @@
                             <a href="add_drugs.php"><i class="fa fa-user-plus fa-sm"></i>  Add Drugs</a>
                         </li>
                         <li>
-                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Manage Drugs</a>
+                            <a href="add_drugs.php"><i class="fa fa-user-plus fa-sm"></i>  Add Inventory</a>
+                        </li>
+                        <li>
+                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Drugs List</a>
                         </li>
                     </ul>
                 </li>
 
+                <!--NoticeBoard-->
                 <li>
                     <a href="#notice" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> Noticeboard</a>
                     <ul class="collapse list-unstyled" id="notice">
