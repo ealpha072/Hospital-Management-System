@@ -196,13 +196,13 @@
                             <a href="new_message.php"><i class="fa fa-user-plus fa-sm"></i> Send Message</a>
                         </li>
                         <li>
-                            <a href="inbox.php"><i class="fa fa-wrench fa-sm"></i>  Inbox</a>
+                            <a href="inbox.php"><i class="fa fa-inbox fa-sm"></i>  Inbox</a>
                         </li>
                         <li>
-                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Sent</a>
+                            <a href="sent_sms.php"><i class="fa fa-share-square fa-sm"></i>  Sent</a>
                         </li>
                         <li>
-                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Draft</a>
+                            <a href=""><i class="fa fa-envelope-open fa-sm"></i>  Draft</a>
                         </li>
                     </ul>
                 </li>
