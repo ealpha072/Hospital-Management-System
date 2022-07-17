@@ -100,7 +100,7 @@
 
                 <!--Reports-->
                 <li>
-                    <a href="#schools" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> Reports</a>
+                    <a href="#schools" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user mr-2"></i> Reports</a>
                     <ul class="collapse list-unstyled" id="schools">
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-sm"></i> Patient List Report</a>
@@ -125,11 +125,12 @@
                         </li>
                     </ul>
                 </li>
+
                 <!--store-->
 
                 <!--Accounting-->
                 <li>
-                    <a href="#suppliers" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-briefcase"></i> Suppliers</a>
+                    <a href="#suppliers" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-briefcase mr-2"></i> Suppliers</a>
                     <ul class="collapse list-unstyled" id="suppliers">
                         <li>
                             <a href="add_supplier.php"><i class="fa fa-user-plus fa-sm"></i>  Add Supplier</a>
@@ -145,7 +146,7 @@
 
                 <!--Expenses-->
                 <li>
-                    <a href="#expenses" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-credit-card"></i> Expenses</a>
+                    <a href="#expenses" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-credit-card mr-2"></i> Expenses</a>
                     <ul class="collapse list-unstyled" id="expenses">
                         <li>
                             <a href="add_category.php"><i class="fa fa-user fa-sm"></i>  Add Category</a>
@@ -161,7 +162,7 @@
 
                 <!--Inventory --> 
                 <li>
-                    <a href="#staff" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> Inventory</a>
+                    <a href="#staff" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user mr-2"></i> Inventory</a>
                     <ul class="collapse list-unstyled" id="staff">
                         <li>
                             <a href="add_drugs.php"><i class="fa fa-user-plus fa-sm"></i>  Add Drugs</a>
@@ -177,7 +178,7 @@
 
                 <!--NoticeBoard-->
                 <li>
-                    <a href="#notice" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"></i> Noticeboard</a>
+                    <a href="#notice" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-exclamation-circle mr-2"></i> Noticeboard</a>
                     <ul class="collapse list-unstyled" id="notice">
                         <li>
                             <a href="add_notice.php"><i class="fa fa-user-plus fa-sm"></i> Add Notice</a>
@@ -190,7 +191,7 @@
 
                 
                 <li>
-                    <a href="../dashboard/settings.php"><i class="fa fa-cogs"></i> Settings</a>
+                    <a href="../dashboard/settings.php"><i class="fa fa-cogs mr-2"></i> Settings</a>
                 </li>
 
                 <!--OTHERS-->
