@@ -27,13 +27,49 @@ class Database{
         return $this->conn;
     }
 
-    public function insert(){
-
+    public function executeStatement($statement="", $params=[]){
+        try {
+            //code...
+            $stmt = $this->conn->prepare($statement);
+            $stmt->execute($params);
+            return $stmt;
+        } catch (Exception $e) {
+            //throw $th;
+            throw new Exception($e->getMessage());
+        }
     }
 
-    public function select(){}
-    public function update(){}
-    public function delete(){}
+    public function insert($statement = "", $params = []){
+        try {
+            $this->executeStatement($statement, $params); 
+            return $this->conn->lastInsertId();
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function select($statement, $params=[]){
+        try {
+            $results = $this->executeStatement($statement, $params); 
+            return $results->fetchAll();
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+    public function update($statement, $params=[]){
+        try {
+            $this->executeStatement($statement, $params); 
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+    public function remove($statement, $params=[]){
+        try {
+            $this->executeStatement($statement, $params); 
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
 }
 
 ?>
