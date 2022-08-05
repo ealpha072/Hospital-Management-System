@@ -1,9 +1,5 @@
 <?php 
-//session_start();
-// echo ($_SERVER['HTTP_HOST']);
-// echo ($_SERVER['SERVER_NAME']);
-$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-var_dump($cleardb_url);
+session_start();
 
 class Database{
     //Heroku creds
@@ -30,9 +26,5 @@ class Database{
         return $this->conn;
     }
 }
-
-$db = new Database();
-$db->getCon();
-
 
 ?>
