@@ -1,3 +1,5 @@
+--for heroku database, replace 'hospital_db' with heroku_bece3e49d0c6d9b
+
 CREATE TABLE `hospital_db`.`patients` (
     `id` INT(255) NOT NULL AUTO_INCREMENT , 
     `first_name` TEXT NOT NULL , 
