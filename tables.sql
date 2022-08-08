@@ -53,3 +53,29 @@ CREATE TABLE `hospital_db`.`doctors` (
     `date_in` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
+
+CREATE TABLE `hospital_db`.`departments` (
+    `id` INT(255) NOT NULL AUTO_INCREMENT , 
+    `name` TEXT(255) NOT NULL,
+    `hod` TEXT(255) NOT NULL,
+    `date_created` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
+
+CREATE TABLE `hospital_db`.`wards` (
+    `id` INT(255) NOT NULL AUTO_INCREMENT , 
+    `name` TEXT(255) NOT NULL,
+    `incharge` TEXT(255) NOT NULL,
+    `capacity` INT(5) NOT NULL,
+    `date_created` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
+
+CREATE TABLE `hospital_db`.`services` (
+    `id` INT(255) NOT NULL AUTO_INCREMENT , 
+    `name` VARCHAR(255) NOT NULL,
+    `description` VARCHAR(255) NOT NULL,
+    `unit_charge` INT(255) NOT NULL,
+    `date_created` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
