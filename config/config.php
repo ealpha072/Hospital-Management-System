@@ -31,13 +31,10 @@ class Database{
 
     public function executeStatement($statement="", $params=[]){
         try {
-            //code...
-            echo $statement;
-            $stmt = $this->conn->prepare($statement, $params);
-            $stmt->execute();
+            $stmt = $this->conn->prepare($statement);
+            $stmt->execute($params);
             return $stmt;
         } catch (Exception $e) {
-            //throw $th;
             throw new Exception($e->getMessage());
             echo "Not exceting";
         }
@@ -61,14 +58,14 @@ class Database{
         }
     }
 
-    public function update($statement, $params=[]){
+    public function update($statement = "", $params=[]){
         try {
             $this->executeStatement($statement, $params); 
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
     }
-    public function remove($statement, $params=[]){
+    public function remove($statement = "", $params=[]){
         try {
             $this->executeStatement($statement, $params); 
         } catch (Exception $e) {
@@ -78,6 +75,7 @@ class Database{
 }
 
 $db = new Database();
-$id = $db->select("SELECT * FROM test", []);
-echo $id;
-?>
+
+$id = $db->insert("INSERT INTO names(name, age) VALUES(:name, :age)", ["name"=>"Alpha", "age" => 1223]);
+var_dump($id);
+?> 
