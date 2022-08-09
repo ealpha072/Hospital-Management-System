@@ -73,9 +73,4 @@ class Database{
         }
     }
 }
-
-$db = new Database();
-
-$id = $db->insert("INSERT INTO names(name, age) VALUES(:name, :age)", ["name"=>"Alpha", "age" => 1223]);
-var_dump($id);
 ?> 
