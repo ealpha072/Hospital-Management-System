@@ -52,7 +52,7 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Date of Birth<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <input type="text" name="dob" id="" class="form-control form-control-sm" placeholder="Date of Birth" required>
+                        <input type="date" name="dob" id="" class="form-control form-control-sm" placeholder="Date of Birth" required>
                     </div>
                 </div>
 

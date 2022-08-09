@@ -15,6 +15,8 @@ CREATE TABLE `hospital_db`.`patients` (
     `date_in` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
+ALTER TABLE `patients` ADD `op_num` INT(10) NOT NULL AFTER `id`;
+
 
 CREATE TABLE `hospital_db`.`employees` (
     `id` INT(255) NOT NULL AUTO_INCREMENT , 
