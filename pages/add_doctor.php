@@ -44,16 +44,24 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Date of Birth<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <input type="text" name="dob" id="" class="form-control form-control-sm" placeholder="Date of Birth">
+                        <input type="date" name="dob" id="" class="form-control form-control-sm" placeholder="Date of Birth">
                     </div>
                 </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-sm-2">Age<sup>*</sup></label>
+                    <div class="col-sm-6">
+                        <input type="number" name="age" id="" class="form-control form-control-sm" placeholder="Age">
+                    </div>
+                </div>
+
 
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Sex<sup>*</sup></label>
                     <div class="col-sm-6">
                         <select name="sex" id="" class="form-control form-control-sm">
                             <option value="" disabled selected>--Select Gender--</option>
-                            <option value="male">Man</option>
+                            <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
                     </div>

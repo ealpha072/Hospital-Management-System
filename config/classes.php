@@ -34,9 +34,9 @@
         }
 
         public function attach_common_props_employees_doctors(){
-            $this->nssf =htmlspecialchars(strip_tags($_POST['nssf']));
-            $this->kra =htmlspecialchars(strip_tags($_POST['kra']));
-            $this->picture =htmlspecialchars(strip_tags($_FILES['profile_picture']));
+            $this->nssf = htmlspecialchars(strip_tags($_POST['nssf']));
+            $this->kra = htmlspecialchars(strip_tags($_POST['kra']));
+            $this->picture = $_FILES['profile_picture'];
             $this->department =htmlspecialchars(strip_tags($_POST['department']));
         }
     }
@@ -92,11 +92,15 @@
         use person;
         public $table = 'doctors';
 
+        public function __construct($database){
+            $this->conn = $database;
+        }
+
         public function add_doctor(){
             $errors = [];
             //id	first_name	last_name	age	sex	status	email	phone_num	physical_address	dob	nhif_num	picture	department	kra_num	nssf_num	date_in	
 
-            $query = "INSERT INTO ".$this->table. "(first_name, 
+            $query = "INSERT INTO ".$this->table. " (first_name, 
                 last_name, age, sex, status, email, 
                 phone_num, physical_address, dob, nhif_num, 
                 picture, department, kra_num, nssf_num)
