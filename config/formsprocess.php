@@ -10,10 +10,14 @@
     }
 
     if(isset($_POST['add_doctor']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
-        $new_doctor = new Doctor($database); 
-        $new_doctor->attach_common_props();
-        $new_doctor->attach_common_props_employees_doctors();
-        $new_doctor->add_doctor();
+
+        $img = $_FILES['profile_picture'];
+        fileUpload($img);
+        // $new_doctor = new Doctor($database); 
+        // $new_doctor->attach_common_props();
+        // $new_doctor->attach_common_props_employees_doctors();
+        // $new_doctor->add_doctor();
+
     }
 
 
