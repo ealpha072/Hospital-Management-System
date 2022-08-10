@@ -98,6 +98,7 @@
 
         public function add_doctor(){
             $errors = [];
+            $destination_folder = '../images/';
             //id	first_name	last_name	age	sex	status	email	phone_num	physical_address	dob	nhif_num	picture	department	kra_num	nssf_num	date_in	
 
             $query = "INSERT INTO ".$this->table. " (first_name, 
@@ -126,14 +127,23 @@
                 "physical_address"=>$this->physical_address,
                 "dob"=>$this->dob,
                 "nhif_num"=>$this->nhif_number,
-                "picture" =>$this->picture,
+                "picture" =>$this->picture['name'],
                 "department" =>$this->department,
                 "kra" =>$this->kra,
                 "nssf" =>$this->nssf,
             ];
 
+            $upload_image_return = fileUpload($this->picture, '../images/');
+            
+            if(is_array($upload_image_return)){
+                foreach($upload_image_return as $img_error){
+                    array_push($errors, $img_error);
+                }
+            }
+
             if(count($errors) === 0){
                 try {
+                    move_uploaded_file($this->picture['tmp_name'], $destination_folder.$upload_image_return);
                     $this->conn->insert($query, $params);
                     $_SESSION['msg'] = 'Doctor added to database succesfully';
                     echo $_SESSION['msg'];

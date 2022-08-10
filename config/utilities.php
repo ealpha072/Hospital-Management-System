@@ -11,15 +11,15 @@ function sanitizeEmail($email){
     } 
 }
 
-function fileUpload($file){
+function fileUpload($file, $destination_folder){
     $img_errors = [];
-    $destination_folder = "../images/";
     $img_name = $file['name'];
     $img_size = $file['size'];
     $img_ext  = pathinfo($img_name, PATHINFO_EXTENSION);
+    $img_tmp = $file["tmp_name"];
 
     $allowed_extensions = array('jpeg', 'jpg', 'png');
-    if(!in_array($img_ext['extension'], $allowed_extensions)){
+    if(!in_array($img_ext, $allowed_extensions)){
         array_push($img_errors, "Invalid image format");
     }
 
@@ -31,6 +31,11 @@ function fileUpload($file){
         array_push($img_errors, "File already exists");
     }
 
-    return $img_errors;
+    if(count($img_errors) === 0){
+        // move_uploaded_file($img_tmp, $destination_folder.$img_name);
+        return $img_name;
+    }else{
+        return $img_errors;
+    }
 }
 ?>
