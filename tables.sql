@@ -37,6 +37,8 @@ CREATE TABLE `hospital_db`.`employees` (
     `date_in` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
+ALTER TABLE `employees` CHANGE `marital_status` 
+`status` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
 
 CREATE TABLE `hospital_db`.`doctors` (
     `id` INT(255) NOT NULL AUTO_INCREMENT , 

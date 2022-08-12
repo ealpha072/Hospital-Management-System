@@ -19,6 +19,7 @@
         public $picture = "";
         public $kra = "";
         public $department = "" ;
+        public $role = "";
         
         public function attach_common_props(){
             $this->first_name = htmlspecialchars(strip_tags($_POST['first_name']));
@@ -37,7 +38,6 @@
             $this->nssf = htmlspecialchars(strip_tags($_POST['nssf']));
             $this->kra = htmlspecialchars(strip_tags($_POST['kra']));
             $this->picture = $_FILES['profile_picture'];
-            $this->department =htmlspecialchars(strip_tags($_POST['department']));
         }
     }
 
@@ -98,7 +98,9 @@
 
         public function add_doctor(){
             $errors = [];
-            $destination_folder = '../images/';
+
+            $this->department =htmlspecialchars(strip_tags($_POST['department']));
+            $destination_folder = '../images/doctors/';
             //id	first_name	last_name	age	sex	status	email	phone_num	physical_address	dob	nhif_num	picture	department	kra_num	nssf_num	date_in	
 
             $query = "INSERT INTO ".$this->table. " (first_name, 
@@ -133,7 +135,7 @@
                 "nssf" =>$this->nssf,
             ];
 
-            $upload_image_return = fileUpload($this->picture, '../images/');
+            $upload_image_return = fileUpload($this->picture, '../images/doctors/');
             
             if(is_array($upload_image_return)){
                 foreach($upload_image_return as $img_error){
@@ -155,4 +157,69 @@
         }
     }
 
+    class Employee{
+        use person;
+        public $table = "employees";
+
+        public function __construct($db){
+            $this->conn = $db;
+        }
+        
+
+        public function addEmployee(){
+            //first_name	last_name	age	sex	marital_status	email	phone_num	physical_address	dob	nhif_num	picture	role	kra_num	nssf_num	date_in	
+            $errors = [];
+            $destination_folder = '../images/employees/';
+            $this->role =htmlspecialchars(strip_tags($_POST['role']));
+            $query = "INSERT INTO ".$this->table. " (
+                first_name,last_name,age,
+                sex,status,email,
+                phone_num,physical_address,dob,
+                nhif_num,picture,role,
+                kra_num,nssf_num
+                ) VALUES(
+                :first_name,:last_name,:age,
+                :sex,:status,:email,
+                :phone_num,:physical_address,:dob,
+                :nhif_num,:picture,:role,
+                :kra_num,:nssf_num
+            )";
+            $params = [
+                "first_name"=>$this->first_name,
+                "last_name"=>$this->last_name,
+                "age"=>$this->age,
+                "sex"=>$this->sex,
+                "status"=>$this->status,
+                "email"=>$this->email,
+                "phone_num"=>$this->phone,
+                "physical_address"=>$this->physical_address,
+                "dob"=>$this->dob,
+                "nhif_num"=>$this->nhif_number,
+                "picture" =>$this->picture['name'],
+                "role" =>$this->role,
+                "kra" =>$this->kra,
+                "nssf" =>$this->nssf,
+            ];
+
+            $upload_image_return = fileUpload($this->picture, '../images/employees/');
+            
+            if(is_array($upload_image_return)){
+                foreach($upload_image_return as $img_error){
+                    array_push($errors, $img_error);
+                }
+            }
+
+            if(count($errors) === 0){
+                try {
+                    move_uploaded_file($this->picture['tmp_name'], $destination_folder.$upload_image_return);
+                    $this->conn->insert($query, $params);
+                    $_SESSION['msg'] = 'Doctor added to database succesfully';
+                    echo $_SESSION['msg'];
+                } catch (Exception $e) {
+                    throw new Exception($e->getMessage());                    
+                }
+            }
+        }
+    }
+    
 ?>
