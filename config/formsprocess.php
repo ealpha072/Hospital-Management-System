@@ -31,4 +31,10 @@
         $new_ward = new Ward($database); 
         $new_ward->addWard();
     }
+
+     if(isset($_POST['add_supplier']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
+        $new_supplier = new Supplier($database); 
+        $new_supplier->addSupplier();
+    }
+
 ?>

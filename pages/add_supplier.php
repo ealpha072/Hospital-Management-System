@@ -17,7 +17,7 @@
                     <label for="" class="col-sm-2">Supplier ID<sup>*</sup></label>
                     <div class="col-sm-6">
                         <!--autogenerate-->
-                        <input type="text" name="" id="" class="form-control form-control-sm" readonly value=<?php echo(generateSupplierId());?>>
+                        <input type="text" name="supplier_id" id="" class="form-control form-control-sm" readonly value=<?php echo(generateSupplierId());?>>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -36,7 +36,7 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Company Name<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <input type="number" name="company_name" id="" class="form-control form-control-sm" placeholder="Company Name" required>
+                        <input type="text" name="company_name" id="" class="form-control form-control-sm" placeholder="Company Name" required>
                     </div>
                 </div>
 
@@ -72,7 +72,7 @@
                     </div>
                 </div> -->
 
-                <button class="btn btn-sm btn-primary"> <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i> Save</button>
+                <button class="btn btn-sm btn-primary" name="add_supplier"> <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i> Save</button>
             </div>
         </form>
     </div>

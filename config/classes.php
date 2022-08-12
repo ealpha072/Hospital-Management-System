@@ -301,6 +301,7 @@
         private $conn;
         private $table = 'suppliers';
 
+        public $supplier_id = "";
         public $name= "";
         public $company_name= "";
         public $status= "";
@@ -313,8 +314,9 @@
         }
         
         public function addSupplier(){
-            $erros = [];
+            $errors = [];
 
+            $this->supplier_id = htmlspecialchars(strip_tags($_POST['supplier_id']));
             $this->name = htmlspecialchars(strip_tags($_POST['name']));
             $this->company_name = htmlspecialchars(strip_tags($_POST['company_name']));
             $this->status = htmlspecialchars(strip_tags($_POST['status']));
@@ -322,7 +324,31 @@
             $this->phone_num = htmlspecialchars(strip_tags($_POST['phone_number']));
             $this->physical_address = htmlspecialchars(strip_tags($_POST['p_address']));
 
-            
+            if(count($errors) === 0){
+                $query = "INSERT INTO ".$this->table."(supplier_id, name, company_name, status, email, phone_num, physical_address)
+                    VALUES(
+                        :supplier_id, :name, :company_name, :status, :email, :phone_num, :physical_address
+                    )
+                ";
+                $params = [
+                    "supplier_id" => $this->supplier_id, 
+                    "name" => $this->name, 
+                    "company_name" => $this->company_name, 
+                    "status" => $this->status, 
+                    "email" => $this->email, 
+                    "phone_num" => $this->phone_num, 
+                    "physical_address" => $this->physical_address
+                ];
+                
+                try {                    
+                    $this->conn->insert($query, $params);
+                    $_SESSION['msg'] = "Supplier added to databse";
+                    echo $_SESSION['msg'];
+                } catch (Exception $e) {        
+                    throw new Exception($e->getMessage());
+                    
+                }
+            }
         }
     }
 ?>
