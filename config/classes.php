@@ -295,4 +295,34 @@
 
         }
     }
+
+    class Supplier{
+        //supplier_id	name	company_name	status	email	phone_num	physical_address	
+        private $conn;
+        private $table = 'suppliers';
+
+        public $name= "";
+        public $company_name= "";
+        public $status= "";
+        public $email= "";
+        public $phone_num= "";
+        public $physical_address= "";
+        
+        public function __construct($db){
+            $this->conn = $db;
+        }
+        
+        public function addSupplier(){
+            $erros = [];
+
+            $this->name = htmlspecialchars(strip_tags($_POST['name']));
+            $this->company_name = htmlspecialchars(strip_tags($_POST['company_name']));
+            $this->status = htmlspecialchars(strip_tags($_POST['status']));
+            $this->email = htmlspecialchars(strip_tags($_POST['email']));
+            $this->phone_num = htmlspecialchars(strip_tags($_POST['phone_number']));
+            $this->physical_address = htmlspecialchars(strip_tags($_POST['p_address']));
+
+            
+        }
+    }
 ?>
