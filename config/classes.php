@@ -261,6 +261,38 @@
 
     }
 
-    
-    
+    Class Ward{
+        private $conn;
+        private $table = 'wards';
+        public $name = "";
+        public $incharge = "";
+        public $capacity = "";
+
+        public function __construct($db){
+            $this->conn = $db;
+        }
+
+        public function addWard(){
+            $errors = [];
+            $this->name = htmlspecialchars(strip_tags($_POST["wardname"]));
+            $this->incharge = htmlspecialchars(strip_tags($_POST["incharge"]));
+            $this->capacity = htmlspecialchars(strip_tags($_POST["capacity"]));
+            echo $this->name;
+
+            if(count($errors) === 0){
+                $query = "INSERT INTO ".$this->table." (name, incharge, capacity) VALUES(:name, :incharge, :capacity)";
+                $params = [
+                    "name" => $this->name,
+                    "incharge" => $this->incharge,
+                    "capacity" => $this->capacity
+                ];
+                try {
+                    $this->conn->insert($query, $params);
+                } catch (Exception $e) {
+                    throw new Exception($e->getMessage());
+                }
+            }
+
+        }
+    }
 ?>
