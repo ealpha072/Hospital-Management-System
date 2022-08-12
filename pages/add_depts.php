@@ -7,24 +7,24 @@
         </a>
     </div>
     <div class="card-body">
-        <form action="" method="post">
+        <form action="../config/formsprocess.php" method="post">
             <div class="form-group row">
                 <label for="" class="form-label col-sm-2">Dept Name <sup>*</sup> </label>
                 <div class="col-sm-6">
-                    <input type="text" name="" id="" placeholder="Department Name" class="form-control form-control-sm">
+                    <input type="text" name="name" id="" placeholder="Department Name" class="form-control form-control-sm" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="" class="form-label col-sm-2">HOD <sup>*</sup> </label>
                 <div class="col-sm-6">
-                    <select name="" id="" class="form-control form-control-sm">
+                    <select name="hod" id="" class="form-control form-control-sm" required>
                         <option value="" disabled selected>--Select Incharge--</option>
                         <!--populate from DB-->
-                    </select>
-                    
+                        <option value="John">John</option>
+                    </select>    
                 </div>
             </div>
-            <button class="btn btn-primary btn-sm">  <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i> Save</button>
+            <button class="btn btn-primary btn-sm" name="add_department"> <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i> Save</button>
         </form>
     </div>
 </div>

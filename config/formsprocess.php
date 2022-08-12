@@ -22,7 +22,8 @@
         $new_employee->addEmployee();
     }
 
-
-
-
+    if(isset($_POST['add_department']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
+        $new_department = new Department($database); 
+        $new_department->createDepartment();
+    }
 ?>

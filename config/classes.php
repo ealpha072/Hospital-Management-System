@@ -238,8 +238,8 @@
             $this->name = htmlspecialchars(strip_tags($_POST["name"]));
             $this->hod = htmlspecialchars(strip_tags($_POST["hod"]));
 
-            //check if dpt already exists
-            $check_query = "SELECT name FROM ".$this->table. " WHERE name=:name";
+            //check if department already exists
+            $check_query = "SELECT name FROM ".$this->table. " WHERE name =:name";
             $results = $this->conn->select($check_query, ['name'=>$this->name]);
 
             if(count($results) != 0 ){
@@ -251,15 +251,16 @@
                 $params = ["name"=>$this->name, "hod"=>$this->hod];
                 try {
                     $this->conn->insert($select_query, $params);
+                    $_SESSION['msg'] = 'Department added to database succesfully';
+                    echo $_SESSION['msg'];
                 } catch (Exception $e) {
                     throw new Exception($e->getMessage());
                 }
             }
-
-
-
         }
 
     }
+
+    
     
 ?>
