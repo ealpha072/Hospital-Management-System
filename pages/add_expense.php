@@ -7,30 +7,30 @@
         </a>
     </div>
     <div class="card-body">
-        <form action="" method="post">
+        <form action="../config/formsprocess.php" method="post">
 
             <div class="card-body">
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Expense Name<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <input type="text" name="" id="" class="form-control form-control-sm" placeholder="Expense Name">
+                        <input type="text" name="name" id="" class="form-control form-control-sm" placeholder="Expense Name" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Description<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <textarea name="" id="" cols="30" rows="10" class="form-control form-control-sm"></textarea>
+                        <textarea name="description" id="" cols="30" rows="10" class="form-control form-control-sm" required></textarea>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Method<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <select name="" id="" class="form-control form-control-sm">
+                        <select name="payment_method" id="" class="form-control form-control-sm" required>
                             <option value="" selected disabled>--Payment Method--</option>
                             <!--Populate from DB-->
-                            <option value="">Cash</option>
-                            <option value="">Bank</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Bank">Bank</option>
                         </select>
                     </div>
                 </div>
@@ -38,9 +38,10 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Paid From Account<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <select name="" id="" class="form-control form-control-sm">
+                        <select name="paid_from_account" id="" class="form-control form-control-sm" required>
                             <option value="">--Pay from Account--</option>
                             <!--Populate from DB-->
+                            <option value="bank 1">Bank 1</option>
                         </select>
                     </div>
                 </div>
@@ -55,17 +56,17 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Amount<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <input type="number" name="" id="" class="form-control form-control-sm" placeholder="Amount">
+                        <input type="number" name="amount" id="" class="form-control form-control-sm" placeholder="Amount" required>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Status<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <select name="" id="" class="form-control form-control-sm">
+                        <select name="status" id="" class="form-control form-control-sm" required>
                             <option value="" disabled selected>--Status--</option>
-                            <option value="">Paid</option>
-                            <option value="">Not Paid</option>
+                            <option value="Paid">Paid</option>
+                            <option value="Not Paid">Not Paid</option>
                         </select>
                     </div>
                 </div>
@@ -73,18 +74,11 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Date Due<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <input type="number" name="" id="" class="form-control form-control-sm" placeholder="Date Due">
+                        <input type="date" name="due_date" id="" class="form-control form-control-sm" placeholder="Date Due" required>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="" class="col-sm-2">Date Added<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <input type="number" name="" id="" class="form-control form-control-sm" placeholder="Date Added">
-                    </div>
-                </div>
-
-                <button class="btn btn-sm btn-primary"> <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i> Save</button>
+                <button class="btn btn-sm btn-primary" name="add_expense"> <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i> Save</button>
             </div>
         </form>
     </div>

@@ -339,7 +339,7 @@
                     "phone_num" => $this->phone_num, 
                     "physical_address" => $this->physical_address
                 ];
-                
+
                 try {                    
                     $this->conn->insert($query, $params);
                     $_SESSION['msg'] = "Supplier added to databse";
@@ -349,6 +349,94 @@
                     
                 }
             }
+        }
+    }
+
+    class Expense{
+        private $conn;
+        private $table="expenses";
+        //name	payment_method	paid_from_account	description	amount	status	due_date
+        public $name = "";
+        public $payment_method = "";
+        public $paid_from_account = "";
+        public $description = "";
+        public $amount = "";
+        public $status = "";
+        public $due_date = "";
+
+        public function __construct($db){
+            $this->conn = $db;
+        }
+
+        public function addExpense(){
+            $errors = [];
+            $this->name = htmlspecialchars(strip_tags($_POST['name']));
+            $this->payment_method = htmlspecialchars(strip_tags($_POST['payment_method']));
+            $this->paid_from_account = htmlspecialchars(strip_tags($_POST['paid_from_account']));
+            $this->description = htmlspecialchars(strip_tags($_POST['description']));
+            $this->amount = htmlspecialchars(strip_tags($_POST['amount']));
+            $this->status = htmlspecialchars(strip_tags($_POST['status']));
+            $this->due_date = htmlspecialchars(strip_tags($_POST['due_date']));
+
+            //CHECKS if status is not paid, due date is compulsory
+
+            if(count($errors) === 0){
+                $query = "INSERT INTO ".$this->table." (name, payment_method, paid_from_account, description, amount, status, due_date)
+                    VALUES(
+                        :name, :payment_method, :paid_from_account, :description, :amount, :status, :due_date
+                    )
+                ";
+                $params = [
+                    ":name" => $this->name, 
+                    ":payment_method" => $this->payment_method, 
+                    ":paid_from_account" => $this->paid_from_account, 
+                    ":description" => $this->description, 
+                    ":amount" => $this->amount, 
+                    ":status" => $this->status, 
+                    ":due_date" => $this->due_date
+                ];
+                try {
+                    //code...
+                    $this->conn->insert($query, $params);
+                    $_SESSION['msg'] = "Supplier added to databse";
+                    echo $_SESSION['msg'];
+                } catch (Exception $e) {
+                    //throw $th;
+                    throw new Exception($e->getMessage());
+                    
+                    
+                }
+            }
+
+        }
+
+        public function addExpenseCategory(){
+            $errors = [];
+            $this->table = 'expenses_category';
+            $this->name = htmlspecialchars(strip_tags($_POST['name']));
+            $this->description = htmlspecialchars(strip_tags($_POST['description']));
+            $this->status = htmlspecialchars(strip_tags($_POST['status']));
+
+            if(count($errors) === 0){
+                $query = "INSERT INTO ".$this->table." (name, status, description)
+                VALUES(:name, :status, :description)";
+                $params = [
+                    "name"=> $this->name, 
+                    "status"=> $this->status, 
+                    "description"=> $this->description
+                ];
+
+                try {
+                    //code...
+                    $this->conn->insert($query, $params);
+                    $_SESSION['msg'] = "Operation okay";
+                } catch (Exception $e) {
+                    //throw $th;
+                    throw new Exception($e->getMessage());
+                    
+                }
+            }
+
         }
     }
 ?>

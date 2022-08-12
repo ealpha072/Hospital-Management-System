@@ -32,9 +32,20 @@
         $new_ward->addWard();
     }
 
-     if(isset($_POST['add_supplier']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
+    if(isset($_POST['add_supplier']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
         $new_supplier = new Supplier($database); 
         $new_supplier->addSupplier();
+    }
+
+    if(isset($_POST['add_expense']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
+        $new_expense = new Expense($database);
+        $new_expense->addExpense();
+    }
+
+    //add_expensecategory
+    if(isset($_POST['add_expensecategory']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
+        $new_expenseCategory = new Expense($database);
+        $new_expenseCategory->addExpenseCategory();
     }
 
 ?>

@@ -7,34 +7,34 @@
         </a>
     </div>
     <div class="card-body">
-        <form action="" method="post">
+        <form action="../config/formsprocess.php" method="post">
 
             <div class="card-body">
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Category Name<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <input type="text" name="" id="" class="form-control form-control-sm" placeholder="Expense Name">
+                        <input type="text" name="name" id="" class="form-control form-control-sm" placeholder="Expense Name">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Status<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <select name="" id="" class="form-control form-control-sm">
+                        <select name="status" id="" class="form-control form-control-sm">
                             <option value="" disabled selected>--Status--</option>
-                            <option value="">Active</option>
-                            <option value="">Inactive</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="" class="col-sm-2">Category Name<sup>*</sup></label>
+                    <label for="" class="col-sm-2">Description<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <textarea name="" id="" cols="30" rows="5" class="form-control form-control-sm"></textarea>
+                        <textarea name="description" id="" cols="30" rows="5" class="form-control form-control-sm"></textarea>
                     </div>
                 </div>
-                <button class="btn btn-sm btn-primary"> <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i> Save</button>
+                <button class="btn btn-sm btn-primary" name="add_expensecategory"> <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i> Save</button>
             </div>
         </form>
     </div>
