@@ -221,5 +221,45 @@
             }
         }
     }
+
+    class Department{
+        private $conn;
+        public $table = 'departments';
+        public $name = "";
+        public $hod = "";
+
+        public function __construct($db){
+            $this->conn = $db;
+        }
+        
+
+        public function createDepartment(){
+            $errors = [];
+            $this->name = htmlspecialchars(strip_tags($_POST["name"]));
+            $this->hod = htmlspecialchars(strip_tags($_POST["hod"]));
+
+            //check if dpt already exists
+            $check_query = "SELECT name FROM ".$this->table. " WHERE name=:name";
+            $results = $this->conn->select($check_query, ['name'=>$this->name]);
+
+            if(count($results) != 0 ){
+                array_push($errors, "Department already exists, choose another name");
+            }
+
+            if(count($errors) === 0){
+                $select_query = "INSERT INTO ".$this->table." (name, hod) VALUES(:name, :hod)";
+                $params = ["name"=>$this->name, "hod"=>$this->hod];
+                try {
+                    $this->conn->insert($select_query, $params);
+                } catch (Exception $e) {
+                    throw new Exception($e->getMessage());
+                }
+            }
+
+
+
+        }
+
+    }
     
 ?>
