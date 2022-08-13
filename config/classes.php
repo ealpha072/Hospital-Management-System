@@ -24,7 +24,6 @@
         public function attach_common_props(){
             $this->first_name = htmlspecialchars(strip_tags($_POST['first_name']));
             $this->last_name = htmlspecialchars(strip_tags($_POST['last_name']));
-            $this->email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
             $this->age = htmlspecialchars(strip_tags($_POST['age']));
             $this->phone = htmlspecialchars(strip_tags($_POST['phone']));
             $this->physical_address = htmlspecialchars(strip_tags($_POST['p_address']));
@@ -35,6 +34,7 @@
         }
 
         public function attach_common_props_employees_doctors(){
+            $this->email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
             $this->nssf = htmlspecialchars(strip_tags($_POST['nssf']));
             $this->kra = htmlspecialchars(strip_tags($_POST['kra']));
             $this->picture = $_FILES['profile_picture'];
@@ -43,47 +43,65 @@
 
     class Patient{
         use person;
-        public $table_name = "patients";
+        public $op_number = "";
+        private $table = "patients";
+        public $number_of_visits = 0;
 
         public function __construct($database){
             $this->conn = $database;
         }
 
         public function add(){
-            $errors = [];       
-            if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-                $email_error = "Invalid email format please check and correcy";
-                array_push($errors, $email_error);
-            }
+            $errors = [];   
 
-            $query = "INSERT INTO ".$this->table_name." (
-                first_name,last_name,age,sex,marital_status,email,phone_num,physical_address,dob,nhif_num
+            //check if patient has visited before;
+            $check_patient_previous_visit_query = "SELECT op, number_of_visits FROM ".$this->table." WHERE first_name = ? AND last_name = ? AND sex = ? AND dob = ?";
+            $check_patient_params = [$this->first_name, $this->last_name, $this->sex, $this->dob];
+            $check_patient_results = $this->conn->select($check_patient_previous_visit_query, $check_patient_params);
 
-            ) VALUES(
-                :first_name,:last_name,:age,:sex,:marital_status,:email,:phone_num,:physical_address,:dob,:nhif_num
-            )";
-
-            $params = [
-                "first_name"=>$this->first_name,
-                "last_name"=>$this->last_name,
-                "age"=>$this->age,
-                "sex"=>$this->sex,
-                "marital_status"=>$this->status,
-                "email"=>$this->email,
-                "phone_num"=>$this->phone,
-                "physical_address"=>$this->physical_address,
-                "dob"=>$this->dob,
-                "nhif_num"=>$this->nhif_number
-            ];
-
+        
             if(count($errors) === 0){
-                try {
-                    $this->conn->insert($query, $params);
-                    $_SESSION['msg'] = 'Patient added to database succesfully';
-                } catch (Exception $e) {
-                    throw new Exception($e->getMessage());
+                $this->op_number = generateOutPatientNumber();
+                if(count($check_patient_results) > 0){
+                    $this->number_of_visits = $check_patient_results[0]['number_of_visits'] + 1;
+                    $update_patient_query = "UPDATE ".$this->table." SET op_num = ?,  
+                        age=?, marital_status=?, phone_num=?, physical_address=?, nhif_num=? WHERE op_num= ? ";
+                    $update_patient_params = [
+                        $this->op_number, $this->age, 
+                        $this->status, $this->phone, 
+                        $this->physical_address, 
+                        $this->nhif_number, $check_patient_results[0]['op_num']
+                    ];
+                    try {
+                        $this->conn->update($update_patient_query, $update_patient_params);
+                    } catch (Exception $th) {
+                        throw new Exception($th->getMessage());
+                        
+                    }
+
                     
-                }
+                }else{
+                    $query = "INSERT INTO ".$this->table." (
+                        op_num, first_name,last_name,age,sex,marital_status,phone_num,physical_address,dob,nhif_num,number_of_visits ) 
+                        VALUES(?,?,?,?,?,?,?,?,?,?,?,? )
+                    ";
+                    $params = [ 
+                        $this->op_number, $this->first_name, $this->last_name, 
+                        $this->age, $this->sex, $this->status,
+                        $this->phone,$this->physical_address,$this->dob,
+                        $this->nhif_number,$this->number_of_visits
+                    ];
+                    //:op_num, :first_name,:last_name,:age,:sex,:marital_status,:email,:phone_num,:physical_address,:dob,:nhif_num, :number_of_visits
+                    try {
+                        $this->conn->insert($query, $params);
+                        $_SESSION['msg'] = 'Patient added to database succesfully';
+                        echo "Success, patient OP number is".$this->op_number;
+                    } catch (Exception $e) {
+                        throw new Exception($e->getMessage());
+                    }
+                }  
+            }else{
+                echo $errors;
             }
         }
     }

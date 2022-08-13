@@ -12,6 +12,16 @@ function mailMessage(){
    }
 }
 
-mailMessage()
+function generateOutPatientNumber(){
+    $op_number = null;
+
+    for($i = 0; $i < 8; $i++){
+        $random_digit = rand(0,9);
+        $op_number .= $random_digit;
+    }
+    return $op_number;
+}
+
+echo(generateOutPatientNumber());
 
 ?>
