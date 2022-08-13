@@ -25,7 +25,7 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Age<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <input type="number" name="age" id="" class="form-control form-control-sm" placeholder="Age" required>
+                        <input type="number" name="age" id="" class="form-control form-control-sm" placeholder="Age" max="120" min="0" required>
                     </div>
                 </div>
 
@@ -75,7 +75,7 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-2">NHIF Number<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <input type="number" name="nhif" id="" class="form-control form-control-sm" placeholder="NHIF Number" required>
+                        <input type="number" name="nhif" id="" class="form-control form-control-sm" placeholder="NHIF Number">
                     </div>
                 </div>
 

@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+use function PHPSTORM_META\type;
+
     include_once('config.php');
     include_once('utilities.php');
 
@@ -53,6 +56,12 @@
 
         public function add(){
             $errors = [];   
+
+            if(empty($this->first_name || $this->last_name || $this->age || $this->sex || $this->status ||$this->phone ||$this->physical_address ||$this->dob)){
+                array_push($errors, "No empty fileds allowed, please fill in all fields");
+            }
+
+            if(!empty($this->nhif_number) && !is_integer($this->nhif_number)){array_push($errors, "NHIF Number has to be interegs");}
 
             //check if patient has visited before;
             $check_patient_previous_visit_query = "SELECT op_num, number_of_visits FROM ".$this->table." WHERE first_name = ? AND last_name = ? AND sex = ? AND dob = ?";
