@@ -22,11 +22,11 @@
         public $role = "";
         
         public function attach_common_props(){
-            $this->first_name = htmlspecialchars(strip_tags($_POST['first_name']));
-            $this->last_name = htmlspecialchars(strip_tags($_POST['last_name']));
+            $this->first_name = strtolower(ucfirst(htmlspecialchars(strip_tags($_POST['first_name']))));
+            $this->last_name = strtolower(ucfirst(htmlspecialchars(strip_tags($_POST['last_name']))));
             $this->age = htmlspecialchars(strip_tags($_POST['age']));
             $this->phone = htmlspecialchars(strip_tags($_POST['phone']));
-            $this->physical_address = htmlspecialchars(strip_tags($_POST['p_address']));
+            $this->physical_address = strtolower(ucfirst(htmlspecialchars(strip_tags($_POST['p_address']))));
             $this->dob = htmlspecialchars(strip_tags($_POST['dob']));
             $this->sex = htmlspecialchars(strip_tags($_POST['sex']));
             $this->status = htmlspecialchars(strip_tags($_POST['status']));
@@ -55,35 +55,31 @@
             $errors = [];   
 
             //check if patient has visited before;
-            $check_patient_previous_visit_query = "SELECT op, number_of_visits FROM ".$this->table." WHERE first_name = ? AND last_name = ? AND sex = ? AND dob = ?";
+            $check_patient_previous_visit_query = "SELECT op_num, number_of_visits FROM ".$this->table." WHERE first_name = ? AND last_name = ? AND sex = ? AND dob = ?";
             $check_patient_params = [$this->first_name, $this->last_name, $this->sex, $this->dob];
             $check_patient_results = $this->conn->select($check_patient_previous_visit_query, $check_patient_params);
-
         
             if(count($errors) === 0){
                 $this->op_number = generateOutPatientNumber();
                 if(count($check_patient_results) > 0){
                     $this->number_of_visits = $check_patient_results[0]['number_of_visits'] + 1;
                     $update_patient_query = "UPDATE ".$this->table." SET op_num = ?,  
-                        age=?, marital_status=?, phone_num=?, physical_address=?, nhif_num=? WHERE op_num= ? ";
+                        age=?, marital_status=?, phone_num=?, physical_address=?, nhif_num=?, number_of_visits=? WHERE op_num= ? ";
                     $update_patient_params = [
                         $this->op_number, $this->age, 
                         $this->status, $this->phone, 
                         $this->physical_address, 
-                        $this->nhif_number, $check_patient_results[0]['op_num']
+                        $this->nhif_number, $this->number_of_visits, $check_patient_results[0]['op_num']
                     ];
                     try {
                         $this->conn->update($update_patient_query, $update_patient_params);
                     } catch (Exception $th) {
-                        throw new Exception($th->getMessage());
-                        
+                        throw new Exception($th->getMessage());                        
                     }
-
-                    
                 }else{
                     $query = "INSERT INTO ".$this->table." (
                         op_num, first_name,last_name,age,sex,marital_status,phone_num,physical_address,dob,nhif_num,number_of_visits ) 
-                        VALUES(?,?,?,?,?,?,?,?,?,?,?,? )
+                        VALUES(?,?,?,?,?,?,?,?,?,?,?)
                     ";
                     $params = [ 
                         $this->op_number, $this->first_name, $this->last_name, 
@@ -100,7 +96,7 @@
                         throw new Exception($e->getMessage());
                     }
                 }  
-            }else{
+                }else{
                 echo $errors;
             }
         }

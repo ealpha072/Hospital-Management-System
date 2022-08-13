@@ -24,4 +24,5 @@ function generateOutPatientNumber(){
 
 echo(generateOutPatientNumber());
 
+echo(ucfirst("oTienO"));
 ?>

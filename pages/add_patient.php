@@ -21,12 +21,6 @@
                         <input type="text" name="last_name" id="" class="form-control form-control-sm" placeholder="Last Name" required>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="" class="col-sm-2">Email Address<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <input type="email" name="email" id="" class="form-control form-control-sm" placeholder="Email Address">
-                    </div>
-                </div>
 
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Age<sup>*</sup></label>
