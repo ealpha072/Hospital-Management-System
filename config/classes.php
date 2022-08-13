@@ -517,4 +517,61 @@
             }
         }
     }
+
+    class Message{
+        private $conn;
+        private $table = "messages";
+
+        //subject	to_email	cc_email	from_email	body	attachments
+        public $subject = "";
+        public $to_email = "";
+        public $cc_email = "";
+        public $from_email = "";
+        public $body = "";
+        public $attachment = "";
+
+        public function __construct($db){
+            $this->conn = $db;
+        }
+        
+
+        public function addMessage(){
+            $errors = [];
+            $this->subject = htmlspecialchars(strip_tags($_POST['subject']));
+            $this->to_email = htmlspecialchars(strip_tags($_POST['to_email']));
+            $this->cc_email = htmlspecialchars(strip_tags($_POST['cc_email']));
+            $this->from_email = htmlspecialchars(strip_tags($_POST['from_email']));
+            $this->body = htmlspecialchars(strip_tags($_POST['body']));
+            $this->attachment = $_FILES['attachments'];
+            $this->attachment = $_FILES['attachments'];
+            $total_file_count = count($this->attachment['name']);
+            
+
+            if(count($errors) === 0){
+                $file_names = [];
+                for ($i=0; $i < $total_file_count ; $i++) { 
+                    array_push($file_names, $this->attachment['name'][$i]);
+                }
+
+                $all_attachements_to_string = $total_file_count === 0 ? " " : implode(",", $file_names);
+                $query = "INSERT INTO ".$this->table. " (subject, to_email, cc_email, from_email, body, attachments) VALUES(?, ?, ?, ?, ?, ?)";
+                $params = [$this->subject, $this->to_email, $this->cc_email, $this->from_email, $this->body, $all_attachements_to_string];
+                try {
+                    //code...
+                    $this->conn->insert($query, $params);
+
+                    for ($i=0; $i < $total_file_count ; $i++) { 
+                        $tmpFilePath = $this->attachment['tmp_name'][$i];
+                        $newFilePath = "../Attachments/".$this->attachment['name'][$i];
+                        move_uploaded_file($tmpFilePath, $newFilePath);
+                    }
+                    echo "Everything okay";
+                } catch (Exception $e) {
+                    //throw $th;
+                    throw new Exception($e->getMessage());
+                }
+            }
+
+        }
+    }
 ?>

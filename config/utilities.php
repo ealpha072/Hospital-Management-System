@@ -39,6 +39,19 @@ function fileUpload($file, $destination_folder){
     }
 }
 
+function bulkUploadAttachments($file_name_array){
+    $attachments = array_filter($file_name_array['name']);
+    $total_count = count($file_name_array['name']);
+    $tmpFilePaths = [];
+
+    for( $i=0 ; $i < $total_count ; $i++ ) {
+        //The temp file path is obtained
+        $tmpFilePath = $file_name_array['tmp_name'][$i];
+        array_push($tmpFilePaths, $tmpFilePath );
+    }
+    return $tmpFilePaths;
+}
+
 function generateSupplierId(){
     $supplier_id = null;
     $lower_case_letters = ['a','b','c','d','x','q','w','z','g','p','i','k'];

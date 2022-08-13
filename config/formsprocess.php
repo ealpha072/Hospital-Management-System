@@ -58,4 +58,10 @@
         $new_notice->addNotice();
     }
 
+    //send_message
+    if(isset($_POST['send_message']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
+        $new_message = new Message($database);
+        $new_message->addMessage();
+    }
+
 ?>

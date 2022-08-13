@@ -153,3 +153,5 @@ CREATE TABLE `hospital_db`.`messages` (
     `date_added` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
+
+ALTER TABLE `messages` ADD `cc_email` VARCHAR(255) NOT NULL AFTER `to_email`;
