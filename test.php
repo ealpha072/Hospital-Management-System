@@ -1,13 +1,11 @@
 <?php
-$address = "Daraja Mbili";
-$address_condition = [];
- if(preg_match('/\s/', $address)){
-    $address_array = explode(" ", $address);
-    foreach ($address_array as $single_address) {
-        $is_all_alphabetical = ctype_alpha($single_address) ? "True" : "False";
-        array_push($address_condition, $is_all_alphabetical);
-    }
+$errors = [];
 
-    if(in_array("False", $address_condition)){echo "Found error in address";}else{echo"No error found";}
+function add($er = []){
+    // array_push($er, "No way");
+    var_dump($er);
 }
+
+add($errors);
+var_dump($errors)
 ?>

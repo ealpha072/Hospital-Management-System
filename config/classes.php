@@ -6,14 +6,15 @@ use function PHPSTORM_META\type;
     include_once('utilities.php');
 
     class Validate{
-        public function validateNames($first_name, $last_name, $errors_array){
+        public function validateNames($first_name, $last_name, $errors_array = []){
             if(empty($first_name) || empty($last_name)){array_push($errors_array, "Names cant be empty"); }
             if(preg_match('/\s/', $first_name) or preg_match('/\s/', $last_name)){array_push($errors_array, "No spaces allowed in first or last name");}
+            return $errors_array;
         }
 
-        public function validateEmailandAddress($email, $address, $errors_array){
+        public function validateAddress($address, $errors_array = []){
             $address_condition = [];
-            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){array_push($errors_array, "Invalid email formart, try again");}
+            //if(!filter_var($email, FILTER_VALIDATE_EMAIL)){array_push($errors_array, "Invalid email formart, try again");}
             if(preg_match('/\s/', $address)){
                 $address_array = explode(" ", $address);
                 foreach ($address_array as $single_address) {
@@ -23,17 +24,20 @@ use function PHPSTORM_META\type;
 
                 if(in_array("False", $address_condition)){array_push($errors_array, "Physical address cant contain numbers");}
             }
+            return $errors_array;
         }
 
-        public function validatePhoneNumber($phone,$errors_array){
+        public function validatePhoneNumber($phone, $errors_array = []){
             if(empty($phone)){array_push($errors_array, "Phone number cant be empty");}
             if(!preg_match('/^(\+254)\d{9}$/', $phone)){array_push($errors_array, "Invalid phone number format");}
             if(!is_int($phone)){array_push($errors_array, "Phone number invalid, only numbers allowed");}
+            return $errors_array;
         }
 
-        public function validateNssfandNhif($nssf, $nhif, $kra, $errors_array){
+        public function validateNssfandNhif($nssf, $nhif, $kra, $errors_array=[]){
             if(empty($nssf) || empty($nhif) || empty($kra)){array_push($errors_array, "NSSF, KRA and NHIF can't cant be empty"); }
             if(!is_int($nssf) || !is_int($nhif)){array_push($errors_array, "NSSF and NHIF invalid, only numbers allowed");}
+            return $errors_array;
         }
 
     }
@@ -88,21 +92,21 @@ use function PHPSTORM_META\type;
         }
 
         public function add(){
-            $errors = [];   
+            $all_errors = [];
+            $new_validation = new Validate();
 
-            if(empty($this->first_name || $this->last_name || $this->age || $this->sex || $this->status ||$this->phone ||$this->physical_address ||$this->dob)){
-                array_push($errors, "No empty fileds allowed, please fill in all fields");
-            }
+            $name_error = $new_validation->validateNames($this->first_name, $this->last_name, []);
+            //$new_validation->validateNssfandNhif();
+            $phone_error = $new_validation->validatePhoneNumber($this->phone, []);
+            $address_error = $new_validation->validateAddress($this->physical_address, []);
 
-            if(!empty($this->nhif_number) && !is_integer($this->nhif_number)){array_push($errors, "NHIF Number has to be an integer");}
-            if(!is_integer($this->age)){array_push($errors, "Age must be a number");}
-
+           
             //check if patient has visited before;
             $check_patient_previous_visit_query = "SELECT op_num, number_of_visits FROM ".$this->table." WHERE first_name = ? AND last_name = ? AND sex = ? AND dob = ?";
             $check_patient_params = [$this->first_name, $this->last_name, $this->sex, $this->dob];
             $check_patient_results = $this->conn->select($check_patient_previous_visit_query, $check_patient_params);
         
-            if(count($errors) === 0){
+            if(count($all_errors) === 0){
                 $this->op_number = generateOutPatientNumber();
                 if(count($check_patient_results) > 0){
                     $this->number_of_visits = $check_patient_results[0]['number_of_visits'] + 1;
@@ -121,16 +125,16 @@ use function PHPSTORM_META\type;
                     }
                 }else{
                     $query = "INSERT INTO ".$this->table." (
-                        op_num, first_name,last_name,age,sex,marital_status,phone_num,physical_address,dob,nhif_num,number_of_visits ) 
+                        op_num, first_name,last_name,age,sex,marital_status,phone_num,physical_address,dob,nhif_num) 
                         VALUES(?,?,?,?,?,?,?,?,?,?,?)
                     ";
                     $params = [ 
                         $this->op_number, $this->first_name, $this->last_name, 
                         $this->age, $this->sex, $this->status,
                         $this->phone,$this->physical_address,$this->dob,
-                        $this->nhif_number,$this->number_of_visits
+                        $this->nhif_number
                     ];
-                    //:op_num, :first_name,:last_name,:age,:sex,:marital_status,:email,:phone_num,:physical_address,:dob,:nhif_num, :number_of_visits
+                   
                     try {
                         $this->conn->insert($query, $params);
                         $_SESSION['msg'] = 'Patient added to database succesfully';
@@ -139,8 +143,8 @@ use function PHPSTORM_META\type;
                         throw new Exception($e->getMessage());
                     }
                 }  
-                }else{
-                echo $errors;
+            }else{
+                var_dump($all_errors);
             }
         }
     }
