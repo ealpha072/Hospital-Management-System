@@ -479,4 +479,42 @@
             }
         }
     }
+
+    class Notices{
+        private $conn;
+        private $table = "notices";
+
+        //title	description	start_date	end_date	status
+        public $title = "";
+        public $description  = "";
+        public $start_date = "";
+        public $end_date = "";
+        public $status = "";
+
+        public function __construct($db){
+            $this->conn = $db;
+        }
+
+        public function addNotice(){
+            $errors = [];
+            $this->title = htmlspecialchars(strip_tags($_POST['title']));
+            $this->description  = htmlspecialchars(strip_tags($_POST['description']));
+            $this->start_date = htmlspecialchars(strip_tags($_POST['start_date']));
+            $this->end_date = htmlspecialchars(strip_tags($_POST['end_date']));
+            $this->status = htmlspecialchars(strip_tags($_POST['status']));
+
+            if(count($errors) === 0){
+                $query = "INSERT INTO ".$this->table." (title, description, start_date, end_date, status) VALUES(?, ?, ?, ?, ?)";
+                $params = [$this->title,$this->description ,$this->start_date,$this->end_date,$this->status];
+
+                try {
+                    $this->conn->insert($query, $params);
+                    $_SESSION['msg'] = 'Notice added';
+                    echo $_SESSION['msg'];
+                } catch (Exception $e) {
+                    throw new Exception($e->getMessage());
+                }
+            }
+        }
+    }
 ?>

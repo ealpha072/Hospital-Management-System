@@ -53,4 +53,9 @@
         $new_drug->addDrug();
     }
 
+    if(isset($_POST['add_notice']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
+        $new_notice = new Notices($database);
+        $new_notice->addNotice();
+    }
+
 ?>
