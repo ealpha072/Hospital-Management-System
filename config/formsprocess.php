@@ -48,4 +48,9 @@
         $new_expenseCategory->addExpenseCategory();
     }
 
+    if(isset($_POST['add_drug']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
+        $new_drug = new Drugs($database);
+        $new_drug->addDrug();
+    }
+
 ?>

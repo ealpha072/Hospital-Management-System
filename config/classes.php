@@ -439,4 +439,44 @@
 
         }
     }
+
+    class Drugs{
+        private $conn;
+        private $table=  "drugs";
+
+        //name	category	unit_price	supplier	status
+        public $name = "";
+        public $category = "";
+        public $unit_price = "";
+        public $supplier = "";
+        public $status = "";
+
+        public function __construct($db){
+            $this->conn = $db;
+        }
+          
+        public function addDrug(){
+            $errors = [];
+
+            $this->name = htmlspecialchars(strip_tags($_POST['name']));
+            $this->category = htmlspecialchars(strip_tags($_POST['category']));
+            $this->unit_price = htmlspecialchars(strip_tags($_POST['unit_price']));
+            $this->supplier = htmlspecialchars(strip_tags($_POST['supplier']));
+            $this->status = htmlspecialchars(strip_tags($_POST['status']));
+
+            if(count($errors) === 0){
+                $query = "INSERT INTO ".$this->table." (name, category, unit_price, supplier, status) VALUES(?, ?, ?, ?, ?)";
+                $params= [$this->name, $this->category, $this->unit_price, $this->supplier, $this->status];
+
+                try {
+                    //code...
+                    $this->conn->insert($query, $params);
+                    $_SESSION['msg'] = "Drug added";
+                    echo $_SESSION['msg'];
+                } catch (Exception $e) {
+                    throw new Exception($e->getMessage());
+                }
+            }
+        }
+    }
 ?>
