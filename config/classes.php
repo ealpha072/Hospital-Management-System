@@ -5,6 +5,39 @@ use function PHPSTORM_META\type;
     include_once('config.php');
     include_once('utilities.php');
 
+    class Validate{
+        public function validateNames($first_name, $last_name, $errors_array){
+            if(empty($first_name) || empty($last_name)){array_push($errors_array, "Names cant be empty"); }
+            if(preg_match('/\s/', $first_name) or preg_match('/\s/', $last_name)){array_push($errors_array, "No spaces allowed in first or last name");}
+        }
+
+        public function validateEmailandAddress($email, $address, $errors_array){
+            $address_condition = [];
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){array_push($errors_array, "Invalid email formart, try again");}
+            if(preg_match('/\s/', $address)){
+                $address_array = explode(" ", $address);
+                foreach ($address_array as $single_address) {
+                    $is_all_alphabetical = ctype_alpha($single_address) ? "True" : "False";
+                    array_push($address_condition, $is_all_alphabetical);
+                }
+
+                if(in_array("False", $address_condition)){array_push($errors_array, "Physical address cant contain numbers");}
+            }
+        }
+
+        public function validatePhoneNumber($phone,$errors_array){
+            if(empty($phone)){array_push($errors_array, "Phone number cant be empty");}
+            if(!preg_match('/^(\+254)\d{9}$/', $phone)){array_push($errors_array, "Invalid phone number format");}
+            if(!is_int($phone)){array_push($errors_array, "Phone number invalid, only numbers allowed");}
+        }
+
+        public function validateNssfandNhif($nssf, $nhif, $kra, $errors_array){
+            if(empty($nssf) || empty($nhif) || empty($kra)){array_push($errors_array, "NSSF, KRA and NHIF can't cant be empty"); }
+            if(!is_int($nssf) || !is_int($nhif)){array_push($errors_array, "NSSF and NHIF invalid, only numbers allowed");}
+        }
+
+    }
+
     trait person{
         private $conn; 
         public $first_name = "";
@@ -61,7 +94,8 @@ use function PHPSTORM_META\type;
                 array_push($errors, "No empty fileds allowed, please fill in all fields");
             }
 
-            if(!empty($this->nhif_number) && !is_integer($this->nhif_number)){array_push($errors, "NHIF Number has to be interegs");}
+            if(!empty($this->nhif_number) && !is_integer($this->nhif_number)){array_push($errors, "NHIF Number has to be an integer");}
+            if(!is_integer($this->age)){array_push($errors, "Age must be a number");}
 
             //check if patient has visited before;
             $check_patient_previous_visit_query = "SELECT op_num, number_of_visits FROM ".$this->table." WHERE first_name = ? AND last_name = ? AND sex = ? AND dob = ?";

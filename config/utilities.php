@@ -79,5 +79,13 @@ function generateOutPatientNumber(){
     return $op_number;
 }
 
+function validatePhone($phone, $errors_array){
+    if(!preg_match('/^(\+254)\d{9}$/', $phone)){
+        return True;
+    }else{
+        array_push($errors_array, "Invalid phone number");
+    }
+}
+
 
 ?>
