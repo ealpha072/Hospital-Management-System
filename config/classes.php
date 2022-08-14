@@ -178,7 +178,7 @@ use function PHPSTORM_META\type;
             $destination_folder = '../images/doctors/';
             $this->department = strtolower(htmlspecialchars(strip_tags($_POST['department'])));
 
-            //validations
+            //form validations
             $new_validation = new Validate();
             $name_error = $new_validation->validateNames($this->first_name, $this->last_name);
             $email_error = $new_validation->validateEmail($this->email);
@@ -186,6 +186,16 @@ use function PHPSTORM_META\type;
             $phone_error = $new_validation->validatePhoneNumber($this->phone);
             $address_error = $new_validation->validateAddress($this->physical_address);
             $all_errors = array_merge($name_error, $email_error, $phone_error, $address_error, $nssf_nhif_kra_error);
+
+			//check if names exists
+			$check_query = "SELECT first_name FROM ".$this->table. " WHERE first_name =? AND last_name = ?";
+			$check_params = [$this->first_name, $this->last_name];
+			$results = $this->conn->select($check_query, $check_params);
+			if(count($results) > 0){
+				array_push($all_errors, "Doctor already exists");
+			}
+
+			//check email
 
             //image processing
             $upload_image_return = fileUpload($this->picture, '../images/doctors/');
@@ -247,6 +257,14 @@ use function PHPSTORM_META\type;
             $address_error = $new_validation->validateAddress($this->physical_address);
             $all_errors = array_merge($name_error, $email_error, $phone_error, $address_error, $nssf_nhif_kra_error);
 
+			//check if names exists
+			$check_query = "SELECT first_name FROM ".$this->table. " WHERE first_name =? AND last_name = ?";
+			$check_params = [$this->first_name, $this->last_name];
+			$results = $this->conn->select($check_query, $check_params);
+			if(count($results) > 0){
+				array_push($all_errors, "Doctor already exists");
+			}
+
 			//image processing
 			$upload_image_return = fileUpload($this->picture, '../images/employees/');
             if(is_array($upload_image_return)){
@@ -255,7 +273,7 @@ use function PHPSTORM_META\type;
                 }
             }
 
-           
+			//push to database
             if(count($all_errors) === 0){
 				$query = "INSERT INTO ".$this->table. " ( first_name,last_name,age, sex,status,email,
 					phone_num,physical_address,dob, nhif_num,picture,role, kra_num,nssf_num
@@ -290,15 +308,15 @@ use function PHPSTORM_META\type;
         public function __construct($db){
             $this->conn = $db;
         }
-        
-
+    
         public function createDepartment(){
+			//variables
             $errors = [];
             $this->name = htmlspecialchars(strip_tags($_POST["name"]));
             $this->hod = htmlspecialchars(strip_tags($_POST["hod"]));
 
             //check if department already exists
-            $check_query = "SELECT name FROM ".$this->table. " WHERE name =:name";
+            $check_query = "SELECT name FROM ".$this->table. " WHERE name = :name";
             $results = $this->conn->select($check_query, ['name'=>$this->name]);
 
             if(count($results) != 0 ){
@@ -306,8 +324,8 @@ use function PHPSTORM_META\type;
             }
 
             if(count($errors) === 0){
-                $select_query = "INSERT INTO ".$this->table." (name, hod) VALUES(:name, :hod)";
-                $params = ["name"=>$this->name, "hod"=>$this->hod];
+                $select_query = "INSERT INTO ".$this->table." (name, hod) VALUES(?,?)";
+                $params = [$this->name, $this->hod];
                 try {
                     $this->conn->insert($select_query, $params);
                     $_SESSION['msg'] = 'Department added to database succesfully';
@@ -315,7 +333,9 @@ use function PHPSTORM_META\type;
                 } catch (Exception $e) {
                     throw new Exception($e->getMessage());
                 }
-            }
+            }else{
+				print_r($errors);
+			}
         }
 
     }
@@ -333,20 +353,24 @@ use function PHPSTORM_META\type;
 
         public function addWard(){
             $errors = [];
-            $this->name = htmlspecialchars(strip_tags($_POST["wardname"]));
+            $this->name = strtolower(htmlspecialchars(strip_tags($_POST["wardname"])));
             $this->incharge = htmlspecialchars(strip_tags($_POST["incharge"]));
-            $this->capacity = htmlspecialchars(strip_tags($_POST["capacity"]));
-            echo $this->name;
+            $this->capacity = (int)htmlspecialchars(strip_tags($_POST["capacity"]));
+            
+			//check if name exists
+			$check_query = "SELECT name FROM ".$this->table. " WHERE name = ?";
+			$check_params = [$this->name];
+			$results = $this->conn->select($check_query, $check_params);
+			if(count($results) > 0){
+				array_push($errors, "Doctor already exists");
+			}
 
             if(count($errors) === 0){
-                $query = "INSERT INTO ".$this->table." (name, incharge, capacity) VALUES(:name, :incharge, :capacity)";
-                $params = [
-                    "name" => $this->name,
-                    "incharge" => $this->incharge,
-                    "capacity" => $this->capacity
-                ];
+                $query = "INSERT INTO ".$this->table." (name, incharge, capacity) VALUES(?,?,?)";
+                $params = [$this->name,$this->incharge,$this->capacity];
                 try {
                     $this->conn->insert($query, $params);
+					$_SESSION['msg'] = "New ward added successfully";
                 } catch (Exception $e) {
                     throw new Exception($e->getMessage());
                 }
@@ -373,31 +397,42 @@ use function PHPSTORM_META\type;
         }
         
         public function addSupplier(){
-            $errors = [];
+            $all_errors = [];
 
             $this->supplier_id = htmlspecialchars(strip_tags($_POST['supplier_id']));
-            $this->name = htmlspecialchars(strip_tags($_POST['name']));
-            $this->company_name = htmlspecialchars(strip_tags($_POST['company_name']));
+            $this->name = strtolower(htmlspecialchars(strip_tags($_POST['name'])));
+            $this->company_name = strtoupper(htmlspecialchars(strip_tags($_POST['company_name'])));
             $this->status = htmlspecialchars(strip_tags($_POST['status']));
             $this->email = htmlspecialchars(strip_tags($_POST['email']));
             $this->phone_num = htmlspecialchars(strip_tags($_POST['phone_number']));
             $this->physical_address = htmlspecialchars(strip_tags($_POST['p_address']));
 
-            if(count($errors) === 0){
-                $query = "INSERT INTO ".$this->table."(supplier_id, name, company_name, status, email, phone_num, physical_address)
-                    VALUES(
-                        :supplier_id, :name, :company_name, :status, :email, :phone_num, :physical_address
-                    )
-                ";
-                $params = [
-                    "supplier_id" => $this->supplier_id, 
-                    "name" => $this->name, 
-                    "company_name" => $this->company_name, 
-                    "status" => $this->status, 
-                    "email" => $this->email, 
-                    "phone_num" => $this->phone_num, 
-                    "physical_address" => $this->physical_address
-                ];
+			//validation
+			$new_validation = new Validate();
+			$email_error = $new_validation->validateEmail($this->email);
+			$address_error = $new_validation->validateAddress($this->physical_address);
+			$phone_error = $new_validation->validatePhoneNumber($this->phone_num);
+			$all_errors = array_merge($email_error, $address_error, $phone_error);
+
+			//check if supplier exists (company name)
+			$check_query = "SELECT company_name FROM ".$this->table. " WHERE company_name = ?";
+			$check_params = [$this->company_name];
+			$results = $this->conn->select($check_query, $check_params);
+			if(count($results) > 0){
+				array_push($all_errors, "Supplier already exists");
+			}
+
+            if(count($all_errors) === 0){
+                $query = "INSERT INTO ".$this->table."(supplier_id, name, company_name, status, email, phone_num, physical_address) VALUES (?,?,?,?,?,?,?)";
+                $params = [ 
+					$this->supplier_id, 
+					$this->name, 
+					$this->company_name, 
+					$this->status, 
+					$this->email, 
+					$this->phone_num, 
+					$this->physical_address
+				];
 
                 try {                    
                     $this->conn->insert($query, $params);
@@ -405,9 +440,10 @@ use function PHPSTORM_META\type;
                     echo $_SESSION['msg'];
                 } catch (Exception $e) {        
                     throw new Exception($e->getMessage());
-                    
                 }
-            }
+            }else{
+				print_r($all_errors);
+			}
         }
     }
 
