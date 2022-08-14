@@ -3,12 +3,73 @@
 <div class="card mr-4 ml-4 mb-4">
     <div class="card-header">
         <a href="">
-            <button class="btn btn-md btn-primary"> <i class="fa fa-list mr-2"></i> Doctor List</button>
+            <button class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Doctor</button>
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="row mb-2">
+            <div class="col-3">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text">Show</label>
+                    </div>
+                    <select class="custom-select">
+                        <option selected>Choose...</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-6 text-center">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-sm btn-outline-success">CSV</button>
+                    <button type="button" class="btn btn-sm btn-outline-success">Exel</button>
+                    <button type="button" class="btn btn-sm btn-outline-success">Copy</button>
+                    <button type="button" class="btn btn-sm btn-outline-success">PDF</button>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control form-control-sm">
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-success" type="button"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-sm table-bordered table-hover table-stripped">
+                <thead class="">
+                    <tr class="text-center">
+                        <th>SL No</th>
+                        <th>Id No</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>DoB</th>                        
+                        <th>Age</th>
+                        <th>Phone Number</th>
+                        <th>Address</th>
+                        <th>NHIF Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- <div class="card mr-4 ml-4 mb-4" id="add_doctor_page">
+    <div class="card-header">
+        <a href="">
+            <button class="btn btn-md btn-primary" name="doctor-list"> <i class="fa fa-list mr-2"></i> Doctor List</button>
         </a>
     </div>
     <div class="card-body">
         <form action="../config/formsprocess.php" method="post" enctype="multipart/form-data">
-            <!--PERSONAL INFO-->
+            <!--PERSONAL INFO
             <div class="card-body">
                 <div class="form-group row">
                     <label for="" class="col-sm-2">First Name<sup>*</sup></label>
@@ -100,7 +161,7 @@
                             <option value="">--Select Department--</option>
                             <option value="Neurology">Neurology</option>
                             <option value="Radiology">Radiology</option>
-                            <!--populate from DB-->
+                            <!--populate from DB
                         </select>
                     </div>
                 </div>
@@ -129,6 +190,6 @@
             </div>
         </form>
     </div>
-</div>
+</div> -->
 
 <?php require "../public/footer.php" ?>

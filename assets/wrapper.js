@@ -43,6 +43,8 @@ let poTableRow = `
         </td>
     </tr>
 `
+
+let doctor_list_page = ``;
 //add remove rows to bill table
 function addRow(){
     let tableBody = $('#bill-table-body')
