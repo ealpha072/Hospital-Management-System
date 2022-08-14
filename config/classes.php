@@ -538,9 +538,6 @@ use function PHPSTORM_META\type;
 
     class Drugs{
         private $conn;
-        private $table=  "drugs";
-
-        //name	category	unit_price	supplier	status
         public $name = "";
         public $category = "";
         public $unit_price = "";
@@ -554,18 +551,25 @@ use function PHPSTORM_META\type;
         public function addDrug(){
             $errors = [];
 
-            $this->name = htmlspecialchars(strip_tags($_POST['name']));
+            $this->name = strtolower(htmlspecialchars(strip_tags($_POST['name'])));
             $this->category = htmlspecialchars(strip_tags($_POST['category']));
             $this->unit_price = htmlspecialchars(strip_tags($_POST['unit_price']));
             $this->supplier = htmlspecialchars(strip_tags($_POST['supplier']));
             $this->status = htmlspecialchars(strip_tags($_POST['status']));
 
+			//check if name exists
+			$check_query = "SELECT name FROM drugs WHERE name = ?";
+			$check_params = [$this->name];
+			$results = $this->conn->select($check_query, $check_params);
+			if(count($results) > 0){
+				array_push($errors, "Drug already exists");
+			}
+
             if(count($errors) === 0){
-                $query = "INSERT INTO ".$this->table." (name, category, unit_price, supplier, status) VALUES(?, ?, ?, ?, ?)";
+                $query = "INSERT INTO drugs (name, category, unit_price, supplier, status) VALUES(?, ?, ?, ?, ?)";
                 $params= [$this->name, $this->category, $this->unit_price, $this->supplier, $this->status];
 
                 try {
-                    //code...
                     $this->conn->insert($query, $params);
                     $_SESSION['msg'] = "Drug added";
                     echo $_SESSION['msg'];
@@ -578,9 +582,7 @@ use function PHPSTORM_META\type;
 
     class Notices{
         private $conn;
-        private $table = "notices";
-
-        //title	description	start_date	end_date	status
+        
         public $title = "";
         public $description  = "";
         public $start_date = "";
@@ -593,14 +595,17 @@ use function PHPSTORM_META\type;
 
         public function addNotice(){
             $errors = [];
-            $this->title = htmlspecialchars(strip_tags($_POST['title']));
+            $this->title = strtolower(htmlspecialchars(strip_tags($_POST['title'])));
             $this->description  = htmlspecialchars(strip_tags($_POST['description']));
             $this->start_date = htmlspecialchars(strip_tags($_POST['start_date']));
             $this->end_date = htmlspecialchars(strip_tags($_POST['end_date']));
             $this->status = htmlspecialchars(strip_tags($_POST['status']));
 
+			//check that end date is grater than start date
+			if($this->end_date < $this->start_date){array_push($errors, "Start date cant be grater than end date");}
+
             if(count($errors) === 0){
-                $query = "INSERT INTO ".$this->table." (title, description, start_date, end_date, status) VALUES(?, ?, ?, ?, ?)";
+                $query = "INSERT INTO notices (title, description, start_date, end_date, status) VALUES(?, ?, ?, ?, ?)";
                 $params = [$this->title,$this->description ,$this->start_date,$this->end_date,$this->status];
 
                 try {

@@ -18,6 +18,7 @@ CREATE TABLE `hospital_db`.`patients` (
 ALTER TABLE `patients` ADD `op_num` INT(10) NOT NULL AFTER `id`;
 ALTER TABLE `patients` ADD `number_of_visits` INT(255) NOT NULL DEFAULT '1' AFTER `nhif_num`;
 ALTER TABLE `patients` DROP `email`;
+ALTER TABLE `patients` ADD `id_no` INT(10) NOT NULL AFTER `id`;
 
 CREATE TABLE `hospital_db`.`employees` (
     `id` INT(255) NOT NULL AUTO_INCREMENT , 
