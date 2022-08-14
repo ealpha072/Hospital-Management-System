@@ -100,7 +100,8 @@ use function PHPSTORM_META\type;
             $phone_error = $new_validation->validatePhoneNumber($this->phone, []);
             $address_error = $new_validation->validateAddress($this->physical_address, []);
 
-           
+            $all_errors = array_merge($name_error, $phone_error, $address_error);
+            //|| !empty($phone_error) || !empty($address_error)
             //check if patient has visited before;
             $check_patient_previous_visit_query = "SELECT op_num, number_of_visits FROM ".$this->table." WHERE first_name = ? AND last_name = ? AND sex = ? AND dob = ?";
             $check_patient_params = [$this->first_name, $this->last_name, $this->sex, $this->dob];
@@ -144,7 +145,7 @@ use function PHPSTORM_META\type;
                     }
                 }  
             }else{
-                var_dump($all_errors);
+                print_r($all_errors);
             }
         }
     }

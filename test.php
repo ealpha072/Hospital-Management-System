@@ -1,11 +1,9 @@
 <?php
 $errors = [];
+ $one = [];
+ $fdfdf = [];
+ $red = [];
 
-function add($er = []){
-    // array_push($er, "No way");
-    var_dump($er);
-}
-
-add($errors);
-var_dump($errors)
+ $errors = array_merge($one, $fdfdf, $red);
+ print_r($errors);
 ?>
