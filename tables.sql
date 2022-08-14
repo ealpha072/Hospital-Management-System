@@ -60,6 +60,7 @@ CREATE TABLE `hospital_db`.`doctors` (
     `date_in` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
+ALTER TABLE `doctors` CHANGE `date_in` `date_added` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
 CREATE TABLE `hospital_db`.`departments` (
     `id` INT(255) NOT NULL AUTO_INCREMENT , 

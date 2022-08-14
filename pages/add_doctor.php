@@ -90,6 +90,8 @@
                     <div class="col-sm-6">
                         <select name="department" id="" class="form-control form-control-sm" required>
                             <option value="">--Select Department--</option>
+                            <option value="Neurology">Neurology</option>
+                            <option value="Radiology">Radiology</option>
                             <!--populate from DB-->
                         </select>
                     </div>

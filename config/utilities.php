@@ -20,7 +20,7 @@ function fileUpload($file, $destination_folder){
 
     $allowed_extensions = array('jpeg', 'jpg', 'png');
     if(!in_array($img_ext, $allowed_extensions)){
-        array_push($img_errors, "Invalid image format");
+        array_push($img_errors, "Invalid image format, extensions allowed are jpeg, jpg and png");
     }
 
     if($img_size > 5097152){
@@ -32,7 +32,6 @@ function fileUpload($file, $destination_folder){
     }
 
     if(count($img_errors) === 0){
-        // move_uploaded_file($img_tmp, $destination_folder.$img_name);
         return $img_name;
     }else{
         return $img_errors;

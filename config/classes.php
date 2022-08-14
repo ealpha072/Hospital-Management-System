@@ -8,29 +8,40 @@ use function PHPSTORM_META\type;
     class Validate{
         public function validateNames($first_name, $last_name, $errors_array = []){
             if(empty($first_name) || empty($last_name)){array_push($errors_array, "Names cant be empty"); }
-            if(preg_match('/\s/', $first_name) or preg_match('/\s/', $last_name)){array_push($errors_array, "No spaces allowed in first or last name");}
+            if(preg_match('/\s/', $first_name) || preg_match('/\s/', $last_name)){array_push($errors_array, "No spaces allowed in first or last name");}
+
+			if(preg_match('~[0-9]+~', $first_name) || preg_match('~[0-9]+~', $last_name)){array_push($errors_array, "Name can't contain numeric characters");}
+
+            return $errors_array;
+        }
+
+        public function validateEmail($email, $errors_array=[]){
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){array_push($errors_array, "Invalid email formart, try again");}
             return $errors_array;
         }
 
         public function validateAddress($address, $errors_array = []){
             $address_condition = [];
-            //if(!filter_var($email, FILTER_VALIDATE_EMAIL)){array_push($errors_array, "Invalid email formart, try again");}
-            if(preg_match('/\s/', $address)){
+            
+			//check address, we break then check for spaces because ctype_alpha considers white space non alphabetic
+            if(preg_match('/\s/', $address) ){
                 $address_array = explode(" ", $address);
                 foreach ($address_array as $single_address) {
                     $is_all_alphabetical = ctype_alpha($single_address) ? "True" : "False";
                     array_push($address_condition, $is_all_alphabetical);
                 }
+            }else{
+				$is_all_alphabetical = ctype_alpha($address) ? "True" : "False";
+				array_push($address_condition, $is_all_alphabetical);
+			}
 
-                if(in_array("False", $address_condition)){array_push($errors_array, "Physical address cant contain numbers");}
-            }
+			if(in_array("False", $address_condition)){array_push($errors_array, "Physical address cant contain numbers");}
             return $errors_array;
         }
 
         public function validatePhoneNumber($phone, $errors_array = []){
             if(empty($phone)){array_push($errors_array, "Phone number cant be empty");}
-            if(!preg_match('/^(\+254)\d{9}$/', $phone)){array_push($errors_array, "Invalid phone number format");}
-            if(!is_int($phone)){array_push($errors_array, "Phone number invalid, only numbers allowed");}
+            if(!preg_match('/^(\+254)\d{9}$/', $phone)){array_push($errors_array, "Invalid phone number format, start with +254");}
             return $errors_array;
         }
 
@@ -70,13 +81,14 @@ use function PHPSTORM_META\type;
             $this->dob = htmlspecialchars(strip_tags($_POST['dob']));
             $this->sex = htmlspecialchars(strip_tags($_POST['sex']));
             $this->status = htmlspecialchars(strip_tags($_POST['status']));
-            $this->nhif_number = htmlspecialchars(strip_tags($_POST['nhif']));
+            $this->nhif_number = (int)htmlspecialchars(strip_tags($_POST['nhif']));
+			
         }
 
         public function attach_common_props_employees_doctors(){
-            $this->email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
-            $this->nssf = htmlspecialchars(strip_tags($_POST['nssf']));
-            $this->kra = htmlspecialchars(strip_tags($_POST['kra']));
+            $this->email = strtolower($_POST['email']);
+            $this->nssf = (int)htmlspecialchars(strip_tags($_POST['nssf']));
+            $this->kra = strtoupper(htmlspecialchars(strip_tags($_POST['kra'])));
             $this->picture = $_FILES['profile_picture'];
         }
     }
@@ -92,23 +104,25 @@ use function PHPSTORM_META\type;
         }
 
         public function add(){
+            //variables
             $all_errors = [];
-            $new_validation = new Validate();
 
+            //validation
+            $new_validation = new Validate();
             $name_error = $new_validation->validateNames($this->first_name, $this->last_name, []);
-            //$new_validation->validateNssfandNhif();
             $phone_error = $new_validation->validatePhoneNumber($this->phone, []);
             $address_error = $new_validation->validateAddress($this->physical_address, []);
-
             $all_errors = array_merge($name_error, $phone_error, $address_error);
-            //|| !empty($phone_error) || !empty($address_error)
+
             //check if patient has visited before;
             $check_patient_previous_visit_query = "SELECT op_num, number_of_visits FROM ".$this->table." WHERE first_name = ? AND last_name = ? AND sex = ? AND dob = ?";
             $check_patient_params = [$this->first_name, $this->last_name, $this->sex, $this->dob];
             $check_patient_results = $this->conn->select($check_patient_previous_visit_query, $check_patient_params);
-        
+            
+            //push to database
             if(count($all_errors) === 0){
                 $this->op_number = generateOutPatientNumber();
+                //for returning patients
                 if(count($check_patient_results) > 0){
                     $this->number_of_visits = $check_patient_results[0]['number_of_visits'] + 1;
                     $update_patient_query = "UPDATE ".$this->table." SET op_num = ?,  
@@ -125,8 +139,8 @@ use function PHPSTORM_META\type;
                         throw new Exception($th->getMessage());                        
                     }
                 }else{
-                    $query = "INSERT INTO ".$this->table." (
-                        op_num, first_name,last_name,age,sex,marital_status,phone_num,physical_address,dob,nhif_num) 
+                    //for first time patients
+                    $query = "INSERT INTO ".$this->table." (op_num, first_name, last_name, age, sex, marital_status, phone_num, physical_address, dob, nhif_num) 
                         VALUES(?,?,?,?,?,?,?,?,?,?,?)
                     ";
                     $params = [ 
@@ -159,53 +173,42 @@ use function PHPSTORM_META\type;
         }
 
         public function add_doctor(){
-            $errors = [];
-
-            $this->department =htmlspecialchars(strip_tags($_POST['department']));
+            //variables
+            $all_errors = [];
             $destination_folder = '../images/doctors/';
-            //id	first_name	last_name	age	sex	status	email	phone_num	physical_address	dob	nhif_num	picture	department	kra_num	nssf_num	date_in	
+            $this->department = strtolower(htmlspecialchars(strip_tags($_POST['department'])));
 
-            $query = "INSERT INTO ".$this->table. " (first_name, 
-                last_name, age, sex, status, email, 
-                phone_num, physical_address, dob, nhif_num, 
-                picture, department, kra_num, nssf_num)
-                VALUES (
-                    :first_name,:last_name,
-                    :age,:sex,:status,
-                    :email,:phone_num,
-                    :physical_address,:dob, 
-                    :nhif_num, :picture, 
-                    :department, :kra, 
-                    :nssf
-                )
-            ";
+            //validations
+            $new_validation = new Validate();
+            $name_error = $new_validation->validateNames($this->first_name, $this->last_name);
+            $email_error = $new_validation->validateEmail($this->email);
+            $nssf_nhif_kra_error = $new_validation->validateNssfandNhif($this->nssf, $this->nhif_number, $this->kra);
+            $phone_error = $new_validation->validatePhoneNumber($this->phone);
+            $address_error = $new_validation->validateAddress($this->physical_address);
+            $all_errors = array_merge($name_error, $email_error, $phone_error, $address_error, $nssf_nhif_kra_error);
 
-            $params = [
-                "first_name"=>$this->first_name,
-                "last_name"=>$this->last_name,
-                "age"=>$this->age,
-                "sex"=>$this->sex,
-                "status"=>$this->status,
-                "email"=>$this->email,
-                "phone_num"=>$this->phone,
-                "physical_address"=>$this->physical_address,
-                "dob"=>$this->dob,
-                "nhif_num"=>$this->nhif_number,
-                "picture" =>$this->picture['name'],
-                "department" =>$this->department,
-                "kra" =>$this->kra,
-                "nssf" =>$this->nssf,
-            ];
-
+            //image processing
             $upload_image_return = fileUpload($this->picture, '../images/doctors/');
-            
             if(is_array($upload_image_return)){
                 foreach($upload_image_return as $img_error){
-                    array_push($errors, $img_error);
+                    array_push($all_errors, $img_error);
                 }
             }
 
-            if(count($errors) === 0){
+            //to database
+            if(count($all_errors) === 0){
+                $query = "INSERT INTO ".$this->table. " (first_name, last_name, age, sex, status, email, phone_num, physical_address, dob, nhif_num, 
+                    picture, department, kra_num, nssf_num) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                ";
+
+                $params = [
+                    $this->first_name,$this->last_name,$this->age,
+                    $this->sex, $this->status,
+                    $this->email,$this->phone,$this->physical_address,
+                    $this->dob,$this->nhif_number,
+                    $this->picture['name'],$this->department,
+                    $this->kra,$this->nssf,
+                ];
                 try {
                     move_uploaded_file($this->picture['tmp_name'], $destination_folder.$upload_image_return);
                     $this->conn->insert($query, $params);
@@ -214,6 +217,8 @@ use function PHPSTORM_META\type;
                 } catch (Exception $e) {
                     throw new Exception($e->getMessage());                    
                 }
+            }else{
+                print_r($all_errors);
             }
     
         }
@@ -227,60 +232,52 @@ use function PHPSTORM_META\type;
             $this->conn = $db;
         }
         
-
         public function addEmployee(){
-            //first_name	last_name	age	sex	marital_status	email	phone_num	physical_address	dob	nhif_num	picture	role	kra_num	nssf_num	date_in	
-            $errors = [];
+			//variables
+            $all_errors = [];
             $destination_folder = '../images/employees/';
-            $this->role =htmlspecialchars(strip_tags($_POST['role']));
-            $query = "INSERT INTO ".$this->table. " (
-                first_name,last_name,age,
-                sex,status,email,
-                phone_num,physical_address,dob,
-                nhif_num,picture,role,
-                kra_num,nssf_num
-                ) VALUES(
-                :first_name,:last_name,:age,
-                :sex,:status,:email,
-                :phone_num,:physical_address,:dob,
-                :nhif_num,:picture,:role,
-                :kra_num,:nssf_num
-            )";
-            $params = [
-                "first_name"=>$this->first_name,
-                "last_name"=>$this->last_name,
-                "age"=>$this->age,
-                "sex"=>$this->sex,
-                "status"=>$this->status,
-                "email"=>$this->email,
-                "phone_num"=>$this->phone,
-                "physical_address"=>$this->physical_address,
-                "dob"=>$this->dob,
-                "nhif_num"=>$this->nhif_number,
-                "picture" =>$this->picture['name'],
-                "role" =>$this->role,
-                "kra" =>$this->kra,
-                "nssf" =>$this->nssf,
-            ];
+            $this->role = htmlspecialchars(strip_tags($_POST['role']));
 
-            $upload_image_return = fileUpload($this->picture, '../images/employees/');
-            
+			//validations
+			$new_validation = new Validate();
+            $name_error = $new_validation->validateNames($this->first_name, $this->last_name);
+            $email_error = $new_validation->validateEmail($this->email);
+            $nssf_nhif_kra_error = $new_validation->validateNssfandNhif($this->nssf, $this->nhif_number, $this->kra);
+            $phone_error = $new_validation->validatePhoneNumber($this->phone);
+            $address_error = $new_validation->validateAddress($this->physical_address);
+            $all_errors = array_merge($name_error, $email_error, $phone_error, $address_error, $nssf_nhif_kra_error);
+
+			//image processing
+			$upload_image_return = fileUpload($this->picture, '../images/employees/');
             if(is_array($upload_image_return)){
                 foreach($upload_image_return as $img_error){
-                    array_push($errors, $img_error);
+                    array_push($all_errors, $img_error);
                 }
             }
 
-            if(count($errors) === 0){
+           
+            if(count($all_errors) === 0){
+				$query = "INSERT INTO ".$this->table. " ( first_name,last_name,age, sex,status,email,
+					phone_num,physical_address,dob, nhif_num,picture,role, kra_num,nssf_num
+					) VALUES( ?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+				";
+				$params = [
+					$this->first_name,$this->last_name,$this->age,$this->sex,
+					$this->status,$this->email,$this->phone,$this->physical_address,
+					$this->dob,$this->nhif_number,$this->picture['name'],$this->role,
+					$this->kra,$this->nssf,
+				];
                 try {
                     move_uploaded_file($this->picture['tmp_name'], $destination_folder.$upload_image_return);
                     $this->conn->insert($query, $params);
-                    $_SESSION['msg'] = 'Doctor added to database succesfully';
+                    $_SESSION['msg'] = 'Employee added to database succesfully';
                     echo $_SESSION['msg'];
                 } catch (Exception $e) {
                     throw new Exception($e->getMessage());                    
                 }
-            }
+            }else{
+				print_r($all_errors);
+			}
         }
     }
 
