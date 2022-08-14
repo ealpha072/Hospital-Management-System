@@ -449,7 +449,6 @@ use function PHPSTORM_META\type;
 
     class Expense{
         private $conn;
-        private $table="expenses";
         //name	payment_method	paid_from_account	description	amount	status	due_date
         public $name = "";
         public $payment_method = "";
@@ -465,6 +464,7 @@ use function PHPSTORM_META\type;
 
         public function addExpense(){
             $errors = [];
+
             $this->name = htmlspecialchars(strip_tags($_POST['name']));
             $this->payment_method = htmlspecialchars(strip_tags($_POST['payment_method']));
             $this->paid_from_account = htmlspecialchars(strip_tags($_POST['paid_from_account']));
@@ -474,64 +474,65 @@ use function PHPSTORM_META\type;
             $this->due_date = htmlspecialchars(strip_tags($_POST['due_date']));
 
             //CHECKS if status is not paid, due date is compulsory
+			if($this->status === "Not Paid" and empty($this->due_date)){
+				array_push($errors, "Expenses not paid must have due date");
+			}
+
+			if($this->status === 'Paid' and !empty($this->due_date)){
+				array_push($errors, "Paid expenses cant have due dates");
+			}
 
             if(count($errors) === 0){
-                $query = "INSERT INTO ".$this->table." (name, payment_method, paid_from_account, description, amount, status, due_date)
-                    VALUES(
-                        :name, :payment_method, :paid_from_account, :description, :amount, :status, :due_date
-                    )
-                ";
+                $query = "INSERT INTO expenses (name, payment_method, paid_from_account, description, amount, status, due_date) VALUES (?,?,?,?,?,?,?)";
                 $params = [
-                    ":name" => $this->name, 
-                    ":payment_method" => $this->payment_method, 
-                    ":paid_from_account" => $this->paid_from_account, 
-                    ":description" => $this->description, 
-                    ":amount" => $this->amount, 
-                    ":status" => $this->status, 
-                    ":due_date" => $this->due_date
+                    $this->name, $this->payment_method, 
+                    $this->paid_from_account, $this->description, $this->amount, $this->status, $this->due_date
                 ];
+
                 try {
-                    //code...
                     $this->conn->insert($query, $params);
-                    $_SESSION['msg'] = "Supplier added to databse";
+                    $_SESSION['msg'] = "Expense ".$this->name." added to database";
                     echo $_SESSION['msg'];
                 } catch (Exception $e) {
-                    //throw $th;
                     throw new Exception($e->getMessage());
                     
                     
                 }
-            }
+            }else{
+				print_r($errors);
+			}
 
         }
 
         public function addExpenseCategory(){
-            $errors = [];
-            $this->table = 'expenses_category';
-            $this->name = htmlspecialchars(strip_tags($_POST['name']));
+            $all_errors = [];
+            //$this->table = 'expenses_category';
+            $this->name = strtolower(htmlspecialchars(strip_tags($_POST['name'])));
             $this->description = htmlspecialchars(strip_tags($_POST['description']));
             $this->status = htmlspecialchars(strip_tags($_POST['status']));
 
-            if(count($errors) === 0){
-                $query = "INSERT INTO ".$this->table." (name, status, description)
-                VALUES(:name, :status, :description)";
-                $params = [
-                    "name"=> $this->name, 
-                    "status"=> $this->status, 
-                    "description"=> $this->description
-                ];
+			//check if category exists
+			$check_query = "SELECT name FROM expenses_category WHERE name = ?";
+			$check_params = [$this->name];
+			$results = $this->conn->select($check_query, $check_params);
+			if(count($results) > 0){
+				array_push($all_errors, "Expense category already exists");
+			}
+
+            if(count($all_errors) === 0){
+                $query = "INSERT INTO expenses_category (name, status, description) VALUES (?,?,?)";
+                $params = [ $this->name, $this->status, $this->description];
 
                 try {
-                    //code...
                     $this->conn->insert($query, $params);
                     $_SESSION['msg'] = "Operation okay";
+					echo $_SESSION['msg'];
                 } catch (Exception $e) {
-                    //throw $th;
                     throw new Exception($e->getMessage());
-                    
                 }
-            }
-
+            }else{
+				print_r($all_errors);
+			}
         }
     }
 

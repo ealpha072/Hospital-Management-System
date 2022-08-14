@@ -19,7 +19,7 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Description<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <textarea name="description" id="" cols="30" rows="10" class="form-control form-control-sm" required></textarea>
+                        <textarea name="description" id="" cols="30" rows="2" class="form-control form-control-sm" maxlength="150" placeholder="A short description"></textarea>
                     </div>
                 </div>
 
@@ -56,7 +56,7 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Amount<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <input type="number" name="amount" id="" class="form-control form-control-sm" placeholder="Amount" required>
+                        <input type="number" name="amount" id="" class="form-control form-control-sm" placeholder="Amount" required min="0">
                     </div>
                 </div>
 
@@ -72,9 +72,9 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="" class="col-sm-2">Date Due<sup>*</sup></label>
+                    <label for="" class="col-sm-2">Date Due<sup></sup></label>
                     <div class="col-sm-6">
-                        <input type="date" name="due_date" id="" class="form-control form-control-sm" placeholder="Date Due" required>
+                        <input type="date" name="due_date" id="" class="form-control form-control-sm" placeholder="Date Due">
                     </div>
                 </div>
 
