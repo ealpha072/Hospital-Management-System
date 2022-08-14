@@ -41,7 +41,6 @@ use function PHPSTORM_META\type;
 
         public function validatePhoneNumber($phone, $errors_array = []){
             if(empty($phone)){array_push($errors_array, "Phone number cant be empty");}
-            if(!preg_match('/^(\+254)\d{9}$/', $phone)){array_push($errors_array, "Invalid phone number format, start with +254");}
             return $errors_array;
         }
 
@@ -65,16 +64,19 @@ use function PHPSTORM_META\type;
         public $sex = "";
         public $status = "";
         public $nhif_number = "";
+		public $id_num = "";
 
         public $nssf = "";
         public $picture = "";
         public $kra = "";
         public $department = "" ;
         public $role = "";
+
         
         public function attach_common_props(){
             $this->first_name = strtolower(ucfirst(htmlspecialchars(strip_tags($_POST['first_name']))));
             $this->last_name = strtolower(ucfirst(htmlspecialchars(strip_tags($_POST['last_name']))));
+			$this->id_num = (int)htmlspecialchars(strip_tags($_POST['id_num']));
             $this->age = htmlspecialchars(strip_tags($_POST['age']));
             $this->phone = htmlspecialchars(strip_tags($_POST['phone']));
             $this->physical_address = strtolower(ucfirst(htmlspecialchars(strip_tags($_POST['p_address']))));
@@ -115,8 +117,8 @@ use function PHPSTORM_META\type;
             $all_errors = array_merge($name_error, $phone_error, $address_error);
 
             //check if patient has visited before;
-            $check_patient_previous_visit_query = "SELECT op_num, number_of_visits FROM ".$this->table." WHERE first_name = ? AND last_name = ? AND sex = ? AND dob = ?";
-            $check_patient_params = [$this->first_name, $this->last_name, $this->sex, $this->dob];
+            $check_patient_previous_visit_query = "SELECT id_no, number_of_visits FROM ".$this->table." WHERE id_no = ? ";
+            $check_patient_params = [$this->id_num];
             $check_patient_results = $this->conn->select($check_patient_previous_visit_query, $check_patient_params);
             
             //push to database
@@ -126,12 +128,12 @@ use function PHPSTORM_META\type;
                 if(count($check_patient_results) > 0){
                     $this->number_of_visits = $check_patient_results[0]['number_of_visits'] + 1;
                     $update_patient_query = "UPDATE ".$this->table." SET op_num = ?,  
-                        age=?, marital_status=?, phone_num=?, physical_address=?, nhif_num=?, number_of_visits=? WHERE op_num= ? ";
+                        age=?, marital_status=?, phone_num=?, physical_address=?, nhif_num=?, number_of_visits=? WHERE id_no = ? ";
                     $update_patient_params = [
                         $this->op_number, $this->age, 
                         $this->status, $this->phone, 
                         $this->physical_address, 
-                        $this->nhif_number, $this->number_of_visits, $check_patient_results[0]['op_num']
+                        $this->nhif_number, $this->number_of_visits, $check_patient_results[0]['id_num']
                     ];
                     try {
                         $this->conn->update($update_patient_query, $update_patient_params);
@@ -140,10 +142,11 @@ use function PHPSTORM_META\type;
                     }
                 }else{
                     //for first time patients
-                    $query = "INSERT INTO ".$this->table." (op_num, first_name, last_name, age, sex, marital_status, phone_num, physical_address, dob, nhif_num) 
+                    $query = "INSERT INTO ".$this->table." (id_no, op_num, first_name, last_name, age, sex, marital_status, phone_num, physical_address, dob, nhif_num) 
                         VALUES(?,?,?,?,?,?,?,?,?,?,?)
                     ";
                     $params = [ 
+						$this->id_num,
                         $this->op_number, $this->first_name, $this->last_name, 
                         $this->age, $this->sex, $this->status,
                         $this->phone,$this->physical_address,$this->dob,

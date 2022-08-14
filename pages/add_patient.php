@@ -21,6 +21,12 @@
                         <input type="text" name="last_name" id="" class="form-control form-control-sm" placeholder="Last Name" required>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-2">ID Num<sup>*</sup></label>
+                    <div class="col-sm-6">
+                        <input type="digit" name="id_num" id="" class="form-control form-control-sm" placeholder="Last Name" required maxlength="10">
+                    </div>
+                </div>
 
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Age<sup>*</sup></label>
