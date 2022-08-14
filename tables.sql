@@ -41,6 +41,7 @@ CREATE TABLE `hospital_db`.`employees` (
 ) ENGINE = InnoDB;
 ALTER TABLE `employees` CHANGE `marital_status` 
 `status` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
+ALTER TABLE `employees` ADD `id_no` INT(12) NOT NULL AFTER `id`;
 
 CREATE TABLE `hospital_db`.`doctors` (
     `id` INT(255) NOT NULL AUTO_INCREMENT , 
@@ -62,6 +63,7 @@ CREATE TABLE `hospital_db`.`doctors` (
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 ALTER TABLE `doctors` CHANGE `date_in` `date_added` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE `doctors` ADD `id_no` INT(10) NOT NULL AFTER `id`;
 
 CREATE TABLE `hospital_db`.`departments` (
     `id` INT(255) NOT NULL AUTO_INCREMENT , 

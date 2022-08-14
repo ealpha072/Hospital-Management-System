@@ -180,6 +180,7 @@ use function PHPSTORM_META\type;
             $all_errors = [];
             $destination_folder = '../images/doctors/';
             $this->department = strtolower(htmlspecialchars(strip_tags($_POST['department'])));
+			$upload_image_return = null;
 
             //form validations
             $new_validation = new Validate();
@@ -191,39 +192,47 @@ use function PHPSTORM_META\type;
             $all_errors = array_merge($name_error, $email_error, $phone_error, $address_error, $nssf_nhif_kra_error);
 
 			//check if names exists
-			$check_query = "SELECT first_name FROM ".$this->table. " WHERE first_name =? AND last_name = ?";
-			$check_params = [$this->first_name, $this->last_name];
+			$check_query = "SELECT first_name FROM ".$this->table. " WHERE id_no = ?";
+			$check_params = [$this->id_num];
 			$results = $this->conn->select($check_query, $check_params);
 			if(count($results) > 0){
 				array_push($all_errors, "Doctor already exists");
 			}
 
-			//check email
-
+			print_r($this->picture);
             //image processing
-            $upload_image_return = fileUpload($this->picture, '../images/doctors/');
-            if(is_array($upload_image_return)){
-                foreach($upload_image_return as $img_error){
-                    array_push($all_errors, $img_error);
-                }
-            }
+			if($this->picture['size'] === 0){
+				$this->picture = 'ani-icon-01.png';
+			}else{
+				$upload_image_return = fileUpload($this->picture, '../images/doctors/');
+				$this->picture = $this->picture['name'];
+				if(is_array($upload_image_return)){
+					foreach($upload_image_return as $img_error){
+						array_push($all_errors, $img_error);
+					}
+            	}
+			}
 
+            
             //to database
             if(count($all_errors) === 0){
-                $query = "INSERT INTO ".$this->table. " (first_name, last_name, age, sex, status, email, phone_num, physical_address, dob, nhif_num, 
-                    picture, department, kra_num, nssf_num) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                $query = "INSERT INTO ".$this->table. " (id_no, first_name, last_name, age, sex, status, email, phone_num, physical_address, dob, nhif_num, 
+                    picture, department, kra_num, nssf_num) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
                 ";
 
                 $params = [
+					$this->id_num,
                     $this->first_name,$this->last_name,$this->age,
                     $this->sex, $this->status,
                     $this->email,$this->phone,$this->physical_address,
                     $this->dob,$this->nhif_number,
-                    $this->picture['name'],$this->department,
+                    $this->picture,$this->department,
                     $this->kra,$this->nssf,
                 ];
                 try {
-                    move_uploaded_file($this->picture['tmp_name'], $destination_folder.$upload_image_return);
+					if($this->picture !=  'ani-icon-01.png'){
+						move_uploaded_file($this->picture['tmp_name'], $destination_folder.$upload_image_return);
+					}
                     $this->conn->insert($query, $params);
                     $_SESSION['msg'] = 'Doctor added to database succesfully';
                     echo $_SESSION['msg'];

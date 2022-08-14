@@ -22,6 +22,14 @@
                         <input type="text" name="last_name" id="" class="form-control form-control-sm" placeholder="Last Name" required>
                     </div>
                 </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-sm-2">Id Number<sup>*</sup></label>
+                    <div class="col-sm-6">
+                        <input type="number" name="id_num" id="" class="form-control form-control-sm" placeholder="Last Name" required maxlength="12">
+                    </div>
+                </div>
+
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Email Address<sup>*</sup></label>
                     <div class="col-sm-6">
@@ -79,9 +87,9 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="" class="col-sm-2">Picture<sup>*</sup></label>
+                    <label for="" class="col-sm-2">Picture </label>
                     <div class="col-sm-6">
-                        <input type="file" name="profile_picture" id="" class="form-control form-control-sm" required>
+                        <input type="file" name="profile_picture" id="" class="form-control form-control-sm">
                     </div>
                 </div>
 
