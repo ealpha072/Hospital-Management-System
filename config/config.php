@@ -36,7 +36,7 @@ class Database{
             return $stmt;
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
-            echo "Not exceting";
+            echo "Not executing";
         }
     }
 

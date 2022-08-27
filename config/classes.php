@@ -1,6 +1,6 @@
 <?php
 
-use function PHPSTORM_META\type;
+    use function PHPSTORM_META\type;
 
     include_once('config.php');
     include_once('utilities.php');
@@ -691,4 +691,36 @@ use function PHPSTORM_META\type;
 
         // }
     }
+
+    class Paginator{
+        private $conn;
+        public function __construct($db){
+            $this->conn = $db;
+        }
+
+        public function getData( ){
+            $page_number = !isset($_GET['page']) ?  1 : (int)$_GET['page'];
+            $limit = 10;
+            $offset = ($page_number - 1) * $limit; //20
+            $total_rows = $this->conn->select("SELECT COUNT(id) FROM patients");
+            $total_pages = ceil($total_rows[0]["COUNT(id)"]/$limit);
+            $query = "SELECT id, first_name FROM patients LIMIT $limit OFFSET $offset";
+            $results = $this->conn->select($query);
+            for ($i=0; $i < count($results); $i++) { 
+                # code...
+                echo $results[$i]['first_name'];
+                echo '<br>';
+            }
+            for ($i=1; $i <= $total_pages ; $i++) { 
+                # code...
+                echo '<a class = "page-link" href = "'.$_SERVER['PHP_SELF'].'?page='.$i.'" >'.$i.'</a>';
+            }
+        }
+        
+    }  
+
+    $database = new Database();
+    $page = new Paginator($database);
+    $page->getData();
+    
 ?>
