@@ -17,7 +17,7 @@
             $page_number = $page_number < 1 ? 1 : $page_number;
 
             $rows_to_skip = ($page_number - 1) * $rows_per_page; //20
-            $query = "SELECT id, first_name FROM $table LIMIT $rows_per_page OFFSET $rows_to_skip";
+            $query = "SELECT id_no, first_name, last_name, age, dob, phone_num, nhif_num FROM $table LIMIT $rows_per_page OFFSET $rows_to_skip";
 
             try {
                 //code...
@@ -28,27 +28,10 @@
                 throw new Exception($e->getMessage());
             }
             return $return_items;
-            // for ($i=0; $i < count($results); $i++) { 
-            //     # code...
-            //     echo $results[$i]['first_name'];
-            //     echo '<br>';
-            // }
-            // for ($i=1; $i <= $total_pages ; $i++) { 
-            //     # code...
-            //     echo '<a class = "page-link" href = "'.$_SERVER['PHP_SELF'].'?page_number='.$i.'" >'.$i.'</a>';
-            // }
         }
         
     } 
  
-    // if ($current_page > 1) {
-    //     // show << link to go back to page 1
-    //     echo " <a href='{$_SERVER['PHP_SELF']}?current_page=1'><<</a> ";
-    //     // get previous page num
-    //     $prevpage = $currentpage - 1;
-    //     // show < link to go back to 1 page
-    //     echo " <a href='{$_SERVER['PHP_SELF']}?current_page=$prevpage'><</a> ";
-    // }
-    
+
     
 ?> 

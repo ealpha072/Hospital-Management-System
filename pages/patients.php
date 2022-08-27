@@ -1,6 +1,11 @@
-<?php require 
+<?php
+
+use function PHPSTORM_META\type;
+
+ require 
 
     "../public/wrapper.php";
+    require_once('../config/pagination.php');
      
     if(isset($_GET['patient_page'])){
         if($_GET['patient_page'] === 'add'){
@@ -97,14 +102,14 @@
                 </div>
             ';
         }elseif($_GET['patient_page'] === 'view'){
-            require_once('../config/pagination.php');
+            
             $database = new Database();
             $paginator = new Paginator($database);
             $paging_items = $paginator->buildPages("patients");
             $number_of_pages = $paging_items[0];
             $items_to_display = $paging_items[1];
 
-            //print_r($paging_items[1]);
+            //print_r($items_to_display);
             echo '
                 <div class="card mr-4 ml-4 mb-4">
                     <div class="card-header">
@@ -156,23 +161,25 @@
                                         <th>DoB</th>                        
                                         <th>Age</th>
                                         <th>Phone Number</th>
-                                        <th>Address</th>
                                         <th>NHIF Number</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <th> <button class="btn btn-sm"><i class="fa fa-plus-circle"></i></button> 1</th>
-                                        <th>Id No</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>DoB</th>                        
-                                        <th>Age</th>
-                                        <th>Phone Number</th>
-                                        <th>Address</th>
-                                        <th>NHIF Number</th>
-                                    </tr>
-                                </tbody>
+                                <tbody>';
+                                    for($items = 0; $items < count($items_to_display); $items++){
+                                        
+                                        echo '<tr>
+                                            <td>
+                                                <button class="btn btn-sm btn-success">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </td>';
+                                                foreach(array_keys($items_to_display[$items]) as $key){
+                                                    echo '<td>'.$items_to_display[$items][$key].'</td>';
+                                                }
+                                        echo '</tr>';
+                                    }
+                                    
+                                echo'</tbody>
                             </table>
                         </div>
                         <nav class="float-right">
