@@ -19,7 +19,7 @@
                     <a href="#student" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user-circle mr-2"></i> Patient</a>
                     <ul class="collapse list-unstyled" id="student">
                         <li>
-                            <a href="add_patient.php"><i class="fa fa-user-plus fa-sm mr-2"></i> Register</a>
+                            <a href="patients.php?patient_page=add"><i class="fa fa-user-plus fa-sm mr-2"></i> Register</a>
                         </li>
                         <li>
                             <a href="admit_patient.php"><i class="fa fa-bed fa-sm mr-2"></i> Admit Patient</a>
