@@ -1,27 +1,54 @@
 <?php 
     require_once('config.php');
 
-    $database = new Database();
-    $number_of_items = $database->select('SELECT COUNT(id) FROM patients');
-    $rows_per_page = 10;
-    $total_pages = ceil($number_of_items[0]['COUNT(id)'] / $rows_per_page);
+    class Paginator{
+        private $conn;
+        public function __construct($db){
+            $this->conn = $db;
+        }
 
-    $current_page = isset($_GET['current_page']) && is_numeric($_GET['current_page']) ? (int)$_GET['current_page'] : 1 ;
-    $current_page = $current_page > $total_pages ? $total_pages : $current_page;
-    $current_page = $current_page < 1 ? 1 : $current_page;
+        public function buildPages($table, $rows_per_page = 10){
+            $return_items = [];
+            $total_rows = $this->conn->select("SELECT COUNT(id) FROM $table");
 
-    $offset = ($current_page - 1) * $rows_per_page;
-    $query = "SELECT * FROM patients LIMIT $offset, $rows_per_page";
-    $patients = $database->select($query);
+            $total_pages = ceil($total_rows[0]["COUNT(id)"]/$rows_per_page);
+            $page_number = isset($_GET['page_number']) && is_numeric($_GET['page_number']) ?  (int)$_GET['page_number'] : 1 ;
+            $page_number = $page_number > $total_pages ? $total_pages : $page_number;
+            $page_number = $page_number < 1 ? 1 : $page_number;
 
-    if ($current_page > 1) {
-        // show << link to go back to page 1
-        echo " <a href='{$_SERVER['PHP_SELF']}?current_page=1'><<</a> ";
-        // get previous page num
-        $prevpage = $currentpage - 1;
-        // show < link to go back to 1 page
-        echo " <a href='{$_SERVER['PHP_SELF']}?current_page=$prevpage'><</a> ";
-    }
+            $rows_to_skip = ($page_number - 1) * $rows_per_page; //20
+            $query = "SELECT id, first_name FROM $table LIMIT $rows_per_page OFFSET $rows_to_skip";
+
+            try {
+                //code...
+                $results = $this->conn->select($query);
+                array_push($return_items, $total_pages, $results);
+            } catch (Exception $e) {
+                //throw $th;
+                throw new Exception($e->getMessage());
+            }
+            return $return_items;
+            // for ($i=0; $i < count($results); $i++) { 
+            //     # code...
+            //     echo $results[$i]['first_name'];
+            //     echo '<br>';
+            // }
+            // for ($i=1; $i <= $total_pages ; $i++) { 
+            //     # code...
+            //     echo '<a class = "page-link" href = "'.$_SERVER['PHP_SELF'].'?page_number='.$i.'" >'.$i.'</a>';
+            // }
+        }
+        
+    } 
+ 
+    // if ($current_page > 1) {
+    //     // show << link to go back to page 1
+    //     echo " <a href='{$_SERVER['PHP_SELF']}?current_page=1'><<</a> ";
+    //     // get previous page num
+    //     $prevpage = $currentpage - 1;
+    //     // show < link to go back to 1 page
+    //     echo " <a href='{$_SERVER['PHP_SELF']}?current_page=$prevpage'><</a> ";
+    // }
     
     
 ?> 

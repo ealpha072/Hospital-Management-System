@@ -97,6 +97,14 @@
                 </div>
             ';
         }elseif($_GET['patient_page'] === 'view'){
+            require_once('../config/pagination.php');
+            $database = new Database();
+            $paginator = new Paginator($database);
+            $paging_items = $paginator->buildPages("patients");
+            $number_of_pages = $paging_items[0];
+            $items_to_display = $paging_items[1];
+
+            //print_r($paging_items[1]);
             echo '
                 <div class="card mr-4 ml-4 mb-4">
                     <div class="card-header">
@@ -167,12 +175,22 @@
                                 </tbody>
                             </table>
                         </div>
+                        <nav class="float-right">
+                            <ul class="pagination">
+                            ';
+                                for ($page_number=1; $page_number <= $number_of_pages ; $page_number++) { 
+                                    echo '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page_number='.$page_number.'" >'.$page_number.'</a></li>';
+                                }                     
+                            echo '
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             ';
+        }else{
+            echo "Unknown page"; 
         }
     }
-
 ?>
 
 
