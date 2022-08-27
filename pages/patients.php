@@ -103,7 +103,7 @@ use function PHPSTORM_META\type;
             ';
         }
         if( $_GET['patient_page'] === 'view' && isset($_GET['page_number'])){
-            echo $_GET['page_number'];
+            $current_page = (int)$_GET['page_number'];
             $database = new Database();
             $paginator = new Paginator($database);
 
@@ -165,8 +165,7 @@ use function PHPSTORM_META\type;
                                         <th>NHIF Number</th>
                                     </tr>
                                 </thead>
-                                <tbody>';
-                                if(is_array($items_to_display)){
+                                <tbody>';                        
                                     for($items = 0; $items < count($items_to_display); $items++){
                                         
                                         echo '<tr>
@@ -179,18 +178,36 @@ use function PHPSTORM_META\type;
                                                     echo '<td>'.$items_to_display[$items][$key].'</td>';
                                                 }
                                         echo '</tr>';
-                                    }
-                                }
-                                    
+                                    }                                    
                                 echo'</tbody>
                             </table>
                         </div>
                         <nav class="float-right">
                             <ul class="pagination">
-                            ';
-                                for ($page_number=1; $page_number <= $number_of_pages ; $page_number++) { 
-                                    echo '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?patient_page=view&page_number='.$page_number.'" >'.$page_number.'</a></li>';
-                                }                     
+                            ';  $page_range = 2;
+                                if($current_page > 1){
+                                    echo '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?patient_page=view&page_number=1" ><<<</a></li>';
+                                    // $previous_page = $current_page -1;
+                                    // echo '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?patient_page=view&page_number='.$previous_page.'" ><<</a></li>'; 
+                                }
+
+                                for ($i = $current_page - $page_range ; $i < ($current_page + $page_range) + 1; $i++) { 
+                                    if($i > 0 && ($i <= $number_of_pages)){
+                                        if($i === $current_page){
+                                            echo '<li class="page-item active"><a class="page-link" href="#">'.$i.'</a></li>';
+                                        }else{
+                                            echo '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?patient_page=view&page_number='.$i.'" >'.$i.'</a></li>';
+                                        }
+                                    }
+                                }
+                                if($current_page != $number_of_pages){
+                                    $next_page = $current_page + 1;
+                                    //echo '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?patient_page=view&page_number='.$next_page.'" > >> </a></li>';
+                                    echo '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?patient_page=view&page_number='.$number_of_pages.'" >>>></a></li>';
+                                }
+                                // for ($page_number=1; $page_number <= $number_of_pages ; $page_number++) { 
+                                //     echo '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?patient_page=view&page_number='.$page_number.'" >'.$page_number.'</a></li>';
+                                // }                     
                             echo '
                             </ul>
                         </nav>
