@@ -7,7 +7,7 @@
             $this->conn = $db;
         }
 
-        public function buildPages($table, $rows_per_page = 10){
+        public function buildPages($table, $rows_per_page = 10, ){
             $return_items = [];
             $total_rows = $this->conn->select("SELECT COUNT(id) FROM $table");
 
@@ -17,7 +17,7 @@
             $page_number = $page_number < 1 ? 1 : $page_number;
 
             $rows_to_skip = ($page_number - 1) * $rows_per_page; //20
-            $query = "SELECT id_no, first_name, last_name, age, dob, phone_num, nhif_num FROM $table LIMIT $rows_per_page OFFSET $rows_to_skip";
+            $query = "SELECT  id_no, first_name, last_name, age, dob, phone_num, nhif_num FROM $table LIMIT $rows_per_page OFFSET $rows_to_skip";
 
             try {
                 //code...
@@ -30,8 +30,5 @@
             return $return_items;
         }
         
-    } 
- 
-
-    
+    }     
 ?> 

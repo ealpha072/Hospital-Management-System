@@ -1,17 +1,4 @@
 <?php require "../public/wrapper.php"; 
-
-    class Paginator{
-        private $conn;
-        public function __construct($db){
-            $this->conn = $db;
-        }
-
-        public function getData($limit = 10, $page = 1){
-            $query = "SELECT * FROM patients LIMIT $limit";
-
-        }
-        
-    }
 ?>
 
 <!-- <div class="card mr-4 ml-4 mb-4" id="add_doctor_page">

@@ -12,7 +12,7 @@ use function PHPSTORM_META\type;
             echo '
                 <div class="card mb-4 mr-4 ml-4">
                     <div class="card-header">
-                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=view">
+                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=view&page_number=1">
                             <button class="btn btn-md btn-primary"> <i class="fa fa-list mr-2"></i> Patients List</button>
                         </a>
                     </div>
@@ -101,15 +101,16 @@ use function PHPSTORM_META\type;
                     </div>
                 </div>
             ';
-        }elseif($_GET['patient_page'] === 'view'){
-            
+        }
+        if( $_GET['patient_page'] === 'view' && isset($_GET['page_number'])){
+            echo $_GET['page_number'];
             $database = new Database();
             $paginator = new Paginator($database);
-            $paging_items = $paginator->buildPages("patients");
+
+            $paging_items = $paginator->buildPages("patients"); 
             $number_of_pages = $paging_items[0];
             $items_to_display = $paging_items[1];
-
-            //print_r($items_to_display);
+            
             echo '
                 <div class="card mr-4 ml-4 mb-4">
                     <div class="card-header">
@@ -165,6 +166,7 @@ use function PHPSTORM_META\type;
                                     </tr>
                                 </thead>
                                 <tbody>';
+                                if(is_array($items_to_display)){
                                     for($items = 0; $items < count($items_to_display); $items++){
                                         
                                         echo '<tr>
@@ -178,6 +180,7 @@ use function PHPSTORM_META\type;
                                                 }
                                         echo '</tr>';
                                     }
+                                }
                                     
                                 echo'</tbody>
                             </table>
@@ -186,7 +189,7 @@ use function PHPSTORM_META\type;
                             <ul class="pagination">
                             ';
                                 for ($page_number=1; $page_number <= $number_of_pages ; $page_number++) { 
-                                    echo '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page_number='.$page_number.'" >'.$page_number.'</a></li>';
+                                    echo '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?patient_page=view&page_number='.$page_number.'" >'.$page_number.'</a></li>';
                                 }                     
                             echo '
                             </ul>
@@ -194,8 +197,6 @@ use function PHPSTORM_META\type;
                     </div>
                 </div>
             ';
-        }else{
-            echo "Unknown page"; 
         }
     }
 ?>
