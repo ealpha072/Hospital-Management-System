@@ -170,7 +170,7 @@ use function PHPSTORM_META\type;
                                 <tbody>';                        
                                     for($items = 0; $items < count($items_to_display); $items++){
                                         
-                                        echo '<tr>
+                                        echo '<tr class = "main-row">
                                             <td class="text-center">
                                                 <i class="fa fa-circle-plus"></i>
                                             </td>';
@@ -178,12 +178,12 @@ use function PHPSTORM_META\type;
                                                     echo '<td>'.$items_to_display[$items][$key].'</td>';
                                                 }
                                         echo '</tr>
-                                            <tr>';
+                                            <tr style="display:none" class = "minor-row">';
                                                 $get_details_query = 'SELECT op_num, sex, physical_address, marital_status, date_in FROM patients WHERE id_no = ? AND first_name = ?';
                                                 $params = [$items_to_display[$items]['id_no'], $items_to_display[$items]['first_name']];
                                                 $single_patient_data = $database->select($get_details_query, $params);
                                                 foreach($single_patient_data as $data){
-                                                    echo '<td colspan="8" style="display:none">
+                                                    echo '<td colspan="8" >
                                                         <ul class="list-group">';
                                                             foreach(array_keys($data) as $key){
                                                                 echo '

@@ -87,6 +87,12 @@ $(document).ready(function () {
         $('#bill-table-body').append(tableRow)
     })
 
+    $('#patients-table tbody tr.main-row').on('click', function(){
+        //console.log('hello')
+        $(this).next().toggle()
+        //$('tr.minor-row').hide();
+    })
+
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
     });
