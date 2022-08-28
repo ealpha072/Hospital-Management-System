@@ -1,4 +1,7 @@
-<?php require "../public/wrapper.php" ?>
+<?php 
+    require "../public/wrapper.php"; 
+    require_once "../config/config.php";
+?>
     <div class="card mb-4 mr-4 ml-4">
         <div class="card-header">
             <form action="" class="form-inline">

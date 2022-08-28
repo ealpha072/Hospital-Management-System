@@ -165,6 +165,10 @@
                 print_r($all_errors);
             }
         }
+        
+        public function admitPatient(){
+
+        }
     }
 
     class Doctor{
@@ -389,6 +393,12 @@
             }
 
         }
+
+        public function getWards(){
+            $wards = $this->conn->select('SELECT name, capacity FROM wards');
+            return $wards;
+        }
+       
     }
 
     class Supplier{
@@ -690,5 +700,13 @@
         // public sendMail(){
 
         // }
+    }
+
+    class Html{
+        public function populateSelect($array, $key){
+            foreach ($array as $option_item) {
+                echo '<option value="'.$option_item[$key].'">'.ucfirst($option_item[$key]).'</option>';
+            }
+        }
     }
 ?>

@@ -1,13 +1,14 @@
 <?php
 
-use function PHPSTORM_META\type;
+    use function PHPSTORM_META\type;
 
- require 
-
-    "../public/wrapper.php";
+    require "../public/wrapper.php";
+    require_once "../config/classes.php";
     require_once('../config/pagination.php');
      
     if(isset($_GET['patient_page'])){
+        $database = new Database();
+        $new_html = new Html();
         if($_GET['patient_page'] === 'add'){
             echo '
                 <div class="card mb-4 mr-4 ml-4">
@@ -102,11 +103,10 @@ use function PHPSTORM_META\type;
                 </div>
             ';
         }
+
         if( $_GET['patient_page'] === 'view' && isset($_GET['page_number'])){
             $current_page = (int)$_GET['page_number'];
-            $database = new Database();
             $paginator = new Paginator($database);
-
             $paging_items = $paginator->buildPages("patients"); 
             $number_of_pages = $paging_items[0];
             $items_to_display = $paging_items[1];
@@ -179,10 +179,11 @@ use function PHPSTORM_META\type;
                                                 }
                                         echo '</tr>
                                             <tr style="display:none" class = "minor-row">';
-                                                $get_details_query = 'SELECT op_num, sex, physical_address, marital_status, date_in FROM patients WHERE id_no = ? AND first_name = ?';
+                                                $get_details_query = 'SELECT id_no, op_num, sex, physical_address, marital_status, date_in FROM patients WHERE id_no = ? AND first_name = ?';
                                                 $params = [$items_to_display[$items]['id_no'], $items_to_display[$items]['first_name']];
                                                 $single_patient_data = $database->select($get_details_query, $params);
                                                 foreach($single_patient_data as $data){
+                                                    
                                                     echo '<td colspan="8" >
                                                         <ul class="list-group">';
                                                             foreach(array_keys($data) as $key){
@@ -198,8 +199,8 @@ use function PHPSTORM_META\type;
                                                                 <span class="font-weight-bold">Action</span>
                                                                 <span>
                                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                                        <button type="button" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i></button>
-                                                                        <button type="button" class="btn btn-sm btn-secondary"><i class="fa fa-plus-circle"></i></button>
+                                                                        <a href=""><button type="button" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i></button></a>
+                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=admit&patient_id='.$data['id_no'].'"><button type="button" class="btn btn-sm btn-secondary"><i class="fa fa-plus-circle"></i></button></a>
                                                                         <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                                                                     </div>
                                                                 </span>
@@ -238,6 +239,74 @@ use function PHPSTORM_META\type;
                             echo '
                             </ul>
                         </nav>
+                    </div>
+                </div>
+            ';
+        }
+
+        if( $_GET['patient_page'] === 'admit'){
+            $patient_id = (int)$_GET['patient_id'];
+            $new_ward = new Ward($database);
+            $wards = $new_ward->getWards();
+            $patient_data = $database->select('SELECT * FROM patients WHERE id_no = ?', [$patient_id])[0];
+            
+            echo '
+                <div class="card mb-4 mr-4 ml-4">
+                    <div class="card-header">
+                        <form action="" class="form-inline">
+                            <input type="text" placeholder="Search Name" class="form-control form-control-sm mr-2">
+                            <button class="btn btn-sm btn-primary"><i class="fa fa-search mr-2" ></i>Search</button>
+                        </form>
+                    </div>
+                    <div class="card-body">
+                        <form action="">
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label"><strong>Patient Name</strong> </label>
+                                <div class="col-sm-6">
+                                    <input type="text" value="'.ucfirst($patient_data['first_name']).' '.ucfirst($patient_data['last_name']).'" placeholder="" name="" class="form-control form-control-sm">
+                                </div>
+                            </div>
+            
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label"><strong>IP Number</strong> </label>
+                                <div class="col-sm-6">
+                                    <input type="text" value="GET FROM DB" placeholder="" name="" class="form-control form-control-sm" readonly >
+                                </div>
+                            </div>
+            
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label"><strong>Ward Name</strong> </label>
+                                <div class="col-sm-6">
+                                    <select name="" class="form-control form-control-sm">
+                                        <option value="" disabled selected>--Select Ward--</option>';
+                                        $new_html->populateSelect($wards, 'name');
+                                    echo '</select>
+                                </div>
+                            </div>
+            
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label"><strong>Bed Number</strong> </label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control form-control-sm" max="" />                                    
+                                </div>
+                            </div>
+            
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label"><strong>Next of Kin</strong></label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control form-control-sm" value="" placeholder="Next of Kin">
+                                </div>
+                            </div>
+            
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label"><strong>Relationship</strong> </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control form-control-sm" value="" placeholder="Relationship with next of Kin">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle mr-2"></i> Admit</button>
+            
+                        </form>
                     </div>
                 </div>
             ';

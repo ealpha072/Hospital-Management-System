@@ -22,7 +22,7 @@
                             <a href="patients.php?patient_page=add"><i class="fa fa-user-plus fa-sm mr-2"></i> Register</a>
                         </li>
                         <li>
-                            <a href="admit_patient.php"><i class="fa fa-bed fa-sm mr-2"></i> Admit Patient</a>
+                            <a href="patients.php?patient_page=admit"><i class="fa fa-bed fa-sm mr-2"></i> Admit Patient</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-heartbeat fa-sm mr-2"></i> Patient List</a>
