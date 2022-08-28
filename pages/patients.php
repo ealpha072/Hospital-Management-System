@@ -139,11 +139,12 @@ use function PHPSTORM_META\type;
                                     <button type="button" class="btn btn-sm btn-outline-success">Exel</button>
                                     <button type="button" class="btn btn-sm btn-outline-success">Copy</button>
                                     <button type="button" class="btn btn-sm btn-outline-success">PDF</button>
+                                    <button type="button" class="btn btn-sm btn-outline-success">Print</button>
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control form-control-sm">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Search ID No">
                                     <div class="input-group-append">
                                         <button class="btn btn-sm btn-success" type="button"><i class="fa fa-search"></i></button>
                                     </div>
@@ -152,30 +153,59 @@ use function PHPSTORM_META\type;
                         </div>
                 
                         <div class="table-responsive">
-                            <table class="table table-sm table-bordered table-hover table-stripped">
+                            <table class="table table-sm table-bordered table-hover table-stripped" id="patients-table">
                                 <thead class="">
                                     <tr class="">
                                         <th>SL No</th>
                                         <th>Id No</th>
                                         <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>DoB</th>                        
+                                        <th>Last Name</th>                                                              
                                         <th>Age</th>
+                                        <th>DoB</th>  
                                         <th>Phone Number</th>
                                         <th>NHIF Number</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>';                        
                                     for($items = 0; $items < count($items_to_display); $items++){
                                         
                                         echo '<tr>
-                                            <td>
-                                                <button class="btn btn-sm btn-success">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
+                                            <td class="text-center">
+                                                <i class="fa fa-circle-plus"></i>
                                             </td>';
                                                 foreach(array_keys($items_to_display[$items]) as $key){
                                                     echo '<td>'.$items_to_display[$items][$key].'</td>';
+                                                }
+                                        echo '</tr>
+                                            <tr>';
+                                                $get_details_query = 'SELECT op_num, sex, physical_address, marital_status, date_in FROM patients WHERE id_no = ? AND first_name = ?';
+                                                $params = [$items_to_display[$items]['id_no'], $items_to_display[$items]['first_name']];
+                                                $single_patient_data = $database->select($get_details_query, $params);
+                                                foreach($single_patient_data as $data){
+                                                    echo '<td colspan="8" style="display:none">
+                                                        <ul class="list-group">';
+                                                            foreach(array_keys($data) as $key){
+                                                                echo '
+                                                                    <li class="">
+                                                                        <span class="font-weight-bold">'.ucfirst($key).':</span>
+                                                                        <span>'.ucfirst($data[$key]).'</span>
+                                                                    </li>
+                                                                ';
+                                                            }
+                                                    echo '
+                                                            <li>
+                                                                <span class="font-weight-bold">Action</span>
+                                                                <span>
+                                                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                                                        <button type="button" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i></button>
+                                                                        <button type="button" class="btn btn-sm btn-secondary"><i class="fa fa-plus-circle"></i></button>
+                                                                        <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                                                    </div>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </td>';
                                                 }
                                         echo '</tr>';
                                     }                                    
@@ -204,10 +234,7 @@ use function PHPSTORM_META\type;
                                     $next_page = $current_page + 1;
                                     //echo '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?patient_page=view&page_number='.$next_page.'" > >> </a></li>';
                                     echo '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?patient_page=view&page_number='.$number_of_pages.'" >>>></a></li>';
-                                }
-                                // for ($page_number=1; $page_number <= $number_of_pages ; $page_number++) { 
-                                //     echo '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?patient_page=view&page_number='.$page_number.'" >'.$page_number.'</a></li>';
-                                // }                     
+                                }                    
                             echo '
                             </ul>
                         </nav>
