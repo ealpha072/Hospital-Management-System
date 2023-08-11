@@ -29,6 +29,5 @@
             }
             return $return_items;
         }
-        
-    }     
-?> 
+    }
+?>

@@ -696,10 +696,6 @@
             }
 
         }
-
-        // public sendMail(){
-
-        // }
     }
 
     class Html{

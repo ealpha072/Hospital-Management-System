@@ -28,7 +28,7 @@ let poTableRow = `
                 <button class="btn btn-success btn-sm" onclick="addPoRow(event);"><i class="fa fa-plus-circle"></i></button>
                 <button class="btn btn-info btn-sm" onclick="removePoRow(event);"><i class="fa fa-minus-circle"></i></button>
             </div>
-        </td>                                    
+        </td>
         <td>
             <input type="text" class="form-control form-control-sm">
         </td>
