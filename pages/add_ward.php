@@ -18,7 +18,7 @@
                             <select name="incharge" id="" class="form-control form-control-sm" required>
                                 <option value="" disabled selected>--Choose Incharge--</option>
                                 <option value="John">John</option>
-                            </select>                            
+                            </select>
                         </div>
                     </div>
 

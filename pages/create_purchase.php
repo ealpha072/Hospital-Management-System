@@ -56,7 +56,7 @@
                                             <div class="col-sm-9">
                                                 <input type="text" placeholder="Company Name" class="form-control form-control-sm">
                                             </div>
-                                        </div>                                        
+                                        </div>
                                         <div class="form-group row">
                                             <label for="" class="col-sm-3 col-form-label">Email</label>
                                             <div class="col-sm-9">
@@ -77,7 +77,7 @@
                                             <div class="col-sm-9">
                                                 <input type="text" placeholder="Company Name" class="form-control form-control-sm">
                                             </div>
-                                        </div>                                        
+                                        </div>
                                         <div class="form-group row">
                                             <label for="" class="col-sm-3 col-form-label">Email</label>
                                             <div class="col-sm-9">
@@ -92,7 +92,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>                                    
+                                <tr>
                                 </tr>
                             </tbody>
                         </table>
@@ -114,7 +114,7 @@
                                             <button class="btn btn-success btn-sm arppt"><i class="fa fa-plus-circle"></i></button>
                                             <button class="btn btn-info btn-sm"><i class="fa fa-minus-circle"></i></button>
                                         </div>
-                                    </td>                                    
+                                    </td>
                                     <td>
                                         <input type="text" class="form-control form-control-sm">
                                     </td>
@@ -134,8 +134,8 @@
                     </div>
 
                     <div class="row mt-2">
-                        <div class="col-7">                                                            
-                            <textarea name="" id="" cols="30" rows="5" class="form-control form-control-sm" placeholder="Additional Notes"></textarea>                                                            
+                        <div class="col-7">
+                            <textarea name="" id="" cols="30" rows="5" class="form-control form-control-sm" placeholder="Additional Notes"></textarea>
                         </div>
                         <div class="col-5">
                             <table class="table table-sm table-bordered">

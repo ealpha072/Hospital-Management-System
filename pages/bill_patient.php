@@ -47,7 +47,6 @@
                                 <input type="text" readonly value="" name="" class="form-control form-control-sm">
                             </div>
                         </div>
-                        
                     </div>
                     <div class="col">
                         <div class="row">
@@ -111,7 +110,7 @@
                                 <input type="number" class="form-control form-control-sm" placeholder="0.00" readonly>
                             </td>
                         </tr>
-                        
+
                     </tbody>
                 </table>
             </div>
@@ -193,7 +192,7 @@
                 <button class="btn btn-md btn-success"><i class="fa fa-save mr-2"></i> Save and Print Invoice</button>
             </div>
         </form>
-        
+
     </div>
 </div>
 <?php require "../public/footer.php" ?>

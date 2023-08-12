@@ -28,7 +28,7 @@
                     <input type="text" name="" id="" placeholder="Unit Charge" class="form-control form-control-sm">
                 </div>
             </div>
-            
+
             <button class="btn btn-primary btn-sm">  <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i> Save</button>
         </form>
     </div>

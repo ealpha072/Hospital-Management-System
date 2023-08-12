@@ -65,13 +65,6 @@
                     </div>
                 </div>
 
-                <!-- <div class="form-group row">
-                    <label for="" class="col-sm-2">Photo<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <input type="file" name="picture" id="" class="form-control form-control-sm" required>
-                    </div>
-                </div> -->
-
                 <button class="btn btn-sm btn-primary" name="add_supplier"> <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i> Save</button>
             </div>
         </form>

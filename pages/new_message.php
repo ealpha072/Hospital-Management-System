@@ -10,7 +10,6 @@
                 <a href="sent_sms.php"><i class="fa fa-share-square mr-2"></i> Sent</a> 
             </button>
         </div>
-        
     </div>
     <div class="card-body">
         <form action="../config/formsprocess.php" method="post" enctype="multipart/form-data">

@@ -65,7 +65,7 @@
                         <input type="text" class="form-control form-control-sm" value="" placeholder="Relationship with next of Kin">
                     </div>
                 </div>
-                
+
                 <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle mr-2"></i> Admit</button>
 
             </form>

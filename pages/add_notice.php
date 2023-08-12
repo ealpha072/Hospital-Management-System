@@ -1,4 +1,5 @@
 <?php require "../public/wrapper.php" ?>
+
     <div class="card mb-4 mr-4 ml-4">
         <div class="card-header">
             <a href="">
@@ -50,4 +51,5 @@
             </form>
         </div>
     </div>
+    
 <?php require "../public/footer.php" ?>
