@@ -9,7 +9,6 @@
         public function validateNames($first_name, $last_name, $errors_array = []){
             if(empty($first_name) || empty($last_name)){array_push($errors_array, "Names cant be empty"); }
             if(preg_match('/\s/', $first_name) || preg_match('/\s/', $last_name)){array_push($errors_array, "No spaces allowed in first or last name");}
-
 			if(preg_match('~[0-9]+~', $first_name) || preg_match('~[0-9]+~', $last_name)){array_push($errors_array, "Name can't contain numeric characters");}
 
             return $errors_array;
@@ -22,7 +21,7 @@
 
         public function validateAddress($address, $errors_array = []){
             $address_condition = [];
-            
+
 			//check address, we break then check for spaces because ctype_alpha considers white space non alphabetic
             if(preg_match('/\s/', $address) ){
                 $address_array = explode(" ", $address);
@@ -72,7 +71,6 @@
         public $department = "" ;
         public $role = "";
 
-        
         public function attach_common_props(){
             $this->first_name = strtolower(ucfirst(htmlspecialchars(strip_tags($_POST['first_name']))));
             $this->last_name = strtolower(ucfirst(htmlspecialchars(strip_tags($_POST['last_name']))));
@@ -84,7 +82,6 @@
             $this->sex = htmlspecialchars(strip_tags($_POST['sex']));
             $this->status = htmlspecialchars(strip_tags($_POST['status']));
             $this->nhif_number = (int)htmlspecialchars(strip_tags($_POST['nhif']));
-			
         }
 
         public function attach_common_props_employees_doctors(){
@@ -120,7 +117,7 @@
             $check_patient_previous_visit_query = "SELECT id_no, number_of_visits FROM ".$this->table." WHERE id_no = ? ";
             $check_patient_params = [$this->id_num];
             $check_patient_results = $this->conn->select($check_patient_previous_visit_query, $check_patient_params);
-            
+
             //push to database
             if(count($all_errors) === 0){
                 $this->op_number = generateOutPatientNumber();
@@ -138,7 +135,7 @@
                     try {
                         $this->conn->update($update_patient_query, $update_patient_params);
                     } catch (Exception $th) {
-                        throw new Exception($th->getMessage());                        
+                        throw new Exception($th->getMessage());
                     }
                 }else{
                     //for first time patients
@@ -147,12 +144,12 @@
                     ";
                     $params = [ 
 						$this->id_num,
-                        $this->op_number, $this->first_name, $this->last_name, 
+                        $this->op_number, $this->first_name, $this->last_name,
                         $this->age, $this->sex, $this->status,
                         $this->phone,$this->physical_address,$this->dob,
                         $this->nhif_number
                     ];
-                   
+
                     try {
                         $this->conn->insert($query, $params);
                         $_SESSION['msg'] = 'Patient added to database succesfully';
