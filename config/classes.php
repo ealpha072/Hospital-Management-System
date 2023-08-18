@@ -162,10 +162,6 @@
                 print_r($all_errors);
             }
         }
-        
-        public function admitPatient(){
-
-        }
     }
 
     class Doctor{
@@ -214,7 +210,6 @@
             	}
 			}
 
-            
             //to database
             if(count($all_errors) === 0){
                 $query = "INSERT INTO ".$this->table. " (id_no, first_name, last_name, age, sex, status, email, phone_num, physical_address, dob, nhif_num, 
@@ -238,12 +233,11 @@
                     $_SESSION['msg'] = 'Doctor added to database succesfully';
                     echo $_SESSION['msg'];
                 } catch (Exception $e) {
-                    throw new Exception($e->getMessage());                    
+                    throw new Exception($e->getMessage());
                 }
             }else{
                 print_r($all_errors);
             }
-    
         }
     }
 
@@ -254,7 +248,7 @@
         public function __construct($db){
             $this->conn = $db;
         }
-        
+
         public function addEmployee(){
 			//variables
             $all_errors = [];
@@ -304,7 +298,7 @@
                     $_SESSION['msg'] = 'Employee added to database succesfully';
                     echo $_SESSION['msg'];
                 } catch (Exception $e) {
-                    throw new Exception($e->getMessage());                    
+                    throw new Exception($e->getMessage());
                 }
             }else{
 				print_r($all_errors);
@@ -321,7 +315,7 @@
         public function __construct($db){
             $this->conn = $db;
         }
-    
+
         public function createDepartment(){
 			//variables
             $errors = [];
@@ -350,7 +344,6 @@
 				print_r($errors);
 			}
         }
-
     }
 
     Class Ward{
@@ -369,7 +362,7 @@
             $this->name = strtolower(htmlspecialchars(strip_tags($_POST["wardname"])));
             $this->incharge = htmlspecialchars(strip_tags($_POST["incharge"]));
             $this->capacity = (int)htmlspecialchars(strip_tags($_POST["capacity"]));
-            
+
 			//check if name exists
 			$check_query = "SELECT name FROM ".$this->table. " WHERE name = ?";
 			$check_params = [$this->name];
@@ -395,7 +388,6 @@
             $wards = $this->conn->select('SELECT name, capacity FROM wards');
             return $wards;
         }
-       
     }
 
     class Supplier{
@@ -453,11 +445,11 @@
 					$this->physical_address
 				];
 
-                try {                    
+                try {
                     $this->conn->insert($query, $params);
                     $_SESSION['msg'] = "Supplier added to databse";
                     echo $_SESSION['msg'];
-                } catch (Exception $e) {        
+                } catch (Exception $e) {
                     throw new Exception($e->getMessage());
                 }
             }else{
@@ -514,13 +506,10 @@
                     echo $_SESSION['msg'];
                 } catch (Exception $e) {
                     throw new Exception($e->getMessage());
-                    
-                    
                 }
             }else{
 				print_r($errors);
 			}
-
         }
 
         public function addExpenseCategory(){
@@ -566,7 +555,7 @@
         public function __construct($db){
             $this->conn = $db;
         }
-          
+
         public function addDrug(){
             $errors = [];
 
@@ -601,7 +590,7 @@
 
     class Notices{
         private $conn;
-        
+
         public $title = "";
         public $description  = "";
         public $start_date = "";
@@ -642,7 +631,7 @@
         private $conn;
         private $table = "messages";
 
-        //subject	to_email	cc_email	from_email	body	attachments
+        //subject, to_email,cc_email,from_email,body,attachments
         public $subject = "";
         public $to_email = "";
         public $cc_email = "";
@@ -653,7 +642,6 @@
         public function __construct($db){
             $this->conn = $db;
         }
-        
 
         public function addMessage(){
             $errors = [];
@@ -665,7 +653,6 @@
             $this->attachment = $_FILES['attachments'];
             $this->attachment = $_FILES['attachments'];
             $total_file_count = count($this->attachment['name']);
-            
 
             if(count($errors) === 0){
                 $file_names = [];
