@@ -14,7 +14,7 @@
         public $username   = "root";
         public $password   = "";
         public $dbname     = "hospital_db";
-        private $conn; 
+        private $conn;
 
         public function __construct(){
             try {
@@ -42,7 +42,7 @@
 
         public function insert($statement = "", $params = []){
             try {
-                $this->executeStatement($statement, $params); 
+                $this->executeStatement($statement, $params);
                 return $this->conn->lastInsertId();
             } catch (Exception $e) {
                 throw new Exception($e->getMessage());
@@ -51,7 +51,7 @@
 
         public function select($statement = "", $params = []){
             try {
-                $results = $this->executeStatement($statement, $params); 
+                $results = $this->executeStatement($statement, $params);
                 return $results->fetchAll();
             } catch (Exception $e) {
                 throw new Exception($e->getMessage());
@@ -60,14 +60,15 @@
 
         public function update($statement = "", $params=[]){
             try {
-                $this->executeStatement($statement, $params); 
+                $this->executeStatement($statement, $params);
             } catch (Exception $e) {
                 throw new Exception($e->getMessage());
             }
         }
+        
         public function remove($statement = "", $params=[]){
             try {
-                $this->executeStatement($statement, $params); 
+                $this->executeStatement($statement, $params);
             } catch (Exception $e) {
                 throw new Exception($e->getMessage());
             }

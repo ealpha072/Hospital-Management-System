@@ -391,7 +391,7 @@
     }
 
     class Supplier{
-        //supplier_id	name	company_name	status	email	phone_num	physical_address	
+        //supplier_id,name,company_name,status,email,phone_num,physical_address
         private $conn;
         private $table = 'suppliers';
 
@@ -402,11 +402,11 @@
         public $email= "";
         public $phone_num= "";
         public $physical_address= "";
-        
+
         public function __construct($db){
             $this->conn = $db;
         }
-        
+
         public function addSupplier(){
             $all_errors = [];
 
