@@ -5,7 +5,7 @@
     require "../public/wrapper.php";
     require_once "../config/classes.php";
     require_once('../config/pagination.php');
-     
+
     if(isset($_GET['patient_page'])){
         $database = new Database();
         $new_html = new Html();
@@ -35,7 +35,7 @@
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2">ID Num<sup>*</sup></label>
                                     <div class="col-sm-6">
-                                        <input type="digit" name="id_num" id="" class="form-control form-control-sm" placeholder="Last Name" required maxlength="8" minlength="8">
+                                        <input type="digit" name="id_num" id="" class="form-control form-control-sm" placeholder="ID Number" required maxlength="8" minlength="8">
                                     </div>
                                 </div>
                 
