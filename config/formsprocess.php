@@ -6,6 +6,7 @@
         $new_patient = new Patient($database); 
         $new_patient->attach_common_props();
         $new_patient->add();
+        
     }
 
     if(isset($_POST['add_doctor']) && $_SERVER['REQUEST_METHOD'] === 'POST'){

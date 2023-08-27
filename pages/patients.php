@@ -159,12 +159,11 @@
                                         <th>SL No</th>
                                         <th>Id No</th>
                                         <th>First Name</th>
-                                        <th>Last Name</th>                                                              
+                                        <th>Last Name</th>
                                         <th>Age</th>
                                         <th>DoB</th>  
                                         <th>Phone Number</th>
                                         <th>NHIF Number</th>
-                                        
                                     </tr>
                                 </thead>
                                 <tbody>';                        
@@ -235,7 +234,7 @@
                                     $next_page = $current_page + 1;
                                     //echo '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?patient_page=view&page_number='.$next_page.'" > >> </a></li>';
                                     echo '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?patient_page=view&page_number='.$number_of_pages.'" >>>></a></li>';
-                                }                    
+                                }
                             echo '
                             </ul>
                         </nav>
