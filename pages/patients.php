@@ -177,12 +177,12 @@
                                                     echo '<td>'.$items_to_display[$items][$key].'</td>';
                                                 }
                                         echo '</tr>
-                                            <tr style="display:none" class = "minor-row">';
+                                                <tr style="display:none" class = "minor-row">';
                                                 $get_details_query = 'SELECT id_no, op_num, sex, physical_address, marital_status, date_in FROM patients WHERE id_no = ? AND first_name = ?';
                                                 $params = [$items_to_display[$items]['id_no'], $items_to_display[$items]['first_name']];
                                                 $single_patient_data = $database->select($get_details_query, $params);
                                                 foreach($single_patient_data as $data){
-                                                    
+
                                                     echo '<td colspan="8" >
                                                         <ul class="list-group">';
                                                             foreach(array_keys($data) as $key){
@@ -208,7 +208,7 @@
                                                     </td>';
                                                 }
                                         echo '</tr>';
-                                    }                                    
+                                    }
                                 echo'</tbody>
                             </table>
                         </div>
