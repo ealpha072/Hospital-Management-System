@@ -5,8 +5,13 @@
     if(isset($_POST['add_patient']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
         $new_patient = new Patient($database); 
         $new_patient->attach_common_props();
-        $new_patient->add();
-        
+        $message = $new_patient->add();
+        unset($_SESSION['msg']);
+
+        $_SESSION['msg'] = $message;
+        echo $_SESSION['msg'];
+        //header('Location: ../pages/patients.php?patient_page=add');
+        //exit();
     }
 
     if(isset($_POST['add_doctor']) && $_SERVER['REQUEST_METHOD'] === 'POST'){

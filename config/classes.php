@@ -72,7 +72,7 @@
         public $role = "";
 
         public function attach_common_props(){
-            $this->first_name = strtolower(ucfirst(htmlspecialchars(strip_tags($_POST['first_name']))));
+            $this->first_name = strtolower(htmlspecialchars(strip_tags(ucfirst($_POST['first_name']))));
             $this->last_name = strtolower(ucfirst(htmlspecialchars(strip_tags($_POST['last_name']))));
 			$this->id_num = (int)htmlspecialchars(strip_tags($_POST['id_num']));
             $this->age = htmlspecialchars(strip_tags($_POST['age']));
@@ -152,12 +152,13 @@
 
                     try {
                         $this->conn->insert($query, $params);
-                        $_SESSION['msg'] = 'Patient added to database succesfully';
-                        echo "Success, patient OP number is".$this->op_number;
+                        $_SESSION['msg'] = 'Patient added to database succesfully. Patient OP number is'.$this->op_number;
+                        return $_SESSION['msg'];
+                        //header('Location: ../pages/patients.php?patient_page=add');
                     } catch (Exception $e) {
                         throw new Exception($e->getMessage());
                     }
-                }  
+                }
             }else{
                 print_r($all_errors);
             }
