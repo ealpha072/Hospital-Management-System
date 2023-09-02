@@ -9,6 +9,7 @@
     if(isset($_GET['patient_page'])){
         $database = new Database();
         $new_html = new Html();
+        
         if($_GET['patient_page'] === 'add'){
             echo '
                 <div class="card mb-4 mr-4 ml-4">
@@ -169,7 +170,7 @@
                                         <th>First Name</th>
                                         <th>Last Name</th>
                                         <th>Age</th>
-                                        <th>DoB</th>  
+                                        <th>DoB</th>
                                         <th>Phone Number</th>
                                         <th>NHIF Number</th>
                                     </tr>
@@ -182,7 +183,7 @@
                                                 <i class="fa fa-circle-plus"></i>
                                             </td>';
                                                 foreach(array_keys($items_to_display[$items]) as $key){
-                                                    echo '<td>'.$items_to_display[$items][$key].'</td>';
+                                                    echo '<td>'.ucfirst($items_to_display[$items][$key]).'</td>';
                                                 }
                                         echo '</tr>
                                                 <tr style="display:none" class = "minor-row">';
@@ -206,9 +207,11 @@
                                                                 <span class="font-weight-bold">Action</span>
                                                                 <span>
                                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                                        <a href=""><button type="button" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i></button></a>
-                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=admit&patient_id='.$data['id_no'].'"><button type="button" class="btn btn-sm btn-secondary"><i class="fa fa-plus-circle"></i></button></a>
-                                                                        <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                                                        <a href=""><button type="button" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i> Edit</button></a>
+                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=admit&patient_id='.$data['id_no'].'">
+                                                                            <button type="button" class="btn btn-sm btn-secondary"><i class="fa fa-plus"></i> Admit</button>
+                                                                        </a>
+                                                                        <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</button>
                                                                     </div>
                                                                 </span>
                                                             </li>
