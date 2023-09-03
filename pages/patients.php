@@ -2,8 +2,8 @@
 
     use function PHPSTORM_META\type;
 
-    require "../public/wrapper.php";
     require_once "../config/classes.php";
+    require "../public/wrapper.php";
     require_once('../config/pagination.php');
 
     if(isset($_GET['patient_page'])){
@@ -19,13 +19,16 @@
                         </a>
                     </div>
                     <div class="card-body">
-                        <form action="../config/formsprocess.php" method="post">
+                       <form action="../config/formsprocess.php" method="post">
                             <div class="card-body">';
-                                if(isset($_SESSION['msg'])){
+                                if(isset($_SESSION['msg']) && $_SESSION['msg'] !== ""){
                                     echo '
-                                        <div class="alert alert-success" role="alert">';
-                                        $_SESSION['msg'];
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">';
+                                        echo $_SESSION['msg'];
                                     echo'
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                     </div>';
                                 }
 

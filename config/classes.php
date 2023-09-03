@@ -1,8 +1,8 @@
 <?php
 
-    use function PHPSTORM_META\type;
-
     include_once('config.php');
+    //use function PHPSTORM_META\type;
+
     include_once('utilities.php');
 
     class Validate{
@@ -152,7 +152,7 @@
 
                     try {
                         $this->conn->insert($query, $params);
-                        $_SESSION['msg'] = 'Patient added to database succesfully. Patient OP number is'.$this->op_number;
+                        $_SESSION['msg'] = 'Patient added to database succesfully. Patient OP number is '.$this->op_number;
                         return $_SESSION['msg'];
                         //header('Location: ../pages/patients.php?patient_page=add');
                     } catch (Exception $e) {

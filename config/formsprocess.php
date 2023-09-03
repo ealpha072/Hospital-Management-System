@@ -2,16 +2,20 @@
     include_once("classes.php");
     $database = new Database();
 
+    if (isset($_SESSION)) {
+        echo "A session is active.";
+    } else {
+        echo "No session is active.";
+    }
+
     if(isset($_POST['add_patient']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
-        $new_patient = new Patient($database); 
+        $new_patient = new Patient($database);
         $new_patient->attach_common_props();
         $message = $new_patient->add();
         unset($_SESSION['msg']);
-
+        
         $_SESSION['msg'] = $message;
-        echo $_SESSION['msg'];
-        //header('Location: ../pages/patients.php?patient_page=add');
-        //exit();
+        header('Location: ../pages/patients.php?patient_page=add');
     }
 
     if(isset($_POST['add_doctor']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
