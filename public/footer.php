@@ -18,6 +18,9 @@
                 $('#sidebar').toggleClass('active');
             });
         });*/
+        setTimeout(function () {
+            $(".alert").alert('close');
+        }, 5000);
     </script>
 </body>
 </html>
