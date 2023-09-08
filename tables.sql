@@ -19,6 +19,12 @@ ALTER TABLE `patients` ADD `op_num` INT(10) NOT NULL AFTER `id`;
 ALTER TABLE `patients` ADD `number_of_visits` INT(255) NOT NULL DEFAULT '1' AFTER `nhif_num`;
 ALTER TABLE `patients` DROP `email`;
 ALTER TABLE `patients` ADD `id_no` INT(10) NOT NULL AFTER `id`;
+ALTER TABLE `patients` ADD `ip_number` INT(10) NOT NULL AFTER `date_in`, 
+    ADD `adm_ward` VARCHAR(255) NOT NULL AFTER `ip_number`, 
+    ADD `next_of_kin` VARCHAR(255) NOT NULL AFTER `adm_ward`, 
+    ADD `kin_rlshp` VARCHAR(255) NOT NULL AFTER `next_of_kin`, 
+    ADD `kin_telephone` INT(10) NOT NULL AFTER `kin_rlshp`, 
+    ADD `adm_date` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `kin_telephone`;
 
 CREATE TABLE `hospital_db`.`employees` (
     `id` INT(255) NOT NULL AUTO_INCREMENT , 
@@ -64,6 +70,7 @@ CREATE TABLE `hospital_db`.`doctors` (
 ) ENGINE = InnoDB;
 ALTER TABLE `doctors` CHANGE `date_in` `date_added` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP;
 ALTER TABLE `doctors` ADD `id_no` INT(10) NOT NULL AFTER `id`;
+
 
 CREATE TABLE `hospital_db`.`departments` (
     `id` INT(255) NOT NULL AUTO_INCREMENT , 

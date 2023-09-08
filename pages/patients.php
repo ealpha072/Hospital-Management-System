@@ -94,12 +94,14 @@
                                 </div> 
                 
                                 <div class="form-group row">
-                                    <label for="" class="col-sm-2">Status<sup>*</sup></label>
+                                    <label for="" class="col-sm-2">Marital Status<sup>*</sup></label>
                                     <div class="col-sm-6">
                                         <select name="status" id="" class="form-control form-control-sm" required>
                                             <option value="" disabled selected>--Status--</option>
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
+                                            <option value="active">Married</option>
+                                            <option value="active">Widowed</option>
+                                            <option value="inactive">Divorced</option>
+                                            <option value="inactive">N/A (For children) </option>
                                         </select>
                                     </div>
                                 </div>
@@ -202,7 +204,7 @@
                                                         <ul class="list-group">';
                                                             foreach(array_keys($data) as $key){
                                                                 echo '
-                                                                    <li class="">
+                                                                    <li class="mt-1">
                                                                         <span class="font-weight-bold">'.ucfirst($key).':</span>
                                                                         <span>'.ucfirst($data[$key]).'</span>
                                                                     </li>
@@ -213,11 +215,11 @@
                                                                 <span class="font-weight-bold">Action</span>
                                                                 <span>
                                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                                        <a href=""><button type="button" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i> Edit</button></a>
-                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=admit&patient_id='.$data['id_no'].'">
+                                                                        <a href="" class="mx-2"><button type="button" class="btn btn-sm btn-success me-1"><i class="fa fa-pencil"></i> Edit</button></a>
+                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=admit&patient_id='.$data['id_no'].'" class="mx-1">
                                                                             <button type="button" class="btn btn-sm btn-secondary"><i class="fa fa-plus"></i> Admit</button>
                                                                         </a>
-                                                                        <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                                                                        <button type="button" class="btn btn-sm btn-danger mx-1"><i class="fa fa-trash"></i> Delete</button>
                                                                     </div>
                                                                 </span>
                                                             </li>
@@ -279,7 +281,7 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Patient Name</strong> </label>
                                 <div class="col-sm-6">
-                                    <input type="text" value="'.ucfirst($patient_data['first_name']).' '.ucfirst($patient_data['last_name']).'" placeholder="" name="" class="form-control form-control-sm">
+                                    <input type="text" value="'.ucfirst($patient_data['first_name']).' '.ucfirst($patient_data['last_name']).'" placeholder="" name="" class="form-control form-control-sm" disabled>
                                 </div>
                             </div>
             
@@ -303,23 +305,32 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Bed Number</strong> </label>
                                 <div class="col-sm-6">
-                                    <input type="number" class="form-control form-control-sm" max="" />                                    
+                                    <input type="number" class="form-control form-control-sm" max="" />
                                 </div>
                             </div>
             
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Next of Kin</strong></label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-sm" value="" placeholder="Next of Kin">
+                                    <input type="text" class="form-control form-control-sm" value="" placeholder="Next of Kin" required>
                                 </div>
                             </div>
             
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Relationship</strong> </label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-sm" value="" placeholder="Relationship with next of Kin">
+                                    <input type="text" class="form-control form-control-sm" value="" placeholder="Relationship with next of Kin" required>
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label"><strong>Kin (Phone Number)</strong> </label>
+                                <div class="col-sm-6">
+                                    <input type="tel" class="form-control form-control-sm" value="" placeholder="Phone number for next of kin" required>
+                                </div>
+                            </div>
+
+                            
                             <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle mr-2"></i> Admit</button>
             
                         </form>
