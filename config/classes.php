@@ -64,6 +64,12 @@
         public $status = "";
         public $nhif_number = "";
 		public $id_num = "";
+        //admission parameters
+        public $ip_number = "";
+        public $adm_ward = "";
+        public $next_of_kin = "";
+        public $kin_rlshp = "";
+        public $kin_telephone = "";
 
         public $nssf = "";
         public $picture = "";
@@ -90,11 +96,19 @@
             $this->kra = strtoupper(htmlspecialchars(strip_tags($_POST['kra'])));
             $this->picture = $_FILES['profile_picture'];
         }
+
+        public function attach_props_admission(){
+            $this->adm_ward = '';
+            $this->next_of_kin = '';
+            $this->kin_rlshp = '';
+            $this->kin_telephone = '';
+        }
     }
 
     class Patient{
         use person;
         public $op_number = "";
+
         private $table = "patients";
         public $number_of_visits = 0;
 
@@ -162,6 +176,10 @@
             }else{
                 print_r($all_errors);
             }
+        }
+
+        public function admit(){
+            $all_errors = [];
         }
     }
 
