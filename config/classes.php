@@ -378,6 +378,7 @@
                 try {
                     $this->conn->insert($query, $params);
 					$_SESSION['msg'] = "New ward added successfully";
+                    return $_SESSION['msg'];
                 } catch (Exception $e) {
                     throw new Exception($e->getMessage());
                 }

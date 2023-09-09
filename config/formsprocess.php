@@ -39,7 +39,11 @@
 
     if(isset($_POST['add_ward']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
         $new_ward = new Ward($database); 
-        $new_ward->addWard();
+        $message = $new_ward->addWard();
+        unset($_SESSION['msg']);
+
+        $_SESSION['msg'] = $message;
+        header('Location: ../pages/add_ward.php');
     }
 
     if(isset($_POST['add_supplier']) && $_SERVER['REQUEST_METHOD'] === 'POST'){

@@ -1,9 +1,27 @@
-<?php require "../public/wrapper.php" ?>
+<?php 
     
-    <div class="card mb-4 mr-4 ml-4">
+    use function PHPSTORM_META\type;
+
+    require_once "../config/classes.php";
+    require "../public/wrapper.php";
+    
+    echo '<div class="card mb-4 mr-4 ml-4">
         <div class="card-header">Ward Info</div>
-        <div class="card-body">
-            <form action="../config/formsprocess.php" method="post">
+        <div class="card-body">';
+            if(isset($_SESSION['msg']) && $_SESSION['msg'] !== ""){
+                echo '
+                    <div class="alert alert-success alert-dismissible fade show" role="alert"><h5>';
+                    echo $_SESSION['msg'];
+                echo'
+                </h5>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>';
+                sleep(3);
+                unset($_SESSION['msg']);
+            };
+            echo '<form action="../config/formsprocess.php" method="post">
                 <div class="form-row">
                     <div class="col">
                         <div class="form-group">
@@ -32,6 +50,7 @@
                 <button class="btn btn-sm btn-primary" name="add_ward">Add</button>
             </form>
         </div>
-    </div>
+    </div>';
+?>
 
 <?php require "../public/footer.php" ?>
