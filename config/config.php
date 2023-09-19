@@ -10,6 +10,7 @@
         // public $password   = "5719819c";
         // public $dbname     = "heroku_bece3e49d0c6d9b";
         //local creds
+
         public $host       = "localhost";
         public $username   = "root";
         public $password   = "";
@@ -65,7 +66,7 @@
                 throw new Exception($e->getMessage());
             }
         }
-        
+
         public function remove($statement = "", $params=[]){
             try {
                 $this->executeStatement($statement, $params);
