@@ -186,7 +186,12 @@
             $all_errors = [];
 
             $new_validation = new Validate();
-            //$name_error = $new_validation->validateNextofKinName($this->)
+            $name_error = $new_validation->validateNextofKinName($this->next_of_kin);
+
+            //push to database
+            if(count($all_errors) === 0){
+                //get patient from database
+            }
         }
     }
 
