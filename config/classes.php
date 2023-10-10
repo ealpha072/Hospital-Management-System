@@ -1,8 +1,8 @@
 <?php
 
-    use function PHPSTORM_META\type;
-
     include_once('config.php');
+    //use function PHPSTORM_META\type;
+
     include_once('utilities.php');
 
     class Validate{
@@ -64,6 +64,12 @@
         public $status = "";
         public $nhif_number = "";
 		public $id_num = "";
+        //admission parameters
+        public $ip_number = "";
+        public $adm_ward = "";
+        public $next_of_kin = "";
+        public $kin_rlshp = "";
+        public $kin_telephone = "";
 
         public $nssf = "";
         public $picture = "";
@@ -72,7 +78,7 @@
         public $role = "";
 
         public function attach_common_props(){
-            $this->first_name = strtolower(ucfirst(htmlspecialchars(strip_tags($_POST['first_name']))));
+            $this->first_name = strtolower(htmlspecialchars(strip_tags(ucfirst($_POST['first_name']))));
             $this->last_name = strtolower(ucfirst(htmlspecialchars(strip_tags($_POST['last_name']))));
 			$this->id_num = (int)htmlspecialchars(strip_tags($_POST['id_num']));
             $this->age = htmlspecialchars(strip_tags($_POST['age']));
@@ -90,11 +96,19 @@
             $this->kra = strtoupper(htmlspecialchars(strip_tags($_POST['kra'])));
             $this->picture = $_FILES['profile_picture'];
         }
+
+        public function attach_props_admission(){
+            $this->adm_ward = '';
+            $this->next_of_kin = '';
+            $this->kin_rlshp = '';
+            $this->kin_telephone = '';
+        }
     }
 
     class Patient{
         use person;
         public $op_number = "";
+
         private $table = "patients";
         public $number_of_visits = 0;
 
@@ -152,15 +166,20 @@
 
                     try {
                         $this->conn->insert($query, $params);
-                        $_SESSION['msg'] = 'Patient added to database succesfully';
-                        echo "Success, patient OP number is".$this->op_number;
+                        $_SESSION['msg'] = 'Patient added to database succesfully. Patient OP number is '.$this->op_number;
+                        return $_SESSION['msg'];
+                        //header('Location: ../pages/patients.php?patient_page=add');
                     } catch (Exception $e) {
                         throw new Exception($e->getMessage());
                     }
-                }  
+                }
             }else{
                 print_r($all_errors);
             }
+        }
+
+        public function admit(){
+            $all_errors = [];
         }
     }
 
@@ -377,6 +396,7 @@
                 try {
                     $this->conn->insert($query, $params);
 					$_SESSION['msg'] = "New ward added successfully";
+                    return $_SESSION['msg'];
                 } catch (Exception $e) {
                     throw new Exception($e->getMessage());
                 }

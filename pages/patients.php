@@ -2,13 +2,14 @@
 
     use function PHPSTORM_META\type;
 
-    require "../public/wrapper.php";
     require_once "../config/classes.php";
+    require "../public/wrapper.php";
     require_once('../config/pagination.php');
-     
+
     if(isset($_GET['patient_page'])){
         $database = new Database();
         $new_html = new Html();
+        
         if($_GET['patient_page'] === 'add'){
             echo '
                 <div class="card mb-4 mr-4 ml-4">
@@ -18,9 +19,23 @@
                         </a>
                     </div>
                     <div class="card-body">
-                        <form action="../config/formsprocess.php" method="post">
-                            <div class="card-body">
-                                <div class="form-group row">
+                       <form action="../config/formsprocess.php" method="post">
+                            <div class="card-body">';
+                                if(isset($_SESSION['msg']) && $_SESSION['msg'] !== ""){
+                                    echo '
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert"><h5>';
+                                        echo $_SESSION['msg'];
+                                    echo'
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>';
+                                    sleep(5);
+                                    unset($_SESSION['msg']);
+                                }
+
+                                echo '<div class="form-group row">
                                     <label for="" class="col-sm-2">First Name<sup>*</sup></label>
                                     <div class="col-sm-6">
                                         <input type="text" name="first_name" id="" class="form-control form-control-sm" placeholder="First Name" required>
@@ -35,7 +50,7 @@
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2">ID Num<sup>*</sup></label>
                                     <div class="col-sm-6">
-                                        <input type="digit" name="id_num" id="" class="form-control form-control-sm" placeholder="Last Name" required maxlength="8" minlength="8">
+                                        <input type="digit" name="id_num" id="" class="form-control form-control-sm" placeholder="ID Number" required maxlength="8" minlength="8">
                                     </div>
                                 </div>
                 
@@ -79,12 +94,14 @@
                                 </div> 
                 
                                 <div class="form-group row">
-                                    <label for="" class="col-sm-2">Status<sup>*</sup></label>
+                                    <label for="" class="col-sm-2">Marital Status<sup>*</sup></label>
                                     <div class="col-sm-6">
                                         <select name="status" id="" class="form-control form-control-sm" required>
                                             <option value="" disabled selected>--Status--</option>
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
+                                            <option value="active">Married</option>
+                                            <option value="active">Widowed</option>
+                                            <option value="inactive">Divorced</option>
+                                            <option value="inactive">N/A (For children) </option>
                                         </select>
                                     </div>
                                 </div>
@@ -96,7 +113,7 @@
                                     </div>
                                 </div>
                 
-                                <button class="btn btn-sm btn-primary" name="add_patient"> <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i> Save</button>
+                                <button class="btn btn-sm btn-primary" name="add_patient"> <i class="fa fa-plus mr-2" aria-hidden="true"></i> Save</button>
                             </div>
                         </form>
                     </div>
@@ -110,12 +127,12 @@
             $paging_items = $paginator->buildPages("patients"); 
             $number_of_pages = $paging_items[0];
             $items_to_display = $paging_items[1];
-            
+
             echo '
                 <div class="card mr-4 ml-4 mb-4">
                     <div class="card-header">
-                        <a href="">
-                            <button class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Doctor</button>
+                        <a href="patients.php?patient_page=add">
+                            <button class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add Patient</button>
                         </a>
                     </div>
                     <div class="card-body">
@@ -159,36 +176,35 @@
                                         <th>SL No</th>
                                         <th>Id No</th>
                                         <th>First Name</th>
-                                        <th>Last Name</th>                                                              
+                                        <th>Last Name</th>
                                         <th>Age</th>
-                                        <th>DoB</th>  
+                                        <th>DoB</th>
                                         <th>Phone Number</th>
                                         <th>NHIF Number</th>
-                                        
                                     </tr>
                                 </thead>
-                                <tbody>';                        
+                                <tbody>';
                                     for($items = 0; $items < count($items_to_display); $items++){
-                                        
+
                                         echo '<tr class = "main-row">
                                             <td class="text-center">
                                                 <i class="fa fa-circle-plus"></i>
                                             </td>';
                                                 foreach(array_keys($items_to_display[$items]) as $key){
-                                                    echo '<td>'.$items_to_display[$items][$key].'</td>';
+                                                    echo '<td>'.ucfirst($items_to_display[$items][$key]).'</td>';
                                                 }
                                         echo '</tr>
-                                            <tr style="display:none" class = "minor-row">';
+                                                <tr style="display:none" class = "minor-row">';
                                                 $get_details_query = 'SELECT id_no, op_num, sex, physical_address, marital_status, date_in FROM patients WHERE id_no = ? AND first_name = ?';
                                                 $params = [$items_to_display[$items]['id_no'], $items_to_display[$items]['first_name']];
                                                 $single_patient_data = $database->select($get_details_query, $params);
                                                 foreach($single_patient_data as $data){
-                                                    
+
                                                     echo '<td colspan="8" >
                                                         <ul class="list-group">';
                                                             foreach(array_keys($data) as $key){
                                                                 echo '
-                                                                    <li class="">
+                                                                    <li class="mt-1">
                                                                         <span class="font-weight-bold">'.ucfirst($key).':</span>
                                                                         <span>'.ucfirst($data[$key]).'</span>
                                                                     </li>
@@ -199,9 +215,11 @@
                                                                 <span class="font-weight-bold">Action</span>
                                                                 <span>
                                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                                        <a href=""><button type="button" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i></button></a>
-                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=admit&patient_id='.$data['id_no'].'"><button type="button" class="btn btn-sm btn-secondary"><i class="fa fa-plus-circle"></i></button></a>
-                                                                        <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                                                        <a href="" class="mx-2"><button type="button" class="btn btn-sm btn-success me-1"><i class="fa fa-pencil"></i> Edit</button></a>
+                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=admit&patient_id='.$data['id_no'].'" class="mx-1">
+                                                                            <button type="button" class="btn btn-sm btn-secondary"><i class="fa fa-plus"></i> Admit</button>
+                                                                        </a>
+                                                                        <button type="button" class="btn btn-sm btn-danger mx-1"><i class="fa fa-trash"></i> Delete</button>
                                                                     </div>
                                                                 </span>
                                                             </li>
@@ -209,7 +227,7 @@
                                                     </td>';
                                                 }
                                         echo '</tr>';
-                                    }                                    
+                                    }
                                 echo'</tbody>
                             </table>
                         </div>
@@ -235,7 +253,7 @@
                                     $next_page = $current_page + 1;
                                     //echo '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?patient_page=view&page_number='.$next_page.'" > >> </a></li>';
                                     echo '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?patient_page=view&page_number='.$number_of_pages.'" >>>></a></li>';
-                                }                    
+                                }
                             echo '
                             </ul>
                         </nav>
@@ -263,7 +281,7 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Patient Name</strong> </label>
                                 <div class="col-sm-6">
-                                    <input type="text" value="'.ucfirst($patient_data['first_name']).' '.ucfirst($patient_data['last_name']).'" placeholder="" name="" class="form-control form-control-sm">
+                                    <input type="text" value="'.ucfirst($patient_data['first_name']).' '.ucfirst($patient_data['last_name']).'" placeholder="" name="" class="form-control form-control-sm" disabled>
                                 </div>
                             </div>
             
@@ -287,23 +305,32 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Bed Number</strong> </label>
                                 <div class="col-sm-6">
-                                    <input type="number" class="form-control form-control-sm" max="" />                                    
+                                    <input type="number" class="form-control form-control-sm" max="" />
                                 </div>
                             </div>
             
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Next of Kin</strong></label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-sm" value="" placeholder="Next of Kin">
+                                    <input type="text" class="form-control form-control-sm" value="" placeholder="Next of Kin" required>
                                 </div>
                             </div>
             
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Relationship</strong> </label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-sm" value="" placeholder="Relationship with next of Kin">
+                                    <input type="text" class="form-control form-control-sm" value="" placeholder="Relationship with next of Kin" required>
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label"><strong>Kin (Phone Number)</strong> </label>
+                                <div class="col-sm-6">
+                                    <input type="tel" class="form-control form-control-sm" value="" placeholder="Phone number for next of kin" required>
+                                </div>
+                            </div>
+
+                            
                             <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle mr-2"></i> Admit</button>
             
                         </form>
@@ -313,169 +340,5 @@
         }
     }
 ?>
-
-
-<!--<div class="card mr-4 ml-4 mb-4">
-    <div class="card-header">
-        <a href="">
-            <button class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Doctor</button>
-        </a>
-    </div>
-    <div class="card-body">
-        <div class="row mb-2">
-            <div class="col-3">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text">Show</label>
-                    </div>
-                    <select class="custom-select">
-                        <option selected>Choose...</option>
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-6 text-center">
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-sm btn-outline-success">CSV</button>
-                    <button type="button" class="btn btn-sm btn-outline-success">Exel</button>
-                    <button type="button" class="btn btn-sm btn-outline-success">Copy</button>
-                    <button type="button" class="btn btn-sm btn-outline-success">PDF</button>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control form-control-sm">
-                    <div class="input-group-append">
-                        <button class="btn btn-sm btn-success" type="button"><i class="fa fa-search"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="table-responsive">
-            <table class="table table-sm table-bordered table-hover table-stripped">
-                <thead class="">
-                    <tr class="">
-                        <th>SL No</th>
-                        <th>Id No</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>DoB</th>                        
-                        <th>Age</th>
-                        <th>Phone Number</th>
-                        <th>Address</th>
-                        <th>NHIF Number</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th> <button class="btn btn-sm"><i class="fa fa-plus-circle"></i></button> 1</th>
-                        <th>Id No</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>DoB</th>                        
-                        <th>Age</th>
-                        <th>Phone Number</th>
-                        <th>Address</th>
-                        <th>NHIF Number</th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>-->
-
-<!-- <div class="card mb-4 mr-4 ml-4">
-    <div class="card-header">
-        <a href="">
-            <button class="btn btn-md btn-primary"> <i class="fa fa-list mr-2"></i> Patients List</button>
-        </a>
-    </div>
-    <div class="card-body">
-        <form action="../config/formsprocess.php" method="post">
-            <div class="card-body">
-                <div class="form-group row">
-                    <label for="" class="col-sm-2">First Name<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <input type="text" name="first_name" id="" class="form-control form-control-sm" placeholder="First Name" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="" class="col-sm-2">Last Name<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <input type="text" name="last_name" id="" class="form-control form-control-sm" placeholder="Last Name" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="" class="col-sm-2">ID Num<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <input type="digit" name="id_num" id="" class="form-control form-control-sm" placeholder="Last Name" required maxlength="8" minlength="8">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="" class="col-sm-2">Age<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <input type="number" name="age" id="" class="form-control form-control-sm" placeholder="Age" max="120" min="0" required>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="" class="col-sm-2">Phone Number<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <input type="tel" name="phone" id="" class="form-control form-control-sm" placeholder="Phone Number" required>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="" class="col-sm-2">Physical Address<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <input type="text" name="p_address" id="" class="form-control form-control-sm" placeholder="Physical Address" required>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="" class="col-sm-2">Date of Birth<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <input type="date" name="dob" id="" class="form-control form-control-sm" placeholder="Date of Birth" required>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="" class="col-sm-2">Sex<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <select name="sex" id="" class="form-control form-control-sm" required>
-                            <option value="" disabled selected>--Select Gender--</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                    </div>
-                </div> 
-
-                <div class="form-group row">
-                    <label for="" class="col-sm-2">Status<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <select name="status" id="" class="form-control form-control-sm" required>
-                            <option value="" disabled selected>--Status--</option>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="" class="col-sm-2">NHIF Number<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <input type="number" name="nhif" id="" class="form-control form-control-sm" placeholder="NHIF Number">
-                    </div>
-                </div>
-
-                <button class="btn btn-sm btn-primary" name="add_patient"> <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i> Save</button>
-            </div>
-        </form>
-    </div>
-</div> -->
 
 <?php require "../public/footer.php" ?>

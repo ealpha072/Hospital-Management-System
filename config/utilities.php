@@ -85,6 +85,4 @@ function validatePhone($phone, $errors_array){
         array_push($errors_array, "Invalid phone number");
     }
 }
-
-
 ?>

@@ -2,10 +2,20 @@
     include_once("classes.php");
     $database = new Database();
 
+    if (isset($_SESSION)) {
+        echo "A session is active.";
+    } else {
+        echo "No session is active.";
+    }
+
     if(isset($_POST['add_patient']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
-        $new_patient = new Patient($database); 
+        $new_patient = new Patient($database);
         $new_patient->attach_common_props();
-        $new_patient->add();
+        $message = $new_patient->add();
+        unset($_SESSION['msg']);
+
+        $_SESSION['msg'] = $message;
+        header('Location: ../pages/patients.php?patient_page=add');
     }
 
     if(isset($_POST['add_doctor']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -29,7 +39,11 @@
 
     if(isset($_POST['add_ward']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
         $new_ward = new Ward($database); 
-        $new_ward->addWard();
+        $message = $new_ward->addWard();
+        unset($_SESSION['msg']);
+
+        $_SESSION['msg'] = $message;
+        header('Location: ../pages/add_ward.php');
     }
 
     if(isset($_POST['add_supplier']) && $_SERVER['REQUEST_METHOD'] === 'POST'){

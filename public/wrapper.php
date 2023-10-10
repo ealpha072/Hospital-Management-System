@@ -4,7 +4,7 @@
     <!-- Sidebar -->
     <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Hospital System</h3>                
+                <h3>Hospital System</h3>
             </div>
 
             <!--dashboard items-->
@@ -25,7 +25,7 @@
                             <a href="patients.php?patient_page=admit"><i class="fa fa-bed fa-sm mr-2"></i> Admit Patient</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-heartbeat fa-sm mr-2"></i> Patient List</a>
+                            <a href="patients.php?patient_page=view&page_number=1"><i class="fa fa-heartbeat fa-sm mr-2"></i> Patient List</a>
                         </li>
                     </ul>
                 </li>  
