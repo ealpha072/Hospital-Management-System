@@ -49,6 +49,10 @@
             return $errors_array;
         }
 
+        public function  validateNextofKinName($name, $errors_array=[]){
+            if(empty($name)){array_push($errors_array, "Next of kin cannot be empty");}
+        }
+
     }
 
     trait person{
@@ -184,7 +188,7 @@
 
         public function admit(){
             $all_errors = [];
-            
+
             //validation
             $validation = new Validate();
             $phone_error = $validation->validatePhoneNumber($this->kin_telephone, []);
