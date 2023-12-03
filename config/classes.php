@@ -63,7 +63,7 @@
         public $sex = "";
         public $status = "";
         public $nhif_number = "";
-		public $id_no = "";
+		public $id_num = "";
         //admission parameters
         public $ip_number = "";
         public $adm_ward = "";
@@ -96,7 +96,7 @@
             $this->next_of_kin = strtolower(htmlspecialchars(strip_tags(ucfirst($_POST['next_of_kin']))));
             $this->kin_rlshp = strtolower(htmlspecialchars(strip_tags(ucfirst($_POST['relationship']))));
             $this->kin_telephone = strtolower(htmlspecialchars(strip_tags(ucfirst($_POST['kin_phone']))));
-            $this->id_no = (int)htmlspecialchars(strip_tags($_POST['patient_id']));
+            $this->id_num = (int)htmlspecialchars(strip_tags($_POST['patient_id']));
         }
 
         public function attach_common_props_employees_doctors(){
@@ -209,7 +209,7 @@
                         $this->next_of_kin,
                         $this->kin_rlshp,
                         $this->kin_telephone,
-                        $this->id_no
+                        $this->id_num
                     ];
 
                     try {

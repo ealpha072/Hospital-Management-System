@@ -212,11 +212,16 @@
                                                                 <span class="font-weight-bold">Action</span>
                                                                 <span>
                                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                                        <a href="" class="mx-2"><button type="button" class="btn btn-sm btn-success me-1"><i class="fa fa-pencil"></i> Edit</button></a>
-                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=admit&patient_id='.$data['id_no'].'" class="mx-1">
-                                                                            <button type="button" class="btn btn-sm btn-secondary"><i class="fa fa-plus"></i> Admit</button>
+                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=edit&patient_id='.$data['id_no'].'" class="mx-2">
+                                                                            <button type="button" class="btn btn-sm btn-success me-1">
+                                                                                <i class="fa fa-pencil"></i> Edit
+                                                                            </button>
                                                                         </a>
-                                                                        <button type="button" class="btn btn-sm btn-danger mx-1"><i class="fa fa-trash"></i> Delete</button>
+                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=admit&patient_id='.$data['id_no'].'" class="mx-1">
+                                                                            <button type="button" class="btn btn-sm btn-secondary">
+                                                                                <i class="fa fa-plus"></i> Admit
+                                                                            </button>
+                                                                        </a>
                                                                     </div>
                                                                 </span>
                                                             </li>
@@ -292,14 +297,28 @@
                             echo '<div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Patient Name</strong> </label>
                                 <div class="col-sm-6">
-                                    <input type="text" value="'.ucfirst($patient_data['first_name']).' '.ucfirst($patient_data['last_name']).'" placeholder="" name="" class="form-control form-control-sm" disabled>
+                                    <input 
+                                        type="text" 
+                                        value="'.ucfirst($patient_data['first_name']).' '.ucfirst($patient_data['last_name']).'" 
+                                        placeholder="" 
+                                        name="" 
+                                        class="form-control form-control-sm" 
+                                        disabled
+                                    >
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>ID Number</strong> </label>
                                 <div class="col-sm-6">
-                                    <input type="text" value="'.$patient_data['id_no'].'" placeholder="" name="patient_id" class="form-control form-control-sm" readonly >
+                                    <input 
+                                        type="text" 
+                                        value="'.$patient_data['id_no'].'" 
+                                        placeholder="" 
+                                        name="patient_id" 
+                                        class="form-control form-control-sm" 
+                                        readonly 
+                                    >
                                 </div>
                             </div>
 
@@ -346,6 +365,11 @@
                     </div>
                 </div>
             ';
+        }
+
+        if( $_GET['patient_page'] === 'edit' ){
+            echo "<h1>Coming soon</h1>";
+
         }
     }
 ?>
