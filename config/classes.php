@@ -63,7 +63,7 @@
         public $sex = "";
         public $status = "";
         public $nhif_number = "";
-		public $id_num = "";
+		public $id_no = "";
         //admission parameters
         public $ip_number = "";
         public $adm_ward = "";
@@ -96,6 +96,7 @@
             $this->next_of_kin = strtolower(htmlspecialchars(strip_tags(ucfirst($_POST['next_of_kin']))));
             $this->kin_rlshp = strtolower(htmlspecialchars(strip_tags(ucfirst($_POST['relationship']))));
             $this->kin_telephone = strtolower(htmlspecialchars(strip_tags(ucfirst($_POST['kin_phone']))));
+            $this->id_no = (int)htmlspecialchars(strip_tags($_POST['patient_id']));
         }
 
         public function attach_common_props_employees_doctors(){
@@ -105,12 +106,6 @@
             $this->picture = $_FILES['profile_picture'];
         }
 
-        public function attach_props_admission(){
-            $this->adm_ward = '';
-            $this->next_of_kin = '';
-            $this->kin_rlshp = '';
-            $this->kin_telephone = '';
-        }
     }
 
     class Patient{
@@ -193,6 +188,36 @@
             //validation
             $validation = new Validate();
             $phone_error = $validation->validatePhoneNumber($this->kin_telephone, []);
+
+            $all_errors = array_merge( $phone_error );
+
+            if(count($all_errors) === 0){
+                //generaate ip_number
+                $this->ip_num = generateOutPatientNumber();
+
+                $update_patient_query = "UPDATE ".$this->table." SET 
+                    ip_number=?, 
+                    adm_ward = ?, 
+                    next_of_kin=?, 
+                    kin_rlshp=?,
+                    kin_telephone=?
+                    WHERE id_no = ? ";
+
+                    $update_patient_params = [
+                        $this->ip_number,
+                        $this->adm_ward,
+                        $this->next_of_kin,
+                        $this->kin_rlshp,
+                        $this->kin_telephone,
+                        $this->id_no
+                    ];
+
+                    try {
+                        $this->conn->update($update_patient_query, $update_patient_params);
+                    } catch (Exception $th) {
+                        throw new Exception($th->getMessage());
+                    }
+            }
         }
     }
 

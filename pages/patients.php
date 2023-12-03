@@ -283,9 +283,9 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="" class="col-sm-2 col-form-label"><strong>IP Number</strong> </label>
+                                <label for="" class="col-sm-2 col-form-label"><strong>ID Number</strong> </label>
                                 <div class="col-sm-6">
-                                    <input type="text" value="GET FROM DB" placeholder="" name="" class="form-control form-control-sm" readonly >
+                                    <input type="text" value="'.$patient_data['id_no'].'" placeholder="" name="patient_id" class="form-control form-control-sm" readonly >
                                 </div>
                             </div>
 
