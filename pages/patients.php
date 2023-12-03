@@ -9,7 +9,7 @@
     if(isset($_GET['patient_page'])){
         $database = new Database();
         $new_html = new Html();
-        
+
         if($_GET['patient_page'] === 'add'){
             echo '
                 <div class="card mb-4 mr-4 ml-4">
@@ -53,35 +53,35 @@
                                         <input type="digit" name="id_num" id="" class="form-control form-control-sm" placeholder="ID Number" required maxlength="8" minlength="8">
                                     </div>
                                 </div>
-                
+
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2">Age<sup>*</sup></label>
                                     <div class="col-sm-6">
                                         <input type="number" name="age" id="" class="form-control form-control-sm" placeholder="Age" max="120" min="0" required>
                                     </div>
                                 </div>
-                
+
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2">Phone Number<sup>*</sup></label>
                                     <div class="col-sm-6">
                                         <input type="tel" name="phone" id="" class="form-control form-control-sm" placeholder="Phone Number" required>
                                     </div>
                                 </div>
-                
+
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2">Physical Address<sup>*</sup></label>
                                     <div class="col-sm-6">
                                         <input type="text" name="p_address" id="" class="form-control form-control-sm" placeholder="Physical Address" required>
                                     </div>
                                 </div>
-                
+
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2">Date of Birth<sup>*</sup></label>
                                     <div class="col-sm-6">
                                         <input type="date" name="dob" id="" class="form-control form-control-sm" placeholder="Date of Birth" required>
                                     </div>
                                 </div>
-                
+
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2">Sex<sup>*</sup></label>
                                     <div class="col-sm-6">
@@ -92,7 +92,6 @@
                                         </select>
                                     </div>
                                 </div> 
-                
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2">Marital Status<sup>*</sup></label>
                                     <div class="col-sm-6">
@@ -105,14 +104,12 @@
                                         </select>
                                     </div>
                                 </div>
-                
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2">NHIF Number<sup>*</sup></label>
                                     <div class="col-sm-6">
                                         <input type="number" name="nhif" id="" class="form-control form-control-sm" placeholder="NHIF Number">
                                     </div>
                                 </div>
-                
                                 <button class="btn btn-sm btn-primary" name="add_patient"> <i class="fa fa-plus mr-2" aria-hidden="true"></i> Save</button>
                             </div>
                         </form>
@@ -124,7 +121,7 @@
         if( $_GET['patient_page'] === 'view' && isset($_GET['page_number'])){
             $current_page = (int)$_GET['page_number'];
             $paginator = new Paginator($database);
-            $paging_items = $paginator->buildPages("patients"); 
+            $paging_items = $paginator->buildPages("patients");
             $number_of_pages = $paging_items[0];
             $items_to_display = $paging_items[1];
 
@@ -168,7 +165,7 @@
                                 </div>
                             </div>
                         </div>
-                
+
                         <div class="table-responsive">
                             <table class="table table-sm table-bordered table-hover table-stripped" id="patients-table">
                                 <thead class="">
@@ -267,7 +264,7 @@
             $new_ward = new Ward($database);
             $wards = $new_ward->getWards();
             $patient_data = $database->select('SELECT * FROM patients WHERE id_no = ?', [$patient_id])[0];
-            
+
             echo '
                 <div class="card mb-4 mr-4 ml-4">
                     <div class="card-header">
@@ -284,14 +281,14 @@
                                     <input type="text" value="'.ucfirst($patient_data['first_name']).' '.ucfirst($patient_data['last_name']).'" placeholder="" name="" class="form-control form-control-sm" disabled>
                                 </div>
                             </div>
-            
+
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>IP Number</strong> </label>
                                 <div class="col-sm-6">
                                     <input type="text" value="GET FROM DB" placeholder="" name="" class="form-control form-control-sm" readonly >
                                 </div>
                             </div>
-            
+
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Ward Name</strong> </label>
                                 <div class="col-sm-6">
@@ -301,21 +298,21 @@
                                     echo '</select>
                                 </div>
                             </div>
-            
+
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Bed Number</strong> </label>
                                 <div class="col-sm-6">
                                     <input type="number" class="form-control form-control-sm" max="" />
                                 </div>
                             </div>
-            
+
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Next of Kin</strong></label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control form-control-sm" value="" placeholder="Next of Kin" required>
                                 </div>
                             </div>
-            
+
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Relationship</strong> </label>
                                 <div class="col-sm-6">
@@ -330,9 +327,7 @@
                                 </div>
                             </div>
 
-                            
                             <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle mr-2"></i> Admit</button>
-            
                         </form>
                     </div>
                 </div>
