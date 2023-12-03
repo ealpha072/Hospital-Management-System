@@ -275,7 +275,21 @@
                     </div>
                     <div class="card-body">
                         <form action="../config/formsprocess.php" method="post">
-                            <div class="form-group row">
+                            <div class="card-body">';
+                            if(isset($_SESSION['msg']) && $_SESSION['msg'] !== ""){
+                                echo '
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert"><h5>';
+                                    echo $_SESSION['msg'];
+                                echo'
+                                </h5>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>';
+                                sleep(5);
+                                unset($_SESSION['msg']);
+                            }
+                            echo '<div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Patient Name</strong> </label>
                                 <div class="col-sm-6">
                                     <input type="text" value="'.ucfirst($patient_data['first_name']).' '.ucfirst($patient_data['last_name']).'" placeholder="" name="" class="form-control form-control-sm" disabled>

@@ -26,6 +26,7 @@
         unset($_SESSION['msg']);
         $_SESSION['msg'] = $message;
         //add header
+        header('Location: ../pages/patients.php?patient_page=add');
     }
 
     if(isset($_POST['add_doctor']) && $_SERVER['REQUEST_METHOD'] === 'POST'){

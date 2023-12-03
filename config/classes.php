@@ -193,7 +193,7 @@
 
             if(count($all_errors) === 0){
                 //generaate ip_number
-                $this->ip_num = generateOutPatientNumber();
+                $this->ip_number = generateOutPatientNumber();
 
                 $update_patient_query = "UPDATE ".$this->table." SET 
                     ip_number=?, 
@@ -214,6 +214,8 @@
 
                     try {
                         $this->conn->update($update_patient_query, $update_patient_params);
+                        $_SESSION['msg'] = 'Patient admitted successfully, IP no is '.$this->ip_number;
+                        return $_SESSION['msg'];
                     } catch (Exception $th) {
                         throw new Exception($th->getMessage());
                     }
