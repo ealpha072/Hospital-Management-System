@@ -90,6 +90,14 @@
             $this->nhif_number = (int)htmlspecialchars(strip_tags($_POST['nhif']));
         }
 
+        public function attach_admission_props(){
+            $this->adm_ward = strtolower(htmlspecialchars(strip_tags(ucfirst($_POST['ward_name']))));
+            $this->bed_number = strtolower(htmlspecialchars(strip_tags(ucfirst($_POST['bed_number']))));
+            $this->next_of_kin = strtolower(htmlspecialchars(strip_tags(ucfirst($_POST['next_of_kin']))));
+            $this->kin_rlshp = strtolower(htmlspecialchars(strip_tags(ucfirst($_POST['relationship']))));
+            $this->kin_telephone = strtolower(htmlspecialchars(strip_tags(ucfirst($_POST['kin_phone']))));
+        }
+
         public function attach_common_props_employees_doctors(){
             $this->email = strtolower($_POST['email']);
             $this->nssf = (int)htmlspecialchars(strip_tags($_POST['nssf']));
@@ -108,6 +116,7 @@
     class Patient{
         use person;
         public $op_number = "";
+        public $ip_number = "";
 
         private $table = "patients";
         public $number_of_visits = 0;
@@ -180,6 +189,10 @@
 
         public function admit(){
             $all_errors = [];
+            
+            //validation
+            $validation = new Validate();
+            $phone_error = $validation->validatePhoneNumber($this->kin_telephone, []);
         }
     }
 

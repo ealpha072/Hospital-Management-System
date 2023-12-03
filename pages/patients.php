@@ -274,7 +274,7 @@
                         </form>
                     </div>
                     <div class="card-body">
-                        <form action="">
+                        <form action="../config/formsprocess.php" method="post">
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Patient Name</strong> </label>
                                 <div class="col-sm-6">
@@ -292,7 +292,7 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Ward Name</strong> </label>
                                 <div class="col-sm-6">
-                                    <select name="" class="form-control form-control-sm">
+                                    <select name="ward_name" class="form-control form-control-sm">
                                         <option value="" disabled selected>--Select Ward--</option>';
                                         $new_html->populateSelect($wards, 'name');
                                     echo '</select>
@@ -302,32 +302,32 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Bed Number</strong> </label>
                                 <div class="col-sm-6">
-                                    <input type="number" class="form-control form-control-sm" max="" />
+                                    <input type="number" class="form-control form-control-sm" max="" name="bed_number" />
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Next of Kin</strong></label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-sm" value="" placeholder="Next of Kin" required>
+                                    <input type="text" name="next_of_kin" class="form-control form-control-sm" value="" placeholder="Next of Kin" required>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Relationship</strong> </label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-sm" value="" placeholder="Relationship with next of Kin" required>
+                                    <input type="text" name="relationship" class="form-control form-control-sm" value="" placeholder="Relationship with next of Kin" required>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Kin (Phone Number)</strong> </label>
                                 <div class="col-sm-6">
-                                    <input type="tel" class="form-control form-control-sm" value="" placeholder="Phone number for next of kin" required>
+                                    <input type="tel" name="kin_phone" class="form-control form-control-sm" value="" placeholder="Phone number for next of kin" required>
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle mr-2"></i> Admit</button>
+                            <button type="submit" class="btn btn-sm btn-primary" name="admit_patient"><i class="fa fa-plus-circle mr-2"></i> Admit</button>
                         </form>
                     </div>
                 </div>
