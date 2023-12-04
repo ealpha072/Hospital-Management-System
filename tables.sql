@@ -1,76 +1,41 @@
 --for heroku database, replace 'hospital_db' with heroku_bece3e49d0c6d9b
 
 CREATE TABLE `hospital_db`.`patients` (
-    `id` INT(255) NOT NULL AUTO_INCREMENT , 
+    `id` INT(255) NOT NULL AUTO_INCREMENT,
+    `id_no` INT(10) NOT NULL,
+    `op_num` INT(10) NOT NULL,
     `first_name` TEXT NOT NULL , 
     `last_name` TEXT NOT NULL , 
-    `age` INT(3) NOT NULL , 
     `sex` TEXT NOT NULL , 
-    `marital_status` TEXT NOT NULL , 
-    `email` VARCHAR(255) NOT NULL , 
     `phone_num` INT(10) NOT NULL , 
     `physical_address` VARCHAR(255) NOT NULL , 
     `dob` DATE NOT NULL , 
     `nhif_num` INT(15) NOT NULL , 
+    `number_of_visits` INT(255) NOT NULL DEFAULT '1'
     `date_in` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+    `ip_number` INT(10) NOT NULL AFTER,
+    `adm_ward` VARCHAR(255) NOT NULL AFTER `ip_number`,
+    `next_of_kin` VARCHAR(255) NOT NULL,
+    `kin_rlshp` VARCHAR(255) NOT NULL,
+    `kin_telephone` INT(10) NOT NULL,
+    `adm_date` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
-ALTER TABLE `patients` ADD `op_num` INT(10) NOT NULL AFTER `id`;
-ALTER TABLE `patients` ADD `number_of_visits` INT(255) NOT NULL DEFAULT '1' AFTER `nhif_num`;
-ALTER TABLE `patients` DROP `email`;
-ALTER TABLE `patients` ADD `id_no` INT(10) NOT NULL AFTER `id`;
-ALTER TABLE `patients` ADD `ip_number` INT(10) NOT NULL AFTER `date_in`, 
-    ADD `adm_ward` VARCHAR(255) NOT NULL AFTER `ip_number`, 
-    ADD `next_of_kin` VARCHAR(255) NOT NULL AFTER `adm_ward`, 
-    ADD `kin_rlshp` VARCHAR(255) NOT NULL AFTER `next_of_kin`, 
-    ADD `kin_telephone` INT(10) NOT NULL AFTER `kin_rlshp`, 
-    ADD `adm_date` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `kin_telephone`;
 
 CREATE TABLE `hospital_db`.`employees` (
     `id` INT(255) NOT NULL AUTO_INCREMENT , 
     `first_name` TEXT NOT NULL , 
     `last_name` TEXT NOT NULL , 
-    `age` INT(3) NOT NULL , 
     `sex` TEXT NOT NULL , 
-    `marital_status` TEXT NOT NULL , 
     `email` VARCHAR(255) NOT NULL , 
     `phone_num` INT(10) NOT NULL , 
     `physical_address` VARCHAR(255) NOT NULL , 
     `dob` DATE NOT NULL , 
-    `nhif_num` INT(15) NOT NULL , 
-    `picture` VARCHAR(255) NOT NULL, 
     `role` VARCHAR(255) NOT NULL,
-    `kra_num` VARCHAR(255) NOT NULL,
-    `nssf_num` VARCHAR(255) NOT NULL,
+     `job_title` VARCHAR(255) NOT NULL,
     `date_in` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
-ALTER TABLE `employees` CHANGE `marital_status` 
-`status` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
-ALTER TABLE `employees` ADD `id_no` INT(12) NOT NULL AFTER `id`;
-
-CREATE TABLE `hospital_db`.`doctors` (
-    `id` INT(255) NOT NULL AUTO_INCREMENT , 
-    `first_name` TEXT NOT NULL , 
-    `last_name` TEXT NOT NULL , 
-    `age` INT(3) NOT NULL , 
-    `sex` TEXT NOT NULL , 
-    `status` TEXT NOT NULL , 
-    `email` VARCHAR(255) NOT NULL , 
-    `phone_num` INT(10) NOT NULL , 
-    `physical_address` VARCHAR(255) NOT NULL , 
-    `dob` DATE NOT NULL , 
-    `nhif_num` INT(15) NOT NULL , 
-    `picture` VARCHAR(255) NOT NULL, 
-    `department` VARCHAR(255) NOT NULL,
-    `kra_num` VARCHAR(255) NOT NULL,
-    `nssf_num` VARCHAR(255) NOT NULL,
-    `date_in` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB;
-ALTER TABLE `doctors` CHANGE `date_in` `date_added` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP;
-ALTER TABLE `doctors` ADD `id_no` INT(10) NOT NULL AFTER `id`;
-
 
 CREATE TABLE `hospital_db`.`departments` (
     `id` INT(255) NOT NULL AUTO_INCREMENT , 

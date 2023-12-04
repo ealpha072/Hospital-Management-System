@@ -55,13 +55,6 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="" class="col-sm-2">Age<sup>*</sup></label>
-                                    <div class="col-sm-6">
-                                        <input type="number" name="age" id="" class="form-control form-control-sm" placeholder="Age" max="120" min="0" required>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
                                     <label for="" class="col-sm-2">Phone Number<sup>*</sup></label>
                                     <div class="col-sm-6">
                                         <input type="tel" name="phone" id="" class="form-control form-control-sm" placeholder="Phone Number" required>

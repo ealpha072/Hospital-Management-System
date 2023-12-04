@@ -23,6 +23,12 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="" class="col-sm-2">ID Num<sup>*</sup></label>
+                    <div class="col-sm-6">
+                        <input type="digit" name="id_num" id="" class="form-control form-control-sm" placeholder="ID Number" required maxlength="8" minlength="8">
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="" class="col-sm-2">Email Address<sup>*</sup></label>
                     <div class="col-sm-6">
                         <input type="email" name="email" id="" class="form-control form-control-sm" placeholder="Email Address" required>
@@ -34,6 +40,7 @@
                         <input type="tel" name="phone" id="" class="form-control form-control-sm" placeholder="Phone Number" required>
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <label for="" class="col-sm-2">Physical Address<sup>*</sup></label>
                     <div class="col-sm-6">
@@ -49,13 +56,6 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="" class="col-sm-2">Age<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <input type="number" name="age" id="" class="form-control form-control-sm" placeholder="Age" required>
-                    </div>
-                </div>
-
-                <div class="form-group row">
                     <label for="" class="col-sm-2">Sex<sup>*</sup></label>
                     <div class="col-sm-6">
                         <select name="sex" id="" class="form-control form-control-sm" required>
@@ -67,52 +67,20 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="" class="col-sm-2">Status<sup>*</sup></label>
+                    <label for="" class="col-sm-2">Job Title<sup>*</sup></label>
                     <div class="col-sm-6">
-                        <select name="status" id="" class="form-control form-control-sm" required>
-                            <option value="" disabled selected>--Status--</option>
-                            <option value="Active">Active</option>
-                            <option value="Inactive">Inactive</option>
+                        <input type="email" name="job_title" id="" class="form-control form-control-sm" placeholder="Doctor, Nurse, Store Keeper etc" required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-sm-2">Department<sup>*</sup></label>
+                    <div class="col-sm-6">
+                        <select name="department" id="" class="form-control form-control-sm" required>
+                            <option value="" disabled selected>--Select Department--</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </select>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="" class="col-sm-2">Picture<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <input type="file" name="profile_picture" id="" class="form-control form-control-sm" required>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="" class="col-sm-2">Staff Role<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <select name="role" id="" class="form-control form-control-sm" required>
-                            <option value="">--Select Role--</option>
-                            <option value="Superintendant">Superintendant</option>
-                            <!--populate from DB-->
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="" class="col-sm-2">NHIF Number<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <input type="number" name="nhif" id="" class="form-control form-control-sm" placeholder="NHIF Number" required>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="" class="col-sm-2">NSSF Number<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <input type="number" name="nssf" id="" class="form-control form-control-sm" placeholder="NSSF Number" required>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="" class="col-sm-2">KRA Number<sup>*</sup></label>
-                    <div class="col-sm-6">
-                        <input type="text" name="kra" id="" class="form-control form-control-sm" placeholder="KRA Number" required>
                     </div>
                 </div>
 

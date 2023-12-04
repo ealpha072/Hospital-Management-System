@@ -60,7 +60,6 @@
         public $first_name = "";
         public $last_name = "";
         public $email = "";
-        public $age = "";
         public $phone = "";
         public $physical_address = "";
         public $dob = "";
@@ -68,6 +67,7 @@
         public $status = "";
         public $nhif_number = "";
 		public $id_num = "";
+
         //admission parameters
         public $ip_number = "";
         public $adm_ward = "";
@@ -75,9 +75,7 @@
         public $kin_rlshp = "";
         public $kin_telephone = "";
 
-        public $nssf = "";
-        public $picture = "";
-        public $kra = "";
+        //employee parameters
         public $department = "" ;
         public $role = "";
 
@@ -85,12 +83,10 @@
             $this->first_name = strtolower(htmlspecialchars(strip_tags(ucfirst($_POST['first_name']))));
             $this->last_name = strtolower(ucfirst(htmlspecialchars(strip_tags($_POST['last_name']))));
 			$this->id_num = (int)htmlspecialchars(strip_tags($_POST['id_num']));
-            $this->age = htmlspecialchars(strip_tags($_POST['age']));
             $this->phone = htmlspecialchars(strip_tags($_POST['phone']));
             $this->physical_address = strtolower(ucfirst(htmlspecialchars(strip_tags($_POST['p_address']))));
             $this->dob = htmlspecialchars(strip_tags($_POST['dob']));
             $this->sex = htmlspecialchars(strip_tags($_POST['sex']));
-            $this->status = htmlspecialchars(strip_tags($_POST['status']));
             $this->nhif_number = (int)htmlspecialchars(strip_tags($_POST['nhif']));
         }
 
@@ -105,9 +101,6 @@
 
         public function attach_common_props_employees_doctors(){
             $this->email = strtolower($_POST['email']);
-            $this->nssf = (int)htmlspecialchars(strip_tags($_POST['nssf']));
-            $this->kra = strtoupper(htmlspecialchars(strip_tags($_POST['kra'])));
-            $this->picture = $_FILES['profile_picture'];
         }
 
     }
@@ -146,13 +139,19 @@
                 //for returning patients
                 if(count($check_patient_results) > 0){
                     $this->number_of_visits = $check_patient_results[0]['number_of_visits'] + 1;
-                    $update_patient_query = "UPDATE ".$this->table." SET op_num = ?,  
-                        age=?, marital_status=?, phone_num=?, physical_address=?, nhif_num=?, number_of_visits=? WHERE id_no = ? ";
+                    $update_patient_query = "UPDATE ".$this->table." SET 
+                        op_num = ?, 
+                        phone_num=?, 
+                        physical_address=?, 
+                        nhif_num=?, 
+                        number_of_visits=? WHERE id_no = ? ";
                     $update_patient_params = [
-                        $this->op_number, $this->age, 
-                        $this->status, $this->phone, 
+                        $this->op_number,
+                        $this->phone, 
                         $this->physical_address, 
-                        $this->nhif_number, $this->number_of_visits, $check_patient_results[0]['id_num']
+                        $this->nhif_number, 
+                        $this->number_of_visits, 
+                        $check_patient_results[0]['id_num']
                     ];
                     try {
                         $this->conn->update($update_patient_query, $update_patient_params);
@@ -161,13 +160,14 @@
                     }
                 }else{
                     //for first time patients
-                    $query = "INSERT INTO ".$this->table." (id_no, op_num, first_name, last_name, age, sex, marital_status, phone_num, physical_address, dob, nhif_num) 
-                        VALUES(?,?,?,?,?,?,?,?,?,?,?)
+                    //if error, check insert statment
+                    $query = "INSERT INTO ".$this->table." (id_no, op_num, first_name, last_name, sex, phone_num, physical_address, dob, nhif_num) 
+                        VALUES(?,?,?,?,?,?,?,?,?)
                     ";
                     $params = [ 
 						$this->id_num,
                         $this->op_number, $this->first_name, $this->last_name,
-                        $this->age, $this->sex, $this->status,
+                        $this->sex, $this->status,
                         $this->phone,$this->physical_address,$this->dob,
                         $this->nhif_number
                     ];
@@ -259,39 +259,27 @@
 				array_push($all_errors, "Doctor already exists");
 			}
 
-			print_r($this->picture);
-            //image processing
-			if($this->picture['size'] === 0){
-				$this->picture = 'ani-icon-01.png';
-			}else{
-				$upload_image_return = fileUpload($this->picture, '../images/doctors/');
-				$this->picture = $this->picture['name'];
-				if(is_array($upload_image_return)){
-					foreach($upload_image_return as $img_error){
-						array_push($all_errors, $img_error);
-					}
-            	}
-			}
 
             //to database
             if(count($all_errors) === 0){
-                $query = "INSERT INTO ".$this->table. " (id_no, first_name, last_name, age, sex, status, email, phone_num, physical_address, dob, nhif_num, 
-                    picture, department, kra_num, nssf_num) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                $query = "INSERT INTO ".$this->table. " (id_no, first_name, last_name, sex, status, email, phone_num, physical_address, dob, nhif_num, 
+                    department) VALUES (?,?,?,?,?,?,?,?,?,?,?)
                 ";
 
                 $params = [
 					$this->id_num,
-                    $this->first_name,$this->last_name,$this->age,
-                    $this->sex, $this->status,
-                    $this->email,$this->phone,$this->physical_address,
-                    $this->dob,$this->nhif_number,
-                    $this->picture,$this->department,
-                    $this->kra,$this->nssf,
+                    $this->first_name,
+                    $this->last_name,
+                    $this->sex, 
+                    $this->status,
+                    $this->email,
+                    $this->phone,
+                    $this->physical_address,
+                    $this->dob,
+                    $this->nhif_number,
+                    $this->department,
                 ];
                 try {
-					if($this->picture !=  'ani-icon-01.png'){
-						move_uploaded_file($this->picture['tmp_name'], $destination_folder.$upload_image_return);
-					}
                     $this->conn->insert($query, $params);
                     $_SESSION['msg'] = 'Doctor added to database succesfully';
                     echo $_SESSION['msg'];
@@ -315,7 +303,7 @@
         public function addEmployee(){
 			//variables
             $all_errors = [];
-            $destination_folder = '../images/employees/';
+
             $this->role = htmlspecialchars(strip_tags($_POST['role']));
 
 			//validations
