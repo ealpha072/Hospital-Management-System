@@ -29,18 +29,15 @@
         header('Location: ../pages/patients.php?patient_page=add');
     }
 
-    if(isset($_POST['add_doctor']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
-        $new_doctor = new Doctor($database); 
-        $new_doctor->attach_common_props();
-        $new_doctor->attach_common_props_employees_doctors();
-        $new_doctor->add_doctor();
-    }
-
-    if(isset($_POST['add_employee']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
-        $new_employee = new Employee($database); 
+    if(isset($_POST['add_staff']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
+        $new_employee = new Employee($database);
         $new_employee->attach_common_props();
         $new_employee->attach_common_props_employees_doctors();
-        $new_employee->addEmployee();
+        $message = $new_employee->addEmployee();
+
+        unset($_SESSION['msg']);
+        $_SESSION['msg'] = $message;
+        header('Location: ../pages/add_staff.php');
     }
 
     if(isset($_POST['add_department']) && $_SERVER['REQUEST_METHOD'] === 'POST'){

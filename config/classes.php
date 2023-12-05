@@ -71,7 +71,7 @@
 
         //employee parameters
         public $department = "" ;
-        public $role = "";
+        public $job_title = "";
 
         public function attach_common_props(){
             $this->first_name = strtolower(htmlspecialchars(strip_tags(ucfirst($_POST['first_name']))));
@@ -81,7 +81,6 @@
             $this->physical_address = strtolower(ucfirst(htmlspecialchars(strip_tags($_POST['p_address']))));
             $this->dob = htmlspecialchars(strip_tags($_POST['dob']));
             $this->sex = htmlspecialchars(strip_tags($_POST['sex']));
-            $this->nhif_number = (int)htmlspecialchars(strip_tags($_POST['nhif']));
         }
 
         public function attach_admission_props(){
@@ -95,7 +94,7 @@
 
         public function attach_common_props_employees_doctors(){
             $this->email = strtolower($_POST['email']);
-            $this->role = htmlspecialchars(strip_tags($_POST['role']));
+            $this->job_title = htmlspecialchars(strip_tags($_POST['job_title']));
             $this->department = htmlspecialchars(strip_tags($_POST['department']));
             $this->nhif_number = NULL;
         }
@@ -115,6 +114,7 @@
         }
 
         public function add(){
+            $this->nhif_number = (int)htmlspecialchars(strip_tags($_POST['nhif']));
             //variables
             $all_errors = [];
 
@@ -247,7 +247,7 @@
             $email_error = $new_validation->validateEmail($this->email);
             $phone_error = $new_validation->validatePhoneNumber($this->phone);
             $address_error = $new_validation->validateAddress($this->physical_address);
-            $all_errors = array_merge($name_error, $email_error, $phone_error, $address_error, $nssf_nhif_kra_error);
+            $all_errors = array_merge($name_error, $email_error, $phone_error, $address_error);
 
 			//check if names exists
 			$check_query = "SELECT first_name FROM ".$this->table. " WHERE first_name =? AND last_name = ?";
@@ -259,9 +259,9 @@
 
 			//push to database
             if(count($all_errors) === 0){
-				$query = "INSERT INTO ".$this->table. " ( id_num,first_name,last_name,age, sex,email,
-					phone_num,physical_address,dob,role, department
-					) VALUES( ?,?,?,?,?,?,?,?,?,?,?)
+				$query = "INSERT INTO ".$this->table. " ( id_num,first_name,last_name, sex,email,
+					phone_num,physical_address,dob,job_title, department
+					) VALUES(?,?,?,?,?,?,?,?,?,?)
 				";
 				$params = [
                     $this->id_num,
@@ -272,12 +272,13 @@
                     $this->phone,
                     $this->physical_address,
 					$this->dob,
-                    $this->role,
+                    $this->job_title,
 					$this->department
 				];
                 try {
                     $this->conn->insert($query, $params);
-                    $_SESSION['msg'] = 'Employee added to database succesfully';
+                    $_SESSION['msg'] = 'Staff added to database succesfully';
+                    return $_SESSION['msg'];
                 } catch (Exception $e) {
                     throw new Exception($e->getMessage());
                 }
