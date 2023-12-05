@@ -43,12 +43,6 @@
             return $errors_array;
         }
 
-        public function validateNssfandNhif($nssf, $nhif, $kra, $errors_array=[]){
-            if(empty($nssf) || empty($nhif) || empty($kra)){array_push($errors_array, "NSSF, KRA and NHIF can't cant be empty"); }
-            if(!is_int($nssf) || !is_int($nhif)){array_push($errors_array, "NSSF and NHIF invalid, only numbers allowed");}
-            return $errors_array;
-        }
-
         public function  validateNextofKinName($name, $errors_array=[]){
             if(empty($name)){array_push($errors_array, "Next of kin cannot be empty");}
         }
@@ -101,6 +95,9 @@
 
         public function attach_common_props_employees_doctors(){
             $this->email = strtolower($_POST['email']);
+            $this->role = htmlspecialchars(strip_tags($_POST['role']));
+            $this->department = htmlspecialchars(strip_tags($_POST['department']));
+            $this->nhif_number = NULL;
         }
 
     }
@@ -166,9 +163,14 @@
                     ";
                     $params = [ 
 						$this->id_num,
-                        $this->op_number, $this->first_name, $this->last_name,
-                        $this->sex, $this->status,
-                        $this->phone,$this->physical_address,$this->dob,
+                        $this->op_number, 
+                        $this->first_name, 
+                        $this->last_name,
+                        $this->sex, 
+                        $this->status,
+                        $this->phone,
+                        $this->physical_address,
+                        $this->dob,
                         $this->nhif_number
                     ];
 
@@ -227,71 +229,6 @@
         }
     }
 
-    class Doctor{
-        use person;
-        public $table = 'doctors';
-
-        public function __construct($database){
-            $this->conn = $database;
-        }
-
-        public function add_doctor(){
-            //variables
-            $all_errors = [];
-            $destination_folder = '../images/doctors/';
-            $this->department = strtolower(htmlspecialchars(strip_tags($_POST['department'])));
-			$upload_image_return = null;
-
-            //form validations
-            $new_validation = new Validate();
-            $name_error = $new_validation->validateNames($this->first_name, $this->last_name);
-            $email_error = $new_validation->validateEmail($this->email);
-            $nssf_nhif_kra_error = $new_validation->validateNssfandNhif($this->nssf, $this->nhif_number, $this->kra);
-            $phone_error = $new_validation->validatePhoneNumber($this->phone);
-            $address_error = $new_validation->validateAddress($this->physical_address);
-            $all_errors = array_merge($name_error, $email_error, $phone_error, $address_error, $nssf_nhif_kra_error);
-
-			//check if names exists
-			$check_query = "SELECT first_name FROM ".$this->table. " WHERE id_no = ?";
-			$check_params = [$this->id_num];
-			$results = $this->conn->select($check_query, $check_params);
-			if(count($results) > 0){
-				array_push($all_errors, "Doctor already exists");
-			}
-
-
-            //to database
-            if(count($all_errors) === 0){
-                $query = "INSERT INTO ".$this->table. " (id_no, first_name, last_name, sex, status, email, phone_num, physical_address, dob, nhif_num, 
-                    department) VALUES (?,?,?,?,?,?,?,?,?,?,?)
-                ";
-
-                $params = [
-					$this->id_num,
-                    $this->first_name,
-                    $this->last_name,
-                    $this->sex, 
-                    $this->status,
-                    $this->email,
-                    $this->phone,
-                    $this->physical_address,
-                    $this->dob,
-                    $this->nhif_number,
-                    $this->department,
-                ];
-                try {
-                    $this->conn->insert($query, $params);
-                    $_SESSION['msg'] = 'Doctor added to database succesfully';
-                    echo $_SESSION['msg'];
-                } catch (Exception $e) {
-                    throw new Exception($e->getMessage());
-                }
-            }else{
-                print_r($all_errors);
-            }
-        }
-    }
-
     class Employee{
         use person;
         public $table = "employees";
@@ -304,13 +241,10 @@
 			//variables
             $all_errors = [];
 
-            $this->role = htmlspecialchars(strip_tags($_POST['role']));
-
 			//validations
 			$new_validation = new Validate();
             $name_error = $new_validation->validateNames($this->first_name, $this->last_name);
             $email_error = $new_validation->validateEmail($this->email);
-            $nssf_nhif_kra_error = $new_validation->validateNssfandNhif($this->nssf, $this->nhif_number, $this->kra);
             $phone_error = $new_validation->validatePhoneNumber($this->phone);
             $address_error = $new_validation->validateAddress($this->physical_address);
             $all_errors = array_merge($name_error, $email_error, $phone_error, $address_error, $nssf_nhif_kra_error);
@@ -320,34 +254,30 @@
 			$check_params = [$this->first_name, $this->last_name];
 			$results = $this->conn->select($check_query, $check_params);
 			if(count($results) > 0){
-				array_push($all_errors, "Doctor already exists");
+				array_push($all_errors, "Name of employee already exists");
 			}
-
-			//image processing
-			$upload_image_return = fileUpload($this->picture, '../images/employees/');
-            if(is_array($upload_image_return)){
-                foreach($upload_image_return as $img_error){
-                    array_push($all_errors, $img_error);
-                }
-            }
 
 			//push to database
             if(count($all_errors) === 0){
-				$query = "INSERT INTO ".$this->table. " ( first_name,last_name,age, sex,status,email,
-					phone_num,physical_address,dob, nhif_num,picture,role, kra_num,nssf_num
-					) VALUES( ?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+				$query = "INSERT INTO ".$this->table. " ( id_num,first_name,last_name,age, sex,email,
+					phone_num,physical_address,dob,role, department
+					) VALUES( ?,?,?,?,?,?,?,?,?,?,?)
 				";
 				$params = [
-					$this->first_name,$this->last_name,$this->age,$this->sex,
-					$this->status,$this->email,$this->phone,$this->physical_address,
-					$this->dob,$this->nhif_number,$this->picture['name'],$this->role,
-					$this->kra,$this->nssf,
+                    $this->id_num,
+					$this->first_name,
+                    $this->last_name,
+                    $this->sex,
+                    $this->email,
+                    $this->phone,
+                    $this->physical_address,
+					$this->dob,
+                    $this->role,
+					$this->department
 				];
                 try {
-                    move_uploaded_file($this->picture['tmp_name'], $destination_folder.$upload_image_return);
                     $this->conn->insert($query, $params);
                     $_SESSION['msg'] = 'Employee added to database succesfully';
-                    echo $_SESSION['msg'];
                 } catch (Exception $e) {
                     throw new Exception($e->getMessage());
                 }

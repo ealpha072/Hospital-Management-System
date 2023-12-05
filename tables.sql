@@ -24,6 +24,7 @@ CREATE TABLE `hospital_db`.`patients` (
 
 CREATE TABLE `hospital_db`.`employees` (
     `id` INT(255) NOT NULL AUTO_INCREMENT , 
+    `id_num` INT(10) NOT NULL,
     `first_name` TEXT NOT NULL , 
     `last_name` TEXT NOT NULL , 
     `sex` TEXT NOT NULL , 
@@ -31,8 +32,8 @@ CREATE TABLE `hospital_db`.`employees` (
     `phone_num` INT(10) NOT NULL , 
     `physical_address` VARCHAR(255) NOT NULL , 
     `dob` DATE NOT NULL , 
-    `role` VARCHAR(255) NOT NULL,
-     `job_title` VARCHAR(255) NOT NULL,
+    `job_title` VARCHAR(255) NOT NULL,
+    `department` TEXT NOT NULL,
     `date_in` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
