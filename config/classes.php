@@ -167,7 +167,6 @@
                         $this->first_name, 
                         $this->last_name,
                         $this->sex, 
-                        $this->status,
                         $this->phone,
                         $this->physical_address,
                         $this->dob,
@@ -185,6 +184,7 @@
                 }
             }else{
                 print_r($all_errors);
+                return $all_errors;
             }
         }
 

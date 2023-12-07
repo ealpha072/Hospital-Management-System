@@ -12,8 +12,8 @@
         $new_patient = new Patient($database);
         $new_patient->attach_common_props();
         $message = $new_patient->add();
+        
         unset($_SESSION['msg']);
-
         $_SESSION['msg'] = $message;
         header('Location: ../pages/patients.php?patient_page=add');
     }

@@ -6,6 +6,12 @@
     require "../public/wrapper.php";
     require_once('../config/pagination.php');
 
+    if (isset($_SESSION)) {
+        echo "A session is active.";
+    } else {
+        echo "No session is active.";
+    }
+
     if(isset($_GET['patient_page'])){
         $database = new Database();
         $new_html = new Html();
@@ -19,23 +25,28 @@
                         </a>
                     </div>
                     <div class="card-body">
-                       <form action="../config/formsprocess.php" method="post">
+                        <form action="../config/formsprocess.php" method="post">
                             <div class="card-body">';
-                                if(isset($_SESSION['msg']) && $_SESSION['msg'] !== ""){
+                                if(isset($_SESSION['msg'])){
+                                    echo var_dump($_SESSION);
+                                    echo $_SESSION['msg'][0];
                                     echo '
-                                        <div class="alert alert-success alert-dismissible fade show" role="alert"><h5>';
-                                        echo $_SESSION['msg'];
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <h5>';
+                                            echo $_SESSION['msg'];
                                     echo'
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                     </div>';
-                                    sleep(5);
+                                    //sleep(5);
                                     unset($_SESSION['msg']);
                                 }
 
-                                echo '<div class="form-group row">
+
+                                echo '
+                                <div class="form-group row">
                                     <label for="" class="col-sm-2">First Name<sup>*</sup></label>
                                     <div class="col-sm-6">
                                         <input type="text" name="first_name" id="" class="form-control form-control-sm" placeholder="First Name" required>
@@ -85,18 +96,7 @@
                                         </select>
                                     </div>
                                 </div> 
-                                <div class="form-group row">
-                                    <label for="" class="col-sm-2">Marital Status<sup>*</sup></label>
-                                    <div class="col-sm-6">
-                                        <select name="status" id="" class="form-control form-control-sm" required>
-                                            <option value="" disabled selected>--Status--</option>
-                                            <option value="active">Married</option>
-                                            <option value="active">Widowed</option>
-                                            <option value="inactive">Divorced</option>
-                                            <option value="inactive">N/A (For children) </option>
-                                        </select>
-                                    </div>
-                                </div>
+                                
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2">NHIF Number<sup>*</sup></label>
                                     <div class="col-sm-6">
@@ -358,11 +358,6 @@
                     </div>
                 </div>
             ';
-        }
-
-        if( $_GET['patient_page'] === 'edit' ){
-            echo "<h1>Coming soon</h1>";
-
         }
     }
 ?>
