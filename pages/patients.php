@@ -27,21 +27,13 @@
                     <div class="card-body">
                         <form action="../config/formsprocess.php" method="post">
                             <div class="card-body">';
-                                if(isset($_SESSION['msg'])){
-                                    echo var_dump($_SESSION);
-                                    echo $_SESSION['msg'][0];
-                                    echo '
-                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                            <h5>';
-                                            echo $_SESSION['msg'];
-                                    echo'
-                                            </h5>
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                                if(isset($_SESSION['msg']) && isset($_SESSION['success'])){
+
+                                    echo '<div>
+                                        <h5>
                                     </div>';
                                     //sleep(5);
-                                    unset($_SESSION['msg']);
+                                    //unset($_SESSION['msg']);
                                 }
 
 
