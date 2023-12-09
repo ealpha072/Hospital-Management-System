@@ -20,7 +20,7 @@
         });*/
         setTimeout(function () {
             $(".alert").alert('close');
-        }, 3000);
+        }, 10000);
     </script>
 </body>
 </html>

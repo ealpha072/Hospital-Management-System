@@ -29,8 +29,26 @@
                             <div class="card-body">';
                                 if(isset($_SESSION['msg']) && count($_SESSION['msg']) > 0){
                                     if($_SESSION['msg'][1] === 'Success'){
-                                        echo '<div class="form-group row message-container success-message">
+                                        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                                             <p>'.$_SESSION['msg'][0].'</p>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>';
+                                    }
+
+                                    if($_SESSION['msg'][1] === 'Error'){
+                                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <h5>Please fix below and try again:</h5>
+                                            <ul>';
+
+                                            foreach($_SESSION['msg'][0] as $error){
+                                                echo '<li>'.$error.'</li>';
+                                            }
+                                        echo '</ul>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                         </div>';
                                     }
                                     //sleep(5);

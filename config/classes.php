@@ -175,6 +175,7 @@
 
                     try {
                         $this->conn->insert($query, $params);
+                        unset($_SESSION['msg']);
                         $_SESSION['msg'] = 'Patient added to database succesfully. Patient OP number is '.$this->op_number;
                         return [$_SESSION['msg'], 'success'];
                         //header('Location: ../pages/patients.php?patient_page=add');
@@ -185,7 +186,7 @@
             }else{
                 $_SESSION['error'] = 'Please fix below errors';
                 print_r($all_errors);
-                return [$_SESSION['error'], $all_errors];
+                return [$all_errors, 'Error'];
             }
         }
 

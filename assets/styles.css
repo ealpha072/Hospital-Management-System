@@ -113,9 +113,13 @@ sup {
 /*error and success divs*/
 .message-container {
     /*max-width: 400px;*/
-    margin: 5px auto 20px auto;
+    margin: 10px auto;
     padding:10px;
     border-radius: 5px;
+}
+
+.message-container p{
+    margin-bottom: 0;
 }
 
 .success-message {
