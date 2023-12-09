@@ -178,7 +178,6 @@
                                         <th>Id No</th>
                                         <th>First Name</th>
                                         <th>Last Name</th>
-                                        <th>Age</th>
                                         <th>DoB</th>
                                         <th>Phone Number</th>
                                         <th>NHIF Number</th>
@@ -196,7 +195,7 @@
                                                 }
                                         echo '</tr>
                                                 <tr style="display:none" class = "minor-row">';
-                                                $get_details_query = 'SELECT id_no, op_num, sex, physical_address, marital_status, date_in FROM patients WHERE id_no = ? AND first_name = ?';
+                                                $get_details_query = 'SELECT id_no, op_num, sex, physical_address, date_in FROM patients WHERE id_no = ? AND first_name = ?';
                                                 $params = [$items_to_display[$items]['id_no'], $items_to_display[$items]['first_name']];
                                                 $single_patient_data = $database->select($get_details_query, $params);
                                                 foreach($single_patient_data as $data){
@@ -285,18 +284,32 @@
                     <div class="card-body">
                         <form action="../config/formsprocess.php" method="post">
                             <div class="card-body">';
-                            if(isset($_SESSION['msg']) && $_SESSION['msg'] !== ""){
-                                echo '
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert"><h5>';
-                                    echo $_SESSION['msg'];
-                                echo'
-                                </h5>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                </div>';
-                                sleep(5);
-                                unset($_SESSION['msg']);
+                            if(isset($_SESSION['msg']) && count($_SESSION['msg']) > 0){
+                                if($_SESSION['msg'][1] === 'Success'){
+                                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <p>'.$_SESSION['msg'][0].'</p>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>';
+                                }
+
+                                if($_SESSION['msg'][1] === 'Error'){
+                                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <h5>Please fix below and try again:</h5>
+                                        <ul>';
+
+                                        foreach($_SESSION['msg'][0] as $error){
+                                            echo '<li>'.$error.'</li>';
+                                        }
+                                    echo '</ul>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>';
+                                }
+                                //sleep(5);
+                                //unset($_SESSION['msg']);
                             }
                             echo '<div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Patient Name</strong> </label>

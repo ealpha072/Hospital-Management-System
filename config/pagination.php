@@ -17,7 +17,7 @@
             $page_number = $page_number < 1 ? 1 : $page_number;
 
             $rows_to_skip = ($page_number - 1) * $rows_per_page; //20
-            $query = "SELECT  id_no, first_name, last_name, age, dob, phone_num, nhif_num FROM $table LIMIT $rows_per_page OFFSET $rows_to_skip";
+            $query = "SELECT  id_no, first_name, last_name, dob, phone_num, nhif_num FROM $table LIMIT $rows_per_page OFFSET $rows_to_skip";
 
             try {
                 //code...

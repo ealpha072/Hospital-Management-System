@@ -177,7 +177,7 @@
                         $this->conn->insert($query, $params);
                         unset($_SESSION['msg']);
                         $_SESSION['msg'] = 'Patient added to database succesfully. Patient OP number is '.$this->op_number;
-                        return [$_SESSION['msg'], 'success'];
+                        return [$_SESSION['msg'], 'Success'];
                         //header('Location: ../pages/patients.php?patient_page=add');
                     } catch (Exception $e) {
                         throw new Exception($e->getMessage());
@@ -223,7 +223,7 @@
                     try {
                         $this->conn->update($update_patient_query, $update_patient_params);
                         $_SESSION['msg'] = 'Patient admitted successfully, IP no is '.$this->ip_number;
-                        return $_SESSION['msg'];
+                        return [$_SESSION['msg'], 'Success'];
                     } catch (Exception $th) {
                         throw new Exception($th->getMessage());
                     }
