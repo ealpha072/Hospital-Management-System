@@ -23,7 +23,7 @@
                         </li>
                        
                         <li>
-                            <a href="patients.php?patient_page=view&page_number=1"><i class="fa fa-heartbeat fa-sm mr-2"></i> Patient List</a>
+                            <a href="patients.php?patient_page=view&page_number=1"><i class="fa fa-heartbeat fa-sm mr-2"></i> Manage Patients</a>
                         </li>
                     </ul>
                 </li>  
@@ -33,16 +33,10 @@
                     <a href="#host-staffs" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users mr-2"></i> Human Resource</a>
                     <ul class="collapse list-unstyled" id="host-staffs">
                         <li>
-                            <a href="add_staff.php"><i class="fa fa-plus fa-sm mr-2"></i> Add Employee</a>
+                            <a href="staff.php?staff_page=add"><i class="fa fa-plus fa-sm mr-2"></i> Add Staff</a>
                         </li>
                         <li>
-                            <a href="add_doctor.php"><i class="fa fa-user-md fa-sm mr-2"></i> Add Doctor</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-stethoscope fa-sm mr-2"></i> Doctor List</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-list fa-sm mr-2"></i> Employee List</a>
+                            <a href="staff.php?staff_page=view&page_number=1"><i class="fa fa-list fa-sm mr-2"></i> Manage Staff</a>
                         </li>
                     </ul>
                 </li>

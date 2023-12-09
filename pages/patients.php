@@ -6,12 +6,6 @@
     require "../public/wrapper.php";
     require_once('../config/pagination.php');
 
-    if (isset($_SESSION)) {
-        echo "A session is active.";
-    } else {
-        echo "No session is active.";
-    }
-
     if(isset($_GET['patient_page'])){
         $database = new Database();
         $new_html = new Html();
@@ -54,7 +48,6 @@
                                     //sleep(5);
                                     //unset($_SESSION['msg']);
                                 }
-
 
                                 echo '
                                 <div class="form-group row">
