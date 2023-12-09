@@ -10,6 +10,8 @@
 
     session_destroy();
 
+    require '../public/footer.php';
+
     exit();
 ?>
 

@@ -1,4 +1,5 @@
 <?php
+
     include_once("classes.php");
     $database = new Database();
 
@@ -8,17 +9,34 @@
         echo "No session is active.";
     }
 
-    if(isset($_POST['add_patient']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])){
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        if(!($username === 'Alpha' && $password === 'Alpha')){
+            $message = 'Invalid username or password, please try again';
+            unset($_SESSION['msg']);
+            $_SESSION['msg'] = [$message, 'Error'];
+        }else{
+            $message = 'Taking you to home screen, please wait';
+            unset($_SESSION['msg']);
+            $_SESSION['msg'] = [$message, 'Success'];
+            header('Location: ../pages/login.php');
+        }
+
+    }
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_patient'])){
         $new_patient = new Patient($database);
         $new_patient->attach_common_props();
         $message = $new_patient->add();
-        
+
         unset($_SESSION['msg']);
         $_SESSION['msg'] = $message;
         header('Location: ../pages/patients.php?patient_page=add');
     }
 
-    if(isset($_POST['admit_patient']) && $_SERVER['REQUEST_METHOD'] === 'POST' ){
+    if( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admit_patient']) ){
         $new_patient = new Patient($database);
         $new_patient->attach_admission_props();
         $message = $new_patient->admit();
@@ -29,7 +47,7 @@
         header('Location: ../pages/patients.php?patient_page=add');
     }
 
-    if(isset($_POST['add_staff']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
+    if( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_staff']) ){
         $new_employee = new Employee($database);
         $new_employee->attach_common_props();
         $new_employee->attach_common_props_employees_doctors();
@@ -40,10 +58,12 @@
         header('Location: ../pages/staff.php?staff_page=add');
     }
 
-    if(isset($_POST['add_department']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
+    if( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_department']) ){
         $new_department = new Department($database); 
         $new_department->createDepartment();
     }
+
+    //FIX REQUEST METHOD BEFORE POST
 
     if(isset($_POST['add_ward']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
         $new_ward = new Ward($database); 
