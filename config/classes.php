@@ -175,9 +175,8 @@
 
                     try {
                         $this->conn->insert($query, $params);
-                        $_SESSION['success'] = "Success";
                         $_SESSION['msg'] = 'Patient added to database succesfully. Patient OP number is '.$this->op_number;
-                        return [$_SESSION['msg'], $_SESSION['success']];
+                        return [$_SESSION['msg'], 'success'];
                         //header('Location: ../pages/patients.php?patient_page=add');
                     } catch (Exception $e) {
                         throw new Exception($e->getMessage());

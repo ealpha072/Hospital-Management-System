@@ -109,3 +109,25 @@ sup {
 #patients-table i, #patients-table tbody tr.main-row{
     cursor: pointer;
 }
+
+/*error and success divs*/
+.message-container {
+    /*max-width: 400px;*/
+    margin: 5px auto 20px auto;
+    padding:10px;
+    border-radius: 5px;
+}
+
+.success-message {
+    background-color: #dff0d8;
+    border: 1px solid #d0e9c6;
+    color: #3c763d;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.error-message {
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    color: #a94442;
+}

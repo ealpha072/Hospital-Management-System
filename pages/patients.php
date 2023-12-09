@@ -27,11 +27,12 @@
                     <div class="card-body">
                         <form action="../config/formsprocess.php" method="post">
                             <div class="card-body">';
-                                if(isset($_SESSION['msg']) && isset($_SESSION['success'])){
-
-                                    echo '<div>
-                                        <h5>
-                                    </div>';
+                                if(isset($_SESSION['msg']) && count($_SESSION['msg']) > 0){
+                                    if($_SESSION['msg'][1] === 'Success'){
+                                        echo '<div class="form-group row message-container success-message">
+                                            <p>'.$_SESSION['msg'][0].'</p>
+                                        </div>';
+                                    }
                                     //sleep(5);
                                     //unset($_SESSION['msg']);
                                 }
