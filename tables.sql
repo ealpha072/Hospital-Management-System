@@ -2,7 +2,7 @@
 
 CREATE TABLE `hospital_db`.`patients` (
     `id` INT(255) NOT NULL AUTO_INCREMENT,
-    `id_no` INT(10) NOT NULL,
+    `id_num` INT(10) NOT NULL,
     `op_num` INT(10) NOT NULL,
     `first_name` TEXT NOT NULL , 
     `last_name` TEXT NOT NULL , 

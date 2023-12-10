@@ -121,7 +121,8 @@
         if( $_GET['patient_page'] === 'view' && isset($_GET['page_number'])){
             $current_page = (int)$_GET['page_number'];
             $paginator = new Paginator($database);
-            $paging_items = $paginator->buildPages("patients");
+            $columnsToSelect= ['id_num', 'op_num', 'first_name', 'last_name', 'physical_address','phone_num', 'nhif_num'];
+            $paging_items = $paginator->buildPages("patients", 10, $columnsToSelect);
             $number_of_pages = $paging_items[0];
             $items_to_display = $paging_items[1];
 
@@ -170,13 +171,12 @@
                             <table class="table table-sm table-bordered table-hover table-stripped" id="patients-table">
                                 <thead class="">
                                     <tr class="">
-                                        <th>SL No</th>
-                                        <th>Id No</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>DoB</th>
-                                        <th>Phone Number</th>
-                                        <th>NHIF Number</th>
+                                        <th>SL No</th>';
+                                        foreach ($columnsToSelect as $columns) {
+                                            # code...
+                                            echo '<th>'.ucfirst($columns).'</th>';
+                                        }
+                                        echo '
                                     </tr>
                                 </thead>
                                 <tbody>';
@@ -191,8 +191,8 @@
                                                 }
                                         echo '</tr>
                                                 <tr style="display:none" class = "minor-row">';
-                                                $get_details_query = 'SELECT id_no, op_num, sex, physical_address, date_in FROM patients WHERE id_no = ? AND first_name = ?';
-                                                $params = [$items_to_display[$items]['id_no'], $items_to_display[$items]['first_name']];
+                                                $get_details_query = 'SELECT id_num, op_num, sex, physical_address, date_in FROM patients WHERE id_num = ? AND first_name = ?';
+                                                $params = [$items_to_display[$items]['id_num'], $items_to_display[$items]['first_name']];
                                                 $single_patient_data = $database->select($get_details_query, $params);
                                                 foreach($single_patient_data as $data){
 
@@ -211,12 +211,12 @@
                                                                 <span class="font-weight-bold">Action</span>
                                                                 <span>
                                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=edit&patient_id='.$data['id_no'].'" class="mx-2">
+                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=edit&patient_id='.$data['id_num'].'" class="mx-2">
                                                                             <button type="button" class="btn btn-sm btn-success me-1">
                                                                                 <i class="fa fa-pencil"></i> Edit
                                                                             </button>
                                                                         </a>
-                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=admit&patient_id='.$data['id_no'].'" class="mx-1">
+                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=admit&patient_id='.$data['id_num'].'" class="mx-1">
                                                                             <button type="button" class="btn btn-sm btn-secondary">
                                                                                 <i class="fa fa-plus"></i> Admit
                                                                             </button>
