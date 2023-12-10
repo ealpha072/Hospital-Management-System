@@ -220,7 +220,7 @@
                 </button>
             </div>
             <div class="logout">
-                <b><a href=" " class="text-success"> Logout</a></b>
+                <b><a href="logout.php" class="text-success"> Logout</a></b>
             </div>
         </nav>
         <hr>

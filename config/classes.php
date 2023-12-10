@@ -280,7 +280,7 @@
                 try {
                     $this->conn->insert($query, $params);
                     $_SESSION['msg'] = 'Staff added to database succesfully';
-                    return $_SESSION['msg'];
+                    return [$_SESSION['msg'], 'Success'];
                 } catch (Exception $e) {
                     throw new Exception($e->getMessage());
                 }

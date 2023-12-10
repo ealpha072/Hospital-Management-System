@@ -1,4 +1,4 @@
-<?php require 'public/header.php'; ?>
+<?php require '../public/header.php'; ?>
 
 <div class="row h-100 justify-content-center align-items-center">
 	<div class="col-10 col-md-8 col-lg-4">

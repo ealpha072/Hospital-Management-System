@@ -9,6 +9,8 @@
     if(isset($_GET['patient_page'])){
         $database = new Database();
         $new_html = new Html();
+        
+        echo var_dump($_SESSION['msg']);
 
         if($_GET['patient_page'] === 'add'){
             echo '
@@ -21,6 +23,7 @@
                     <div class="card-body">
                         <form action="../config/formsprocess.php" method="post">
                             <div class="card-body">';
+                                
                                 if(isset($_SESSION['msg']) && count($_SESSION['msg']) > 0){
                                     if($_SESSION['msg'][1] === 'Success'){
                                         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">

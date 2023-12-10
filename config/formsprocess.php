@@ -37,7 +37,7 @@
 
         unset($_SESSION['msg']);
         $_SESSION['msg'] = $message;
-        header('Location: ../pages/add_staff.php');
+        header('Location: ../pages/staff.php?staff_page=add');
     }
 
     if(isset($_POST['add_department']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
