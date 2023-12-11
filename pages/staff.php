@@ -179,7 +179,7 @@
                         </div>
 
                         <div class="table-responsive">
-                            <table class="table table-sm table-bordered table-hover table-stripped" id="patients-table">
+                            <table class="table table-sm table-bordered table-hover table-stripped" id="staff-table">
                                 <thead class="">
                                     <tr class="">
                                         <th>SL No</th>';
@@ -192,7 +192,6 @@
                                 </thead>
                                 <tbody>';
                                     for($items = 0; $items < count($items_to_display); $items++){
-
                                         echo '<tr class = "main-row">
                                             <td class="text-center">
                                                 <i class="fa fa-circle-plus"></i>
@@ -202,7 +201,8 @@
                                                 }
                                         echo '</tr>
                                                 <tr style="display:none" class = "minor-row">';
-                                                $get_details_query = 'SELECT id_num, sex, physical_address, date_in FROM patients WHERE id_num = ? AND first_name = ?';
+                                                //echo 'This is a test';
+                                                $get_details_query = 'SELECT id_num, sex, physical_address, department, date_in FROM employees WHERE id_num = ? AND first_name = ?';
                                                 $params = [$items_to_display[$items]['id_num'], $items_to_display[$items]['first_name']];
                                                 $single_patient_data = $database->select($get_details_query, $params);
                                                 foreach($single_patient_data as $data){
@@ -222,14 +222,9 @@
                                                                 <span class="font-weight-bold">Action</span>
                                                                 <span>
                                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=edit&patient_id='.$data['id_no'].'" class="mx-2">
+                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=edit&patient_id='.$data['id_num'].'" class="mx-2">
                                                                             <button type="button" class="btn btn-sm btn-success me-1">
                                                                                 <i class="fa fa-pencil"></i> Edit
-                                                                            </button>
-                                                                        </a>
-                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=admit&patient_id='.$data['id_no'].'" class="mx-1">
-                                                                            <button type="button" class="btn btn-sm btn-secondary">
-                                                                                <i class="fa fa-plus"></i> Admit
                                                                             </button>
                                                                         </a>
                                                                     </div>

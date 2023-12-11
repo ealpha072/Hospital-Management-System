@@ -88,6 +88,12 @@ $(document).ready(function () {
     })
 
     $('#patients-table tbody tr.main-row').on('click', function(){
+        console.log('hello')
+        $(this).next().toggle()
+        //$('tr.minor-row').hide();
+    })
+
+    $('#staff-table tbody tr.main-row').on('click', function(){
         //console.log('hello')
         $(this).next().toggle()
         //$('tr.minor-row').hide();
