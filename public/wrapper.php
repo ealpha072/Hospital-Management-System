@@ -46,13 +46,13 @@
                     <a href="#depts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-database mr-2"></i> Departments</a>
                     <ul class="collapse list-unstyled" id="depts">
                         <li>
-                            <a href="add_depts.php"><i class="fa fa-plus fa-sm mr-2"></i> Create New</a>
+                            <a href="depts.php?depts_page=add"><i class="fa fa-plus fa-sm mr-2"></i> Create New</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-sm mr-2"></i> Manage</a>
+                            <a href="depts.php?depts_page=view&page_number=1"><i class="fa fa-wrench fa-sm mr-2"></i> Manage</a>
                         </li>
                     </ul>
-                </li> 
+                </li>
 
                 <!-- wards -->
                 <li>

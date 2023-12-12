@@ -227,6 +227,10 @@
                     } catch (Exception $th) {
                         throw new Exception($th->getMessage());
                     }
+            }else{
+                $_SESSION['error'] = 'Please fix below errors';
+                print_r($all_errors);
+                return [$all_errors, 'Error'];
             }
         }
     }
@@ -285,7 +289,9 @@
                     throw new Exception($e->getMessage());
                 }
             }else{
-				print_r($all_errors);
+				//$_SESSION['error'] = 'Please fix below errors';
+                print_r($all_errors);
+                return [$all_errors, 'Error'];
 			}
         }
     }
@@ -302,8 +308,8 @@
 
         public function createDepartment(){
 			//variables
-            $errors = [];
-            $this->name = htmlspecialchars(strip_tags($_POST["name"]));
+            $all_errors = [];
+            $this->name = htmlspecialchars(strip_tags($_POST["dpt_name"]));
             $this->hod = htmlspecialchars(strip_tags($_POST["hod"]));
 
             //check if department already exists
@@ -311,21 +317,22 @@
             $results = $this->conn->select($check_query, ['name'=>$this->name]);
 
             if(count($results) != 0 ){
-                array_push($errors, "Department already exists, choose another name");
+                array_push($all_errors, "Department already exists, choose another name");
             }
 
-            if(count($errors) === 0){
+            if(count($all_errors) === 0){
                 $select_query = "INSERT INTO ".$this->table." (name, hod) VALUES(?,?)";
                 $params = [$this->name, $this->hod];
                 try {
                     $this->conn->insert($select_query, $params);
-                    $_SESSION['msg'] = 'Department added to database succesfully';
-                    echo $_SESSION['msg'];
+                    $msg = 'Department added to database succesfully';
+                    return [$msg, 'Success'];
                 } catch (Exception $e) {
                     throw new Exception($e->getMessage());
                 }
             }else{
-				print_r($errors);
+                print_r($all_errors);
+                return [$all_errors, 'Error'];
 			}
         }
     }
@@ -671,6 +678,36 @@
         public function populateSelect($array, $key){
             foreach ($array as $option_item) {
                 echo '<option value="'.$option_item[$key].'">'.ucfirst($option_item[$key]).'</option>';
+            }
+        }
+
+        public function showSessionMessage(){
+            if(isset($_SESSION['msg']) && count($_SESSION['msg']) > 0){
+                if($_SESSION['msg'][1] === 'Success'){
+                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <p>'.$_SESSION['msg'][0].'</p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>';
+                }
+
+                if($_SESSION['msg'][1] === 'Error'){
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <h6>Please fix below and try again:</h6>
+                        <ul>';
+
+                        foreach($_SESSION['msg'][0] as $error){
+                            echo '<li>'.$error.'</li>';
+                        }
+                    echo '</ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>';
+                }
+                //sleep(5);
+                //unset($_SESSION['msg']);
             }
         }
     }

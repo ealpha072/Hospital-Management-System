@@ -60,7 +60,11 @@
 
     if( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_department']) ){
         $new_department = new Department($database); 
-        $new_department->createDepartment();
+        $msg = $new_department->createDepartment();
+
+        unset($_SESSION['msg']);
+        $_SESSION['msg'] = $msg;
+        header('Location: ../pages/depts.php?depts_page=add');
     }
 
     //FIX REQUEST METHOD BEFORE POST
