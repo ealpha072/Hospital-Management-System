@@ -54,8 +54,9 @@
         echo var_dump($results);
 
         unset($_SESSION['mdl']);
-        $_SESSION['mdl'] = $results;
-        //header('Location: ../pages/bill_patient.php');
+        $_SESSION['mdl'] = $results[0];
+        echo var_dump($_SESSION['mdl']);
+        header('Location: ../pages/bill_patient.php');
     }
 
     if( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_staff']) ){
