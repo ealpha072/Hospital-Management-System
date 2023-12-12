@@ -67,7 +67,7 @@
                     </ul>
                 </li>
 
-                <!--Finance-->
+                <!--SERVICES-->
                 <li>
                     <a href="#dpts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-credit-card mr-2"></i> Billing</a>
                     <ul class="collapse list-unstyled" id="dpts">
@@ -75,7 +75,7 @@
                             <a href="services.php?services_page=add"><i class="fa fa-user-plus fa-sm mr-2"></i> Add Billing service</a>
                         </li>
                         <li>
-                            <a href="services.php?services_page=view"><i class="fa fa-list fa-sm mr-2"></i> Service List</a>
+                            <a href="services.php?services_page=view&page_number=1"><i class="fa fa-list fa-sm mr-2"></i> Service List</a>
                         </li>
                         <li>
                             <a href="bill_patient.php"><i class="fa fa-credit-card fa-sm mr-2"></i> Bill Patient</a>

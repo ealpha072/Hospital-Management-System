@@ -72,8 +72,8 @@
         echo '
             <div class="card mr-4 ml-4 mb-4">
                 <div class="card-header">
-                    <a href="ward.php?ward_page=add">
-                        <button class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add Ward</button>
+                    <a href="'.$_SERVER['PHP_SELF'].'?services_page=add">
+                        <button class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add Service</button>
                     </a>
                 </div>
                 <div class="card-body">
