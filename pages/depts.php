@@ -7,6 +7,7 @@
         $new_html = new Html();
 
         if($_GET['depts_page'] === 'add'){
+
             echo '<div class="card mb-4 mr-4 ml-4">
                 <div class="card-header">
                     <a href="'.$_SERVER['PHP_SELF'].'?depts_page=view&page_number=1">
@@ -28,9 +29,8 @@
                             <div class="col-sm-6">
                                 <select name="hod" id="" class="form-control form-control-sm" required>
                                     <option value="" disabled selected>--Select Incharge--</option>
-                                    <!--populate from DB-->
                                     <option value="John">John</option>
-                                </select>    
+                                </select>
                             </div>
                         </div>
                         <button class="btn btn-primary btn-sm" name="add_department"> <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i> Save</button>

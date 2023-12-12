@@ -9,8 +9,6 @@
     if(isset($_GET['patient_page'])){
         $database = new Database();
         $new_html = new Html();
-        
-        echo var_dump($_SESSION['msg']);
 
         if($_GET['patient_page'] === 'add'){
             echo '
@@ -267,7 +265,7 @@
             $patient_id = (int)$_GET['patient_id'];
             $new_ward = new Ward($database);
             $wards = $new_ward->getWards();
-            $patient_data = $database->select('SELECT * FROM patients WHERE id_no = ?', [$patient_id])[0];
+            $patient_data = $database->select('SELECT * FROM patients WHERE id_num = ?', [$patient_id])[0];
 
             echo '
                 <div class="card mb-4 mr-4 ml-4">
@@ -326,7 +324,7 @@
                                 <div class="col-sm-6">
                                     <input 
                                         type="text" 
-                                        value="'.$patient_data['id_no'].'" 
+                                        value="'.$patient_data['id_num'].'" 
                                         placeholder="" 
                                         name="patient_id" 
                                         class="form-control form-control-sm" 

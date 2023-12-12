@@ -322,7 +322,7 @@
                 $params = [$this->name, $this->hod];
                 try {
                     $this->conn->insert($select_query, $params);
-                    $msg = 'Department added to database succesfully';
+                    $msg = 'Department added to database succesfully!!';
                     return [$msg, 'Success'];
                 } catch (Exception $e) {
                     throw new Exception($e->getMessage());
@@ -330,6 +330,11 @@
             }else{
                 return [$all_errors, 'Error'];
 			}
+        }
+
+        public function getDepartments(){
+            $departments = $this->conn->select('SELECT name, hod FROM departments');
+            return $departments;
         }
     }
 

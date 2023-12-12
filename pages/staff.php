@@ -8,6 +8,9 @@
         $new_html = new Html();
 
         if($_GET['staff_page'] === 'add'){
+            $newdpt = new Department($database);
+            $departments = $newdpt->getDepartments();
+
             echo '
                 <div class="card mb-4 mr-4 ml-4">
                 <div class="card-header">
@@ -87,10 +90,9 @@
                                 <label for="" class="col-sm-2">Department<sup>*</sup></label>
                                 <div class="col-sm-6">
                                     <select name="department" id="" class="form-control form-control-sm" required>
-                                        <option value="" disabled selected>--Select Department--</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
+                                        <option value="" disabled selected>--Select Department--</option>';
+                                        $new_html->populateSelect($departments, 'name');
+                                    echo '</select>
                                 </div>
                             </div>
         
