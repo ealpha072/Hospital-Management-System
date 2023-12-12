@@ -3,6 +3,11 @@
     require "../public/wrapper.php";
     require_once('../config/pagination.php');
 
+    $database = new Database();
+    $new_html = new Html();
+    $newdpt = new Department($database);
+    $departments = $newdpt->getDepartments();
+
     echo '<div class="card mr-4 mb-2 ml-4">
         <div class="card-header">
             <form action="../config/formsprocess.php" method="post" class="form-inline" id="searchForm">
@@ -17,9 +22,6 @@
         </div>
         <div class="card-body">
             <form action="" method="post">';
-            if( isset($_SESSION['mdl']) ){
-                print_r($_SESSION['mdl'][0]);
-            }
                 echo '<div class="row">
                     <div class="col-9">
                         <div class="form-group row">  
@@ -111,7 +113,7 @@
                             <div class="row">
                                 <label for="" class="col-4"><strong>Insurance Provider</strong> </label>
                                 <div class="col-8">
-                                    <input type="text" readonly value="" name="" class="form-control form-control-sm">
+                                    <input type="text" readonly value="NHIF" name="" class="form-control form-control-sm">
                                 </div>
                             </div>
                         </div>
@@ -120,7 +122,13 @@
                             <div class="row">
                                 <label for="" class="col-4"><strong> Insurance Number</strong></label>
                                 <div class="col-8">
-                                    <input type="text" readonly value="" name="" class="form-control form-control-sm">
+                                    <input 
+                                        type="text" 
+                                        class="form-control form-control-sm"
+                                        value="'. ($_SESSION['mdl'][0]['nhif_num'] ? $_SESSION['mdl'][0]['nhif_num'] : '') .'"
+                                        name="" 
+                                        readonly 
+                                    >
                                 </div>
                             </div>
                         </div>
@@ -132,6 +140,7 @@
                         <thead class="">
                             <tr>
                                 <th><i class="fa fa-cogs"></i></th>
+                                <th>Department</th>
                                 <th>Service Name</th>
                                 <th>Quantity</th>
                                 <th>Unit Charge</th>
@@ -145,6 +154,13 @@
                                         <button class="btn btn-primary btn-sm add-row-btn">+</button>
                                         <button class="btn btn-success btn-sm remove-row-btn">-</button>
                                     </div>
+                                </td>
+                                <td>
+                                    <select name="department" id="" class="form-control form-control-sm" required>
+                                        <option value="" disabled selected>--Select Department--</option>';
+                                        $new_html->populateSelect($departments, 'name');
+                                    echo '</select>
+                                    
                                 </td>
                                 <td>
                                     <input type="text" class="form-control form-control-sm" placeholder="Service Name">

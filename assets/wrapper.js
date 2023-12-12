@@ -10,6 +10,9 @@ let tableRow = `
             <input type="text" class="form-control form-control-sm" placeholder="Service Name">
         </td>
         <td>
+            <input type="text" class="form-control form-control-sm" placeholder="Service Name">
+        </td>
+        <td>
             <input type="number" class="form-control form-control-sm" placeholder="1">
         </td>
         <td>
