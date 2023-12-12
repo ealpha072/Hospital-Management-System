@@ -67,7 +67,6 @@
         header('Location: ../pages/depts.php?depts_page=add');
     }
 
-    //FIX REQUEST METHOD BEFORE POST
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_ward']) ){
         $new_ward = new Ward($database); 
@@ -77,6 +76,17 @@
         $_SESSION['msg'] = $message;
         header('Location: ../pages/ward.php?ward_page=add');
     }
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_service']) ){
+        $new_service = new Services($database); 
+        $message = $new_service->addService();
+        
+        unset($_SESSION['msg']);
+        $_SESSION['msg'] = $message;
+        header('Location: ../pages/services.php?services_page=add');
+    }
+
+    //FIX REQUEST METHOD BEFORE POST
 
     if(isset($_POST['add_supplier']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
         $new_supplier = new Supplier($database); 

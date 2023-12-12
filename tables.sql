@@ -58,6 +58,7 @@ CREATE TABLE `hospital_db`.`wards` (
 CREATE TABLE `hospital_db`.`services` (
     `id` INT(255) NOT NULL AUTO_INCREMENT , 
     `name` VARCHAR(255) NOT NULL,
+    `department` TEXT NOT NULL,
     `description` VARCHAR(255) NOT NULL,
     `unit_charge` INT(255) NOT NULL,
     `date_created` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 

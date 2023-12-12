@@ -19,8 +19,7 @@
                     </a>
                 </div>
                 <div class="card-body">
-                    <form action="../config/formsprocess.php" method="post">
-                        <div class="card-body">';
+                    <form action="../config/formsprocess.php" method="post">';
                         $new_html->showSessionMessage();
                         echo '<div class="card-body">
                             <div class="form-group row">

@@ -384,6 +384,50 @@
         }
     }
 
+    class Services{
+        private $conn;
+        private $table = 'services';
+        public $servicename = "";
+        public $department = "";
+        public $unitcharge = "";
+        public $description = "";
+
+        public function __construct($db){
+            $this->conn = $db;
+        }
+
+        public function addService () {
+            $all_errors = [];
+            $this->servicename = strtolower(htmlspecialchars(strip_tags($_POST["servicename"])));
+            $this->department = htmlspecialchars(strip_tags($_POST["department"]));
+            $this->unitcharge = (int)htmlspecialchars(strip_tags($_POST["unitcharge"]));
+            $this->description = (int)htmlspecialchars(strip_tags($_POST["description"]));
+
+			//check if name exists
+			$check_query = "SELECT name FROM ".$this->table. " WHERE name = ?";
+			$check_params = [$this->servicename];
+			$results = $this->conn->select($check_query, $check_params);
+			if(count($results) > 0){
+				array_push($all_errors, "Billable service already exists exists");
+			}
+
+            if(count($all_errors) === 0){
+                $query = "INSERT INTO ".$this->table." (name, department, unit_charge, description) VALUES(?,?,?,?)";
+                $params = [$this->servicename,$this->department,$this->unitcharge, $this->description];
+                try {
+                    $this->conn->insert($query, $params);
+					$msg = ucfirst($this->servicename).' service added successfully under '.ucfirst($this->department).'department';
+                    return [$msg, 'Success'];
+                } catch (Exception $e) {
+                    throw new Exception($e->getMessage());
+                }
+            }else{
+                return [$all_errors, 'Error'];
+            }
+        }
+
+    }
+
     class Supplier{
         //supplier_id,name,company_name,status,email,phone_num,physical_address
         private $conn;
@@ -684,6 +728,7 @@
         }
 
         public function showSessionMessage(){
+            echo '<div class="card-body">';
             if(isset($_SESSION['msg']) && count($_SESSION['msg']) > 0){
                 if($_SESSION['msg'][1] === 'Success'){
                     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
