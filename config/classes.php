@@ -401,7 +401,7 @@
             $this->servicename = strtolower(htmlspecialchars(strip_tags($_POST["servicename"])));
             $this->department = htmlspecialchars(strip_tags($_POST["department"]));
             $this->unitcharge = (int)htmlspecialchars(strip_tags($_POST["unitcharge"]));
-            $this->description = (int)htmlspecialchars(strip_tags($_POST["description"]));
+            $this->description = strtolower(htmlspecialchars(strip_tags($_POST["description"])));
 
 			//check if name exists
 			$check_query = "SELECT name FROM ".$this->table. " WHERE name = ?";
@@ -416,7 +416,7 @@
                 $params = [$this->servicename,$this->department,$this->unitcharge, $this->description];
                 try {
                     $this->conn->insert($query, $params);
-					$msg = ucfirst($this->servicename).' service added successfully under '.ucfirst($this->department).'department';
+					$msg = ucfirst($this->servicename).' service added successfully under '.ucfirst($this->department).' department';
                     return [$msg, 'Success'];
                 } catch (Exception $e) {
                     throw new Exception($e->getMessage());
