@@ -231,6 +231,23 @@
                 return [$all_errors, 'Error'];
             }
         }
+
+        public function findPatient ($ip_number){
+            $all_error = [];
+
+            //check if ip number is in database
+            $query = "SELECT * FROM ".$this->table." WHERE ip_number=?";
+            $params = [$ip_number];
+
+            try {
+                //code...
+                $results = $this->conn->select($query, $params);
+                return [$results, 'Success'];
+            } catch (\Throwable $th) {
+                //throw $th;
+                throw new Exception("Error Processing Request", 1);
+            }
+        }
     }
 
     class Employee{

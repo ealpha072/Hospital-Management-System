@@ -47,6 +47,17 @@
         header('Location: ../pages/patients.php?patient_page=add');
     }
 
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search_ip']) ){
+        echo $_POST['ip_number'];
+        $patient = new Patient($database);
+        $results = $patient-> findPatient($_POST['ip_number']);
+        echo var_dump($results);
+
+        unset($_SESSION['mdl']);
+        $_SESSION['mdl'] = $results;
+        //header('Location: ../pages/bill_patient.php');
+    }
+
     if( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_staff']) ){
         $new_employee = new Employee($database);
         $new_employee->attach_common_props();
