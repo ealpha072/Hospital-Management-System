@@ -59,10 +59,10 @@
                     <a href="#wards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-hospital mr-2"></i> Ward Rooms</a>
                     <ul class="collapse list-unstyled" id="wards">
                         <li>
-                            <a href="add_ward.php"><i class="fa fa-plus fa-sm mr-2"></i> Add New</a>
+                            <a href="ward.php?ward_page=add"><i class="fa fa-plus fa-sm mr-2"></i> Add New</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-sm mr-2"></i> Manage</a>
+                            <a href="ward.php?ward_page=view&page_number=1"><i class="fa fa-wrench fa-sm mr-2"></i> Manage</a>
                         </li>
                     </ul>
                 </li>

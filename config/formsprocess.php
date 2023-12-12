@@ -69,13 +69,13 @@
 
     //FIX REQUEST METHOD BEFORE POST
 
-    if(isset($_POST['add_ward']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_ward']) ){
         $new_ward = new Ward($database); 
         $message = $new_ward->addWard();
+        
         unset($_SESSION['msg']);
-
         $_SESSION['msg'] = $message;
-        header('Location: ../pages/add_ward.php');
+        header('Location: ../pages/ward.php?ward_page=add');
     }
 
     if(isset($_POST['add_supplier']) && $_SERVER['REQUEST_METHOD'] === 'POST'){

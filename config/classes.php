@@ -350,7 +350,7 @@
         }
 
         public function addWard(){
-            $errors = [];
+            $all_errors = [];
             $this->name = strtolower(htmlspecialchars(strip_tags($_POST["wardname"])));
             $this->incharge = htmlspecialchars(strip_tags($_POST["incharge"]));
             $this->capacity = (int)htmlspecialchars(strip_tags($_POST["capacity"]));
@@ -360,21 +360,22 @@
 			$check_params = [$this->name];
 			$results = $this->conn->select($check_query, $check_params);
 			if(count($results) > 0){
-				array_push($errors, "Doctor already exists");
+				array_push($all_errors, "Ward name already exists");
 			}
 
-            if(count($errors) === 0){
+            if(count($all_errors) === 0){
                 $query = "INSERT INTO ".$this->table." (name, incharge, capacity) VALUES(?,?,?)";
                 $params = [$this->name,$this->incharge,$this->capacity];
                 try {
                     $this->conn->insert($query, $params);
-					$_SESSION['msg'] = "New ward added successfully";
-                    return $_SESSION['msg'];
+					$msg = ucfirst($this->name).' ward added successfully';
+                    return [$msg, 'Success'];
                 } catch (Exception $e) {
                     throw new Exception($e->getMessage());
                 }
+            }else{
+                return [$all_errors, 'Error'];
             }
-
         }
 
         public function getWards(){
