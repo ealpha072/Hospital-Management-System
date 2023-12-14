@@ -79,7 +79,6 @@
         header('Location: ../pages/depts.php?depts_page=add');
     }
 
-
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_ward']) ){
         $new_ward = new Ward($database); 
         $message = $new_ward->addWard();
@@ -100,7 +99,7 @@
 
     //FIX REQUEST METHOD BEFORE POST
 
-    if(isset($_POST['add_supplier']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
+    if( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_supplier']) ){
         $new_supplier = new Supplier($database); 
         $new_supplier->addSupplier();
     }

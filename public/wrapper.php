@@ -118,19 +118,19 @@
                     <a href="#suppliers" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-briefcase mr-2"></i> Suppliers</a>
                     <ul class="collapse list-unstyled" id="suppliers">
                         <li>
-                            <a href="add_supplier.php"><i class="fa fa-user-plus fa-sm"></i>  Add Supplier</a>
+                            <a href="suppliers.php?suppliers_page=add"><i class="fa fa-user-plus fa-sm"></i>  Add Supplier</a>
                         </li>
                         <li>
-                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Manage Suppliers</a>
+                            <a href="suppliers.php?suppliers_page=view&page_number=1"><i class="fa fa-wrench fa-sm"></i>  Manage Suppliers</a>
                         </li>
                         <li>
-                            <a href="create_purchase.php"><i class="fa fa-plus fa-sm"></i>  Create Purchase</a>
+                            <a href="purchases.php"><i class="fa fa-plus fa-sm"></i>  Create Purchase</a>
                         </li>
                         <li>
-                            <a href=" "><i class="fa fa-plus fa-sm"></i>  Purchase Order</a>
+                            <a href="purchases.php?purchases_page="><i class="fa fa-plus fa-sm"></i>  Purchase Order</a>
                         </li>
                         <li>
-                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Purchase Purchase List</a>
+                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Purchase List</a>
                         </li>
                     </ul>
                 </li>

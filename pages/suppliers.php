@@ -23,8 +23,16 @@
                             echo '<div class="form-group row">
                                 <label for="" class="col-sm-2">Supplier ID<sup>*</sup></label>
                                 <div class="col-sm-6">
-                                    <!--autogenerate-->
-                                    <input type="text" name="supplier_id" id="" class="form-control form-control-sm" readonly value=<?php echo(generateSupplierId());?>>
+                                    
+                                    <input 
+                                        type="text" 
+                                        name="supplier_id" 
+                                        id="" 
+                                        class="form-control form-control-sm" 
+                                        readonly 
+                                        value="';echo(generateSupplierId());
+                                        echo'"
+                                    >
                                 </div>
                             </div>
                             <div class="form-group row">

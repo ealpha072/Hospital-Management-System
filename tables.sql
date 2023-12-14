@@ -74,7 +74,7 @@ CREATE TABLE `hospital_db`.`suppliers` (
     `email` VARCHAR(255) NOT NULL , 
     `phone_num` INT(10) NOT NULL , 
     `physical_address` VARCHAR(255) NOT NULL , 
-    `date_in` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+    `date_added` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
