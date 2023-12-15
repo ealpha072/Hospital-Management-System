@@ -123,90 +123,16 @@
                         <li>
                             <a href="suppliers.php?suppliers_page=view&page_number=1"><i class="fa fa-wrench fa-sm"></i>  Manage Suppliers</a>
                         </li>
-                        <li>
-                            <a href="purchases.php"><i class="fa fa-plus fa-sm"></i>  Create Purchase</a>
-                        </li>
-                        <li>
-                            <a href="purchases.php?purchases_page="><i class="fa fa-plus fa-sm"></i>  Purchase Order</a>
-                        </li>
-                        <li>
-                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Purchase List</a>
-                        </li>
                     </ul>
                 </li>
 
-                <!--Expenses-->
-                <li>
-                    <a href="#expenses" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-credit-card mr-2"></i> Expenses</a>
-                    <ul class="collapse list-unstyled" id="expenses">
-                        <li>
-                            <a href="add_expense_category.php"><i class="fa fa-user fa-sm"></i>  Add Category</a>
-                        </li>
-                        <li>
-                            <a href="add_expense.php"><i class="fa fa-plus-circle fa-sm"></i>  Add Expenses</a>
-                        </li>
-                        <li>
-                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Expense List</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <!--Inventory --> 
-                <li>
-                    <a href="#staff" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-truck mr-2"></i> Inventory</a>
-                    <ul class="collapse list-unstyled" id="staff">
-                        <li>
-                            <a href="add_drugs.php"><i class="fa fa-user-plus fa-sm"></i>  Add Drugs</a>
-                        </li>
-                        <li>
-                            <a href="add_drugs.php"><i class="fa fa-user-plus fa-sm"></i>  Add Inventory</a>
-                        </li>
-                        <li>
-                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Drugs List</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <!--NoticeBoard-->
-                <li>
-                    <a href="#notice" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-exclamation-circle mr-2"></i> Noticeboard</a>
-                    <ul class="collapse list-unstyled" id="notice">
-                        <li>
-                            <a href="add_notice.php"><i class="fa fa-user-plus fa-sm"></i> Add Notice</a>
-                        </li>
-                        <li>
-                            <a href=" "><i class="fa fa-wrench fa-sm"></i>  Notice List</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <!--SMS-->
-                <li>
-                    <a href="#sms" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-comment mr-2"></i> SMS</a>
-                    <ul class="collapse list-unstyled" id="sms">
-                        <li>
-                            <a href="new_message.php"><i class="fa fa-user-plus fa-sm"></i> Send Message</a>
-                        </li>
-                        <li>
-                            <a href="inbox.php"><i class="fa fa-inbox fa-sm"></i>  Inbox</a>
-                        </li>
-                        <li>
-                            <a href="sent_sms.php"><i class="fa fa-share-square fa-sm"></i>  Sent</a>
-                        </li>
-                        <li>
-                            <a href=""><i class="fa fa-envelope-open fa-sm"></i>  Draft</a>
-                        </li>
-                    </ul>
-                </li>
-
-                
                 <li>
                     <a href="../dashboard/settings.php"><i class="fa fa-cogs mr-2"></i> Settings</a>
                 </li>
 
                 <!--OTHERS-->
                 <li>
-                    <a href="../shared/endsession.php"><i class="fa fa-arrow-right fa-sm"></i> Logout</a>
+                    <a href="logout.php"><i class="fa fa-arrow-right fa-sm"></i> Logout</a>
                 </li>
             </ul>
     </nav>

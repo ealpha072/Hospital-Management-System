@@ -99,7 +99,7 @@
             <div class="card mr-4 ml-4 mb-4">
                 <div class="card-header">
                     <a href="suppliers.php?suppliers_page=add">
-                        <button class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add Ward</button>
+                        <button class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add Supplier</button>
                     </a>
                 </div>
                 <div class="card-body">

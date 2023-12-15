@@ -502,8 +502,8 @@
 
                 try {
                     $this->conn->insert($query, $params);
-                    $_SESSION['msg'] = "Supplier added to databse";
-                    echo $_SESSION['msg'];
+                    $msg = ucwords($this->name).' added to supplier database successfully';
+                    return [$msg, "Success"];
                 } catch (Exception $e) {
                     throw new Exception($e->getMessage());
                 }

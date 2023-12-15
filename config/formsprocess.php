@@ -101,7 +101,11 @@
 
     if( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_supplier']) ){
         $new_supplier = new Supplier($database); 
-        $new_supplier->addSupplier();
+        $message = $new_supplier->addSupplier();
+
+        unset($_SESSION['msg']);
+        $_SESSION['msg'] = $message;
+        header('Location: ../pages/suppliers.php?suppliers_page=add');
     }
 
     if(isset($_POST['add_expense']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
