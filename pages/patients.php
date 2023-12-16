@@ -189,7 +189,7 @@
                                                 }
                                         echo '</tr>
                                                 <tr style="display:none" class = "minor-row">';
-                                                $get_details_query = 'SELECT id_num, op_num, sex, physical_address, date_in FROM patients WHERE id_num = ? AND first_name = ?';
+                                                $get_details_query = 'SELECT id_num, ip_number, op_num, sex, physical_address, date_in FROM patients WHERE id_num = ? AND first_name = ?';
                                                 $params = [$items_to_display[$items]['id_num'], $items_to_display[$items]['first_name']];
                                                 $single_patient_data = $database->select($get_details_query, $params);
                                                 foreach($single_patient_data as $data){
@@ -197,6 +197,7 @@
                                                     echo '<td colspan="8" >
                                                         <ul class="list-group">';
                                                             foreach(array_keys($data) as $key){
+                                                                
                                                                 echo '
                                                                     <li class="mt-1">
                                                                         <span class="font-weight-bold">'.ucfirst($key).':</span>
@@ -213,13 +214,18 @@
                                                                             <button type="button" class="btn btn-sm btn-success me-1">
                                                                                 <i class="fa fa-pencil"></i> Edit
                                                                             </button>
-                                                                        </a>
-                                                                        <a href="'.$_SERVER['PHP_SELF'].'?patient_page=admit&patient_id='.$data['id_num'].'" class="mx-1">
-                                                                            <button type="button" class="btn btn-sm btn-secondary">
-                                                                                <i class="fa fa-plus"></i> Admit
-                                                                            </button>
-                                                                        </a>
-                                                                    </div>
+                                                                        </a>';
+
+                                                                        if( $data['ip_number']){
+                                                                            echo '';
+                                                                        }else{
+                                                                            echo '<a href="'.$_SERVER['PHP_SELF'].'?patient_page=admit&patient_id='.$data['id_num'].'" class="mx-1">
+                                                                                <button type="button" class="btn btn-sm btn-secondary">
+                                                                                    <i class="fa fa-plus"></i> Admit
+                                                                                </button>
+                                                                            </a>';
+                                                                        }
+                                                                    echo '</div>
                                                                 </span>
                                                             </li>
                                                         </ul>
@@ -278,33 +284,8 @@
                     <div class="card-body">
                         <form action="../config/formsprocess.php" method="post">
                             <div class="card-body">';
-                            if(isset($_SESSION['msg']) && count($_SESSION['msg']) > 0){
-                                if($_SESSION['msg'][1] === 'Success'){
-                                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        <p>'.$_SESSION['msg'][0].'</p>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>';
-                                }
+                           $new_html->showSessionMessage();
 
-                                if($_SESSION['msg'][1] === 'Error'){
-                                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        <h5>Please fix below and try again:</h5>
-                                        <ul>';
-
-                                        foreach($_SESSION['msg'][0] as $error){
-                                            echo '<li>'.$error.'</li>';
-                                        }
-                                    echo '</ul>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    </div>';
-                                }
-                                //sleep(5);
-                                //unset($_SESSION['msg']);
-                            }
                             echo '<div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"><strong>Patient Name</strong> </label>
                                 <div class="col-sm-6">

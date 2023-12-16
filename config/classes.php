@@ -126,7 +126,7 @@
             $all_errors = array_merge($name_error, $phone_error, $address_error);
 
             //check if patient has visited before;
-            $check_patient_previous_visit_query = "SELECT id_no, number_of_visits FROM ".$this->table." WHERE id_no = ? ";
+            $check_patient_previous_visit_query = "SELECT id_num, number_of_visits FROM ".$this->table." WHERE id_num = ? ";
             $check_patient_params = [$this->id_num];
             $check_patient_results = $this->conn->select($check_patient_previous_visit_query, $check_patient_params);
 
@@ -141,7 +141,7 @@
                         phone_num=?, 
                         physical_address=?, 
                         nhif_num=?, 
-                        number_of_visits=? WHERE id_no = ? ";
+                        number_of_visits=? WHERE id_num = ? ";
                     $update_patient_params = [
                         $this->op_number,
                         $this->phone, 
@@ -158,7 +158,7 @@
                 }else{
                     //for first time patients
                     //if error, check insert statment
-                    $query = "INSERT INTO ".$this->table." (id_no, op_num, first_name, last_name, sex, phone_num, physical_address, dob, nhif_num) 
+                    $query = "INSERT INTO ".$this->table." (id_num, op_num, first_name, last_name, sex, phone_num, physical_address, dob, nhif_num) 
                         VALUES(?,?,?,?,?,?,?,?,?)
                     ";
                     $params = [ 
@@ -208,7 +208,7 @@
                     next_of_kin=?, 
                     kin_rlshp=?,
                     kin_telephone=?
-                    WHERE id_no = ? ";
+                    WHERE id_num = ? ";
 
                     $update_patient_params = [
                         $this->ip_number,
