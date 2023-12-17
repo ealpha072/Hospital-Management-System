@@ -849,14 +849,23 @@
 
             if(count($all_errors) === 0){
                 $update_logins_query = "UPDATE ".$this->table." SET 
-                hosp_name=?, 
-                hosp_email = ?, 
-                hosp_vision=?, 
-                hosp_mission=?";
+                user_name=?, 
+                password = ?";
+
+                $update_logins_parameter = [ $this->user_name, $this->new_password ];
+                
+                try {
+                    //code...
+                    $this->conn->update($update_logins_query, $update_logins_parameter);
+                    return ['Successfully updated login credentials', 'Success'];
+                } catch (\Throwable $th) {
+                    //throw $th;
+                    throw new Exception($th->getMessage());
+                }
+            }else{
+                print_r($all_errors);
+                return [$all_errors, 'Error'];
             }
-
-
-
         }
     }
 
