@@ -774,7 +774,10 @@
 
         //subject, to_email,cc_email,from_email,body,attachments
         public $user_name = "";
-        public $password = "";
+        public $database_password = "";
+        public $old_password = "";
+        public $new_password = "";
+        public $confirm_new_password = "";
         public $admin_email = "";
         public $hosp_name = "";
         public $hosp_email = "";
@@ -803,8 +806,7 @@
                     hosp_name=?, 
                     hosp_email = ?, 
                     hosp_vision=?, 
-                    hosp_mission=?,
-                    WHERE id_num = ? ";
+                    hosp_mission=?";
 
                     $update_settings_params = [
                         $this->hosp_name,
@@ -828,9 +830,30 @@
         }
 
         public function updateLogins(){
-            $alll_error = [];
+            $alll_errors = [];
             $this->user_name = htmlspecialchars(strip_tags($_POST('')));
-            $this->password = $_POST('');
+            $this->database_password = $_POST[''];
+            $this->old_password = $_POST[''];
+            $this->new_password = $_POST[''];
+            $this->confirm_new_password = $_POST[''];
+
+            //check that old password matches database password
+            if($this->old_password != $this->database_password){
+                array_push($all_errors, 'Old password doesnt match database password');
+            }
+
+             //check that new password matches confirm pass
+            if($this->new_password != $this->confirm_new_password){
+                array_push($all_errors, "Password mismatch: new password doesnt match confirm password");
+            }
+
+            if(count($all_errors) === 0){
+                $update_logins_query = "UPDATE ".$this->table." SET 
+                hosp_name=?, 
+                hosp_email = ?, 
+                hosp_vision=?, 
+                hosp_mission=?";
+            }
 
 
 
