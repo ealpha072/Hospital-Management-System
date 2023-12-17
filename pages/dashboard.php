@@ -17,32 +17,32 @@
         <div class="card-body">
             <div class="form-row">
                 <div class="col">
-                    <?php buildCard('Students', $select_student, ['text-white', 'bg-primary'], '../students/managest.php'); ?>
+                    
                 </div>
                 <div class="col">
-                    <?php buildCard('Teachers', $select_teacher, ['text-white','bg-dark'], '../teachers/manageteach.php')?>
+                    
                 </div>
                 <div class="col">
-                    <?php buildCard('Hostels', $select_hostel, ['text-white','bg-success'], '../hostels/managehost.php')?>
+                    
                 </div>
                 <div class="col">
-                    <?php buildCard('Streams', $select_stream, ['text-white','bg-secondary'], '#')?>
+                   
                 </div>
             </div>
             <hr>
 
             <div class="form-row">
                 <div class="col">
-                    <?php buildCard('Parents', $select_parent, ['text-white','bg-danger'], '../parents/managepar.php')?>
+                    
                 </div>
                 <div class="col">
-                    <?php buildCard('Subjects', $select_subjects, ['text-white','bg-warning'], '../subjects/managesub.php')?>
+                   
                 </div>
                 <div class="col">
-                    <?php buildCard('Hostels', $select_hostel, ['text-white','bg-info'],'../hostels/managehost.php')?>
+                    
                 </div>
                 <div class="col">
-                    <?php buildCard('Support Staff', $select_support_staff, ['text-dark', 'bg-light'], '../staff/managestaff.php')?>
+                    
                 </div>
             </div>
             <hr>
