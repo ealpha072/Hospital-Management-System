@@ -134,3 +134,17 @@ CREATE TABLE `hospital_db`.`messages` (
 ) ENGINE = InnoDB;
 
 ALTER TABLE `messages` ADD `cc_email` VARCHAR(255) NOT NULL AFTER `to_email`;
+
+
+CREATE TABLE `hospital_db`.`settings` (
+    
+    `id` INT(255) NOT NULL AUTO_INCREMENT , 
+    `user_name` VARCHAR(255) NOT NULL , 
+    `password` VARCHAR(255) NOT NULL , 
+    `admin_email` VARCHAR(255) NOT NULL , 
+    `hosp_name` VARCHAR(255) NOT NULL , 
+    `hosp_email` VARCHAR(255) NOT NULL , 
+    `hosp_vision` VARCHAR(255) NOT NULL , 
+    `hosp_mission` VARCHAR(255) NOT NULL , 
+    `date_created` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+    PRIMARY KEY (`id`)) ENGINE = InnoDB;
