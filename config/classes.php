@@ -737,6 +737,46 @@
         }
     }
 
+    class settings{
+        private $conn;
+        private $table = "settings";
+
+        //subject, to_email,cc_email,from_email,body,attachments
+        public $user_name = "";
+        public $password = "";
+        public $admin_email = "";
+        public $hosp_name = "";
+        public $hosp_email = "";
+        public $hosp_vision = "";
+        public $hosp_mission = "";
+
+        public function __construct($db){
+            $this->conn = $db;
+        }
+
+        public function updateHospitalSettings(){
+            $all_errors = [];
+           
+            $this->admin_email = htmlspecialchars(strip_tags($_POST('')));
+            $this->hosp_name = htmlspecialchars(strip_tags($_POST('')));
+            $this->hosp_email = htmlspecialchars(strip_tags($_POST('')));
+            $this->hosp_vision = htmlspecialchars(strip_tags($_POST('')));
+            $this->hosp_mission = htmlspecialchars(strip_tags($_POST('')));
+
+            
+
+        }
+
+        public function updateLogins(){
+            $alll_error = [];
+            $this->user_name = htmlspecialchars(strip_tags($_POST('')));
+            $this->password = $_POST('');
+
+
+
+        }
+    }
+
     class Html{
         public function populateSelect($array, $key){
             foreach ($array as $option_item) {
