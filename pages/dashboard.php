@@ -7,12 +7,7 @@
 <div class="dashboard">
     <div class="card">
         <div class="card-header">
-            <h6><i class="fa fa-building"></i> School Infomation</h6>
-            <?php
-                if(isset($_SESSION['success'])){
-                    echo $_SESSION['success'];
-                }
-            ?>
+            <h6><i class="fa fa-building"></i> Hospital Infomation</h6>
         </div>
         <div class="card-body">
             <div class="form-row">
