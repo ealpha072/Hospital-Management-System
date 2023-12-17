@@ -5,17 +5,10 @@
 ?>
     <div class="card mb-4 mr-4 ml-4">
         <div class="card-header">
-            <a href="'.$_SERVER['PHP_SELF'].'?depts_page=view&page_number=1">
-                <button class="btn btn-md btn-primary"> <i class="fa fa-list mr-2"></i> Departments List</button>
-            </a>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <h6><i class="fa fa-cogs"></i> Settings</h6>
-            </div>
+            <h6><i class="fa fa-cogs"></i> Settings</h6>
         </div>
 
-        <div class="row" style="margin-top: 10px;">
+        <div class="row mt-4 ml-1">
             <div class="col">
                 <div class="card">
                     <div class="card-header">
