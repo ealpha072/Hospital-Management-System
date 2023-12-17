@@ -47,6 +47,37 @@
             if(empty($name)){array_push($errors_array, "Next of kin cannot be empty");}
         }
 
+        public function validatePassword($password, $error_array=[]){
+             // Define a regular expression pattern for password validation
+            // Minimum length requirement
+            $minLength = 8;
+
+            // Check if the password meets the minimum length requirement
+            if (strlen($password) < $minLength) {
+                array_push($error_array, "Password must be 8 characters long");
+            }
+
+            // Check for at least one uppercase letter
+            if (!preg_match('/[A-Z]/', $password)) {
+                array_push($error_array, "Password must contain one uppercase letter");
+            }
+
+            // Check for at least one lowercase letter
+            if (!preg_match('/[a-z]/', $password)) {
+                array_push($error_array, "Password must contain one lowercase letter");
+            }
+
+            // Check for at least one digit
+            if (!preg_match('/\d/', $password)) {
+                array_push($error_array, "Password must contain one digit letter");
+            }
+
+            // Check for at least one special character (you can customize this based on your requirements)
+            if (!preg_match('/[^a-zA-Z\d]/', $password)) {
+                array_push($error_array, "Password must contain one special character");
+            }
+        }
+
     }
 
     trait person{
@@ -793,7 +824,6 @@
                 print_r($all_errors);
                 return [$all_errors, 'Error'];
             }
-            
 
         }
 
