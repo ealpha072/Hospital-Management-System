@@ -756,13 +756,43 @@
 
         public function updateHospitalSettings(){
             $all_errors = [];
-           
-            $this->admin_email = htmlspecialchars(strip_tags($_POST('')));
+
             $this->hosp_name = htmlspecialchars(strip_tags($_POST('')));
             $this->hosp_email = htmlspecialchars(strip_tags($_POST('')));
             $this->hosp_vision = htmlspecialchars(strip_tags($_POST('')));
             $this->hosp_mission = htmlspecialchars(strip_tags($_POST('')));
 
+            $new_validation = new Validate();
+            $email_error = $new_validation->validateEmail($this->hosp_email, $all_errors);
+            array_merge($all_errors, $email_error);
+
+            if(count($all_errors) === 0){
+
+                $update_settings_query = "UPDATE ".$this->table." SET 
+                    hosp_name=?, 
+                    hosp_email = ?, 
+                    hosp_vision=?, 
+                    hosp_mission=?,
+                    WHERE id_num = ? ";
+
+                    $update_settings_params = [
+                        $this->hosp_name,
+                        $this->hosp_email,
+                        $this->hosp_vision,
+                        $this->hosp_mission
+                    ];
+
+                    try {
+                        $this->conn->update($update_settings_query, $update_settings_params);
+                        $msg = 'Successfully updated user settings';
+                        return [$msg, 'Success'];
+                    } catch (Exception $th) {
+                        throw new Exception($th->getMessage());
+                    }
+            }else{
+                print_r($all_errors);
+                return [$all_errors, 'Error'];
+            }
             
 
         }
