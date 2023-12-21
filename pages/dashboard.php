@@ -1,7 +1,7 @@
 <?php   
     require_once "../config/classes.php";
     require "../public/wrapper.php";
-    require_once('../config/pagination.php');    
+    require_once '../config/pagination.php';    
 ?>
 
 <div class="dashboard">
