@@ -1,7 +1,7 @@
-<?php   
-    require_once "../config/classes.php";
-    require "../public/wrapper.php";
-    require_once '../config/pagination.php';    
+<?php
+require_once "../config/classes.php";
+require "../public/wrapper.php";
+require_once '../config/pagination.php';
 ?>
 
 <div class="dashboard">
@@ -12,32 +12,32 @@
         <div class="card-body">
             <div class="form-row">
                 <div class="col">
-                    
+
                 </div>
                 <div class="col">
-                    
+
                 </div>
                 <div class="col">
-                    
+
                 </div>
                 <div class="col">
-                   
+
                 </div>
             </div>
             <hr>
 
             <div class="form-row">
                 <div class="col">
-                    
+
                 </div>
                 <div class="col">
-                   
+
                 </div>
                 <div class="col">
-                    
+
                 </div>
                 <div class="col">
-                    
+
                 </div>
             </div>
             <hr>
