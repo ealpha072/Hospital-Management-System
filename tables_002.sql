@@ -1,6 +1,6 @@
---for heroku database, replace 'hospital_db' with heroku_bece3e49d0c6d9b
---
-/*CREATE TABLE `hospital_db`.`patients` (
+-- This contains corrections from ChatGPt
+
+CREATE TABLE `hospital_db`.`patients` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `id_num` VARCHAR(20) NOT NULL,
     `op_num` VARCHAR(20) NOT NULL,
@@ -20,29 +20,7 @@
     `kin_telephone` VARCHAR(15) NOT NULL,
     `adm_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB; */
-
-CREATE TABLE `hospital_db`.`patients` (
-    `id` INT(255) NOT NULL AUTO_INCREMENT,
-    `id_num` INT(10) NOT NULL,
-    `op_num` INT(10) NOT NULL,
-    `first_name` TEXT NOT NULL , 
-    `last_name` TEXT NOT NULL , 
-    `sex` TEXT NOT NULL , 
-    `phone_num` INT(10) NOT NULL , 
-    `physical_address` VARCHAR(255) NOT NULL , 
-    `dob` DATE NOT NULL , 
-    `nhif_num` INT(15) NOT NULL , 
-    `number_of_visits` INT(255) NOT NULL DEFAULT '1'
-    `date_in` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
-    `ip_number` INT(10) NOT NULL AFTER,
-    `adm_ward` VARCHAR(255) NOT NULL AFTER `ip_number`,
-    `next_of_kin` VARCHAR(255) NOT NULL,
-    `kin_rlshp` VARCHAR(255) NOT NULL,
-    `kin_telephone` INT(10) NOT NULL,
-    `adm_date` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB;
+) ENGINE=InnoDB;
 
 CREATE TABLE `hospital_db`.`employees` (
     `id` INT(255) NOT NULL AUTO_INCREMENT , 
@@ -145,13 +123,13 @@ CREATE TABLE `hospital_db`.`notices` (
 ) ENGINE = InnoDB;
 
 CREATE TABLE `hospital_db`.`messages` (
-    `id` INT(255) NOT NULL AUTO_INCREMENT , 
-    `subject` VARCHAR NOT NULL ,
-    `to_email` VARCHAR(255) NOT NULL ,  
-    `from_email` VARCHAR(255) NOT NULL ,
-    `body` VARCHAR(255) NOT NULL ,
-    `attachments` VARCHAR(255) NOT NULL,
-    `date_added` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `subject` VARCHAR(255) NOT NULL,
+    `to_email` VARCHAR(255) NOT NULL,  
+    `from_email` VARCHAR(255) NOT NULL,
+    `body` TEXT NOT NULL,
+    `attachments` VARCHAR(255),
+    `date_added` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
